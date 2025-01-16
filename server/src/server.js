@@ -1,11 +1,10 @@
 import expresss from "express";
 import "dotenv/config";
 import { connectDB } from "./database/config.js";
-import { getDetailers } from "./database/controllers/detailers.js";
-import { getPendingServices } from "./database/controllers/pServices.js";
 import { getHome } from "./database/controllers/home.js";
-import { getCompletedServices } from "./database/controllers/cServices.js";
-import { getCustomers } from "./database/controllers/customers.js";
+import { servicesRoute } from "./routes/servicesRoute.js";
+import { detailersRoute } from "./routes/detailersRoute.js";
+import { customersRoute } from "./routes/customersRoute.js";
 
 const app = expresss();
 
@@ -14,13 +13,7 @@ connectDB();
 
 app.get("/", getHome);
 
-app.get("/pending", getPendingServices);
-
-app.get("/completed", getCompletedServices)
-
-app.get("/detailers", getDetailers)
-
-app.get("/customers", getCustomers)
+app.use("/api", customersRoute, detailersRoute, servicesRoute);
 
 app.listen(process.env.PORT, () => {
   console.log(`app listening on http://localhost:${process.env.PORT}`);
