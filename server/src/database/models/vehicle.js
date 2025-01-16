@@ -2,7 +2,7 @@ import { model, Schema } from "mongoose";
 
 const vehicleSchema = new Schema({
   number_plate: { type: String, required: true },
-  customer_id: {
+  customer: {
     type: Schema.Types.ObjectId,
     ref: "Customer",
     required: true,

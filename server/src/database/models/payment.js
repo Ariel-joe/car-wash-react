@@ -1,7 +1,7 @@
 import { model, Schema } from "mongoose";
 
 const paymentSchema = new Schema({
-  service_id: {
+  service: {
     type: Schema.Types.ObjectId,
     ref: "Vehicle",
     required: true,

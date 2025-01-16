@@ -1,13 +1,13 @@
 import { model, Schema } from "mongoose";
 
 const serviceSchema = new Schema({
-  vehicle_id: {
+  vehicle: {
     type: Schema.Types.ObjectId,
     ref: "Vehicle",
     required: true,
   },
   service: { type: String, required: true }, 
-  detailer_id: {
+  detailer: {
     type: Schema.Types.ObjectId,
     ref: "Detailer",
     required: true,
@@ -18,7 +18,7 @@ const serviceSchema = new Schema({
     default: "Pending",
   },
   price: { type: Number, required: true },
-  payment_id: { type: Schema.Types.ObjectId, ref: "Payment" },
+  payment: { type: Schema.Types.ObjectId, ref: "Payment" },
 });
 
 const Service = new model("service", serviceSchema);
