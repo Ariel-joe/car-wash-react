@@ -3,7 +3,7 @@ import { model, Schema } from "mongoose";
 const vehicleSchema = new Schema({
   number_plate: { type: String, required: true },
   customer_id: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: "Customer",
     required: true,
   },
@@ -15,3 +15,5 @@ const vehicleSchema = new Schema({
   detailer_id: { type: mongoose.Schema.Types.ObjectId, ref: "Detailer" },
 });
 const Vehicle = new model("vehicle", vehicleSchema);
+
+export { Vehicle };
