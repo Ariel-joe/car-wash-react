@@ -1,8 +1,13 @@
 import { Router } from "express";
-import { getCustomers } from "../database/controllers/customers.js";
+import {
+  addCustomer,
+  findCustomer,
+  getCustomers,
+} from "../database/controllers/customers.js";
 
 const customersRoute = Router();
 
-customersRoute.get("/customers", getCustomers);
+customersRoute.get("/customers", getCustomers, findCustomer);
+customersRoute.post("/customers/add", addCustomer);
 
 export { customersRoute };

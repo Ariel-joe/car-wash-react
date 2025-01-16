@@ -6,7 +6,7 @@ const serviceSchema = new Schema({
     ref: "Vehicle",
     required: true,
   },
-  service: { type: String, required: true }, 
+  service: { type: String, required: true },
   detailer: {
     type: Schema.Types.ObjectId,
     ref: "Detailer",
