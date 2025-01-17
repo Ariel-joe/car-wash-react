@@ -10,6 +10,9 @@ const Sidebar = () => {
       {/* navigation buttons */}
 
       <div className="flex flex-col gap-4 py-4 justify-center items-center">
+      <a className="text-gray-700 text-sm py-1" to="/#">
+          New Customer
+        </a>
         <a className="text-gray-700 text-sm py-1" to="/#">
           Pending Services
         </a>
