@@ -1,7 +1,10 @@
 import React from "react";
 
 const AddCustomer = () => {
-  return <div></div>;
+  return <form>
+    
+
+  </form>;
 };
 
 export { AddCustomer };
