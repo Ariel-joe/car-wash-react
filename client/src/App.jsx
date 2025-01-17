@@ -5,11 +5,11 @@ import { Sidebar } from "./components/Sidebar";
 const App = () => {
   return (
     <div className="flex">
-      <div className="w-[14%]">
+      <div className="w-[16%]">
         <Sidebar />
       </div>
 
-      <div className="w-[86%]">
+      <div className="w-[84%]">
         <Navbar />
         <main>
           <h1>this is the home page</h1>
