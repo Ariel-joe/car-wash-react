@@ -1,21 +1,33 @@
 import React from "react";
-import { IoNotifications } from "react-icons/io5";
+import { useState } from "react";
+import { Modal } from "./Modal";
+import { IoNotificationsOutline } from "react-icons/io5";
+import { AddCustomer } from "./AddCustomer";
 
 const Navbar = () => {
+  const [modal, setModal] = useState(false);
+
   return (
     <>
       <div className="flex flex-row justify-between px-4 items-center border-b-2 py-3">
-        <div>
-          {/* <h1>Welcome back!</h1> */}
-        </div>
+        <form>
+          <input
+            type="text"
+            className="w-72 border text-sm px-4 py-2 ml-2 rounded-md"
+            placeholder="Search here"
+          />
+        </form>
         <div className="flex justify-evenly items-center gap-5">
           {/* notification/inbox */}
 
           <button className="rounded-full p-2 bg-creamish">
-            <IoNotifications size={18} />
+            <IoNotificationsOutline size={18} />
           </button>
           {/* new customer */}
-          <button className="bg-creamish text-black px-4 py-2 rounded-md hover:cursor-pointer">
+          <button
+            onClick={() => setModal(true)}
+            className="bg-creamish text-black px-4 py-2 rounded-md hover:cursor-pointer"
+          >
             <a
               className="flex justify-center items-center text-sm text-lightDarkGray"
               to="/#"
@@ -37,6 +49,11 @@ const Navbar = () => {
               New Customer
             </a>
           </button>
+
+          {/* this is the modal */}
+          <Modal openModal={modal} closeModal={() => setModal(false)}>
+            <AddCustomer />
+          </Modal>
 
           <button className="bg-black text-creamish text-sm px-4 py-2 rounded-md">
             Logout
