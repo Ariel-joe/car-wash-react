@@ -14,40 +14,40 @@ const Sidebar = () => {
 
       <div className="flex flex-col gap-4 py-4 pl-4">
         {/* pending vehicles */}
-        <a
+        <abbr
           className="flex text-gray-700 items-center text-[16px] py-1 hover:cursor-pointer"
-          to="/#"
+          to="/pending"
         >
           <MdIncompleteCircle size={24} className="mr-1" />
           Pending V
-        </a>
+        </abbr>
 
         {/* completed vehicles */}
-        <a
+        <abbr
           className="flex text-gray-700 items-center text-[16px] py-1 hover:cursor-pointer"
           to="/#"
         >
           <IoCheckmarkDoneCircleOutline size={24} className="mr-1" />
           Completed V
-        </a>
+        </abbr>
 
         {/* detailers list */}
-        <a
+        <abbr
           className="flex text-gray-700 items-center text-[16px] py-1 hover:cursor-pointer"
           to="/#"
         >
           <FaRegUser size={24} className="mr-1" />
           detailers
-        </a>
+        </abbr>
 
         {/* customers list */}
-        <a
+        <abbr
           className="flex text-gray-700 items-center text-[16px] py-1 hover:cursor-pointer"
           to="/#"
         >
           <HiOutlineUsers size={24} className="mr-1" />
           Customers
-        </a>
+        </abbr>
       </div>
     </div>
   );
