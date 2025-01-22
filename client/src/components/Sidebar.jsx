@@ -5,7 +5,6 @@ import { FaRegUser } from "react-icons/fa";
 import { HiOutlineUsers } from "react-icons/hi2";
 import { GiTakeMyMoney } from "react-icons/gi";
 
-
 const Sidebar = () => {
   return (
     <div className="w-full bg-creamish py-4 min-h-screen">
@@ -65,3 +64,4 @@ const Sidebar = () => {
 };
 
 export { Sidebar };
+
