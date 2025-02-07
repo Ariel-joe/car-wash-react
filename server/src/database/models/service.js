@@ -2,7 +2,11 @@ import { model, Schema } from "mongoose";
 
 const serviceSchema = new Schema(
   {
-    status: { enum: ["available", "not available"], default: "available" },
+    status: {
+      type: String,
+      enum: ["available", "not available"],
+      default: "available",
+    },
     service: {
       type: String,
       enum: [

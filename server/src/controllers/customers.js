@@ -1,14 +1,13 @@
-import { Customer } from "../models/customer.js";
+import { Customer } from "../database/models/customer.js";
 
 // adding a customer
 export const addCustomer = async (req, res) => {
   try {
-    const { name, phone, number_plate } = req.body;
+    const { name, phone } = req.body;
 
     const customerData = {
       name,
       phone,
-      number_plate,
     };
 
     const newCustomer = await Customer.create(customerData);
@@ -51,7 +50,10 @@ export const findCustomer = async (req, res) => {
   try {
     const customerId = req.query.id;
 
-    const customer = await Customer.findOne({ _id: customerId }, req.body);
+    const customer = await Customer.findOne(
+      { _id: customerId },
+      req.body
+    ).populate("Vehicle");
 
     return res.status(200).json({
       success: true,
@@ -68,7 +70,7 @@ export const findCustomer = async (req, res) => {
 };
 
 // updating a customer
-export const  updateCustomer = async (req, res) => {
+export const updateCustomer = async (req, res) => {
   try {
     const customerId = req.query.id;
 
