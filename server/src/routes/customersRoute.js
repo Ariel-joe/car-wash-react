@@ -8,7 +8,7 @@ import {
 
 const customersRoute = Router();
 
-customersRoute.get("/customers", getCustomers, findCustomer);
+customersRoute.get("/customers", getCustomers);
 customersRoute.get("/customers/single", findCustomer);
 customersRoute.post("/customers/add", addCustomer);
 customersRoute.patch("/customers/update", updateCustomer);

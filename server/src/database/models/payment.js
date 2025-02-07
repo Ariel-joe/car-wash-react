@@ -13,3 +13,4 @@ const paymentSchema = new Schema({
 const Payment = new model("payment", paymentSchema);
 
 export { Payment };
+

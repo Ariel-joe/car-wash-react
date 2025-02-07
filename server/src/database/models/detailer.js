@@ -2,7 +2,8 @@ import { model, Schema } from "mongoose";
 
 const detailerSchema = new Schema({
   name: { type: String, required: true },
-  availability: {
+  phone_number: { type: String, required: true },
+  status: {
     type: String,
     enum: ["Available", "Busy"],
     default: "Available",

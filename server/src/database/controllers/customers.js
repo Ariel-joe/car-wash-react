@@ -68,7 +68,7 @@ export const findCustomer = async (req, res) => {
 };
 
 // updating a customer
-export const updateCustomer = async (req, res) => {
+export const  updateCustomer = async (req, res) => {
   try {
     const customerId = req.query.id;
 
