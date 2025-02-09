@@ -58,6 +58,7 @@ const Sidebar = () => {
           <GiTakeMyMoney size={24} className="mr-1" />
           Payments
         </a>
+
       </div>
     </div>
   );

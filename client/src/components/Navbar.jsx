@@ -1,9 +1,7 @@
-import React from "react";
 import { useState } from "react";
 import { Modal } from "./Modal";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { AddCustomer } from "./AddCustomer";
-import { Button } from "./ui/button";
 
 const Navbar = () => {
   const [modal, setModal] = useState(false);
@@ -18,8 +16,6 @@ const Navbar = () => {
             placeholder="Search here"
           />
         </form>
-
-        <Button>Hello shadcn</Button>
 
         <div className="flex justify-evenly items-center gap-5">
           {/* notification/inbox */}
@@ -61,8 +57,6 @@ const Navbar = () => {
           <Modal openModal={modal} closeModal={() => setModal(false)}>
             <AddCustomer />
           </Modal>
-
-
         </div>
       </div>
     </>
