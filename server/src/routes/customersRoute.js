@@ -4,7 +4,7 @@ import {
   findCustomer,
   getCustomers,
   updateCustomer,
-} from "../database/controllers/customers.js";
+} from "../controllers/customers.js";
 
 const customersRoute = Router();
 

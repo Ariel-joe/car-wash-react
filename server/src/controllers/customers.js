@@ -53,7 +53,7 @@ export const findCustomer = async (req, res) => {
     const customer = await Customer.findOne(
       { _id: customerId },
       req.body
-    ).populate("Vehicle");
+    )
 
     return res.status(200).json({
       success: true,

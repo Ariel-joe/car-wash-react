@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
   getCompletedServices,
   getPendingServices,
-} from "../database/controllers/Services.js";
+} from "../controllers/Services.js";
 
 const servicesRoute = Router();
 

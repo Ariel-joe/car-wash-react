@@ -1,7 +1,7 @@
 import expresss from "express";
 import "dotenv/config";
 import { connectDB } from "./database/config.js";
-import { getHome } from "./database/controllers/home.js";
+import { getHome } from "./controllers/home.js";
 import { servicesRoute } from "./routes/servicesRoute.js";
 import { detailersRoute } from "./routes/detailersRoute.js";
 import { customersRoute } from "./routes/customersRoute.js";
