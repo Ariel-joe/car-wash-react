@@ -6,13 +6,15 @@ export const getVehicles = (req, res) => {
   });
 };
 
-export const addVehicles = async (req, res) => {
+// adding a customer vehicle for service
+export const addVehicle = async (req, res) => {
   try {
-    const { customer, vehicle_type, status } = req.body;
+    const { customer, vehicle_type, number_plate, status } = req.body;
 
     const vehicleData = {
       customer,
       vehicle_type,
+      number_plate,
       status,
     };
 
@@ -26,9 +28,25 @@ export const addVehicles = async (req, res) => {
     console.error(error.message);
 
     return res.status(500).json({
-        success: false,
-        message: error.message
-    })
-    
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+// searching for a vehicle by it's number_plate
+
+export const searchVehicle = async (req, res) => {
+  try {
+    const vehicleId = req.params.id
+
+    const vehicleSearch = await Vehicle.findOne({vehicleId})
+  } catch (error) {
+    console.error(error.message);
+
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };

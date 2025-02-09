@@ -4,6 +4,7 @@ const vehicleSchema = new Schema(
   {
     customer: { type: Schema.Types.ObjectId, ref: "Customer" },
     vehicle_type: { type: Schema.Types.ObjectId, ref: "Vehicle_type" },
+    number_plate: { type: String, required: true },
     status: {
       type: String,
       enum: ["Pending", "In Progress", "Complete"],
