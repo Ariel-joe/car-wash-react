@@ -12,7 +12,7 @@ const App = () => {
 
       <div className="w-[84%]">
         <Navbar />
-        <main className="w-[84%] flex items-center justify-center my-4">
+        <main className="w-full flex items-center justify-center my-4">
           <Outlet />
         </main>
       </div>

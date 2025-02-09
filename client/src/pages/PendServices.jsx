@@ -23,29 +23,29 @@ const PendServices = () => {
 
   return (
     <>
-      <div className="ml-[10%]">
+      <div>
         <table className="w-full">
           <thead>
             <tr>
-              <th scope="col" className="border-b-2 px-3 py-2 w-[250px]">
+              <th scope="col" className="border-b-2 px-3 py-2 w-[150px]">
                 Customer
               </th>
-              <th scope="col" className="border-b-2 px-3 py-2 w-[250px]">
+              <th scope="col" className="border-b-2 px-3 py-2 w-[150px]">
                 phone number
               </th>
-              <th scope="col" className="border-b-2 px-3 py-2 w-[250px]">
+              <th scope="col" className="border-b-2 px-3 py-2 w-[150px]">
                 vehicle type
               </th>
-              <th scope="col" className="border-b-2 px-3 w-[350px]">
+              <th scope="col" className="border-b-2 px-3 py-2 w-[150px]">
                 number plate
               </th>
-              <th scope="col" className="border-b-2 px-3 py-2 w-[250px]">
+              <th scope="col" className="border-b-2 px-3 py-2 w-[150px]">
                 service
               </th>
-              <th scope="col" className="border-b-2 px-3 py-2 w-[250px]">
+              <th scope="col" className="border-b-2 px-3 py-2 w-[150px]">
                 detailer
               </th>
-              <th scope="col" className="border-b-2 px-3 py-2 w-[250px]">
+              <th scope="col" className="border-b-2 px-3 py-2 w-[150px]">
                 status
               </th>
               <th scope="col" className="border-b-2 px-3 w-[150px]">
@@ -62,15 +62,15 @@ const PendServices = () => {
                 <th className="py-2 font-light">{elem.customer.phone}</th>
                 <th className="py-2 font-light">{elem.vehicle_type.type}</th>
                 <th className="py-2 font-light">{elem.number_plate}</th>
-                <th className="py-2 font-light">{elem.number_plate}</th>
+                <th className="py-2 font-light">full body-wash</th>
                 <th className="py-2 font-light">Michael Kagiri</th>
                 <th className="py-2 font-light">{elem.status}</th>
                 <th className="py-2 font-light">
                   <div className="flex justify-around">
-                    <button className="bg-blue-500 px-3 py-1 text-white rounded-md">
+                    <button className="bg-blue-500 px-3 mr-1 text-sm py-1 text-white rounded-md">
                       edit
                     </button>
-                    <button className="bg-red-500 px-3 py-1 text-white rounded-md">
+                    <button className="bg-red-500 px-3 py-1 text-sm text-white rounded-md">
                       Done
                     </button>
                   </div>
