@@ -43,6 +43,9 @@ const PendServices = () => {
                 service
               </th>
               <th scope="col" className="border-b-2 px-3 w-[250px]">
+                detailer
+              </th>
+              <th scope="col" className="border-b-2 px-3 w-[250px]">
                 status
               </th>
               <th scope="col" className="border-b-2 px-3 w-[150px]">
@@ -60,10 +63,10 @@ const PendServices = () => {
                 <th className="py-2 font-light">{elem.vehicle_type.type}</th>
                 <th className="py-2 font-light">{elem.number_plate}</th>
                 <th className="py-2 font-light">{elem.number_plate}</th>
-                <th className="py-2 font-light italic">{elem.status}</th>
+                <th className="py-2 font-light">{elem.status}</th>
                 <th className="py-2 font-light">
                   <div className="flex justify-around">
-                    <button className="bg-green-500 px-3 py-1 text-white rounded-md">
+                    <button className="bg-blue-500 px-3 py-1 text-white rounded-md">
                       edit
                     </button>
                     <button className="bg-red-500 px-3 py-1 text-white rounded-md">
