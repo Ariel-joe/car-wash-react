@@ -1,25 +1,26 @@
 import { useEffect, useState } from "react";
 
-const PendServices = () => {
-  const [data, setData] = useState([]);
+const InprogressPage = () => {
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:3006/api/vehicles");
-
-        const result = await response.json();
-
-        console.log(result);
-
-        setData(result.data);
-      } catch (error) {
-        console.error(error.message);
-      }
-    };
-
-    fetchData();
-  }, []);
+    const [data, setData] = useState([]);
+    
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await fetch("http://localhost:3006/api/vehicles");
+    
+            const result = await response.json();
+    
+            console.log(result);
+    
+            setData(result.data);
+          } catch (error) {
+            console.error(error.message);
+          }
+        };
+    
+        fetchData();
+      }, []);
 
   return (
     <>
@@ -64,16 +65,11 @@ const PendServices = () => {
                 <th className="py-2 font-light">{elem.number_plate}</th>
                 <th className="py-2 font-light">full body-wash</th>
                 <th className="py-2 font-light">Michael Kagiri</th>
-                <th className="py-2 font-light">{elem.status}</th>
+                <th className="py-2 font-light">In progress</th>
                 <th className="py-2 font-light">
-                  <div className="flex justify-evenly">
-                    <button className="bg-blue-500 px-3 mr-1 text-sm py-1 text-white rounded-md">
-                      edit
+                    <button className="bg-green-500 px-3 py-1 text-sm text-white rounded-md">
+                      complete
                     </button>
-                    <button className="bg-orange-500 px-3 py-1 text-sm text-white rounded-md">
-                      Assign
-                    </button>
-                  </div>
                 </th>
               </tr>
             ))}
@@ -84,4 +80,4 @@ const PendServices = () => {
   );
 };
 
-export { PendServices };
+export { InprogressPage };

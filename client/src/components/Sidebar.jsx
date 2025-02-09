@@ -39,7 +39,7 @@ const Sidebar = () => {
         {/* inprogress  */}
         <Link
           className="flex text-gray-700 items-center text-[16px] py-1 hover:cursor-pointer"
-          to="/pending"
+          to="/progress"
         >
           <TbProgressCheck size={24} className="mr-1" />
           Inprogress

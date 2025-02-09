@@ -10,6 +10,7 @@ import { Detailers } from "./pages/Detailers.jsx";
 import { Customers } from "./pages/Customers.jsx";
 import { Payments } from "./pages/Payments.jsx";
 import { AddCustomerpage } from "./pages/AddCustomerpage.jsx";
+import { InprogressPage } from "./pages/InprogressPage.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
@@ -23,6 +24,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="detailers" element={<Detailers />} />
             <Route path="customers" element={<Customers />} />
             <Route path="payments" element={<Payments />} />
+            <Route path="progress" element={<InprogressPage />} />
           </Route>
         </Route>
 
