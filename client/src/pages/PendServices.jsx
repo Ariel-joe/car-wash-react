@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const PendServices = () => {
-  const [data, setDatas] = useState({});
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -10,8 +10,9 @@ const PendServices = () => {
 
         const result = await response.json();
 
-        setData(result);
+        console.log(result);
 
+        setData(result.data);
       } catch (error) {
         console.error(error.message);
       }
@@ -20,58 +21,61 @@ const PendServices = () => {
     fetchData();
   }, []);
 
-
-  
   return (
     <>
-      <table className="w-full">
-        <thead>
-          <tr className="">
-            <th scope="col" className="border-b-2 px-3 w-[250px]">
-              Customer
-            </th>
-            <th scope="col" className="border-b-2 px-3 w-[250px]">
-              phone number
-            </th>
-            <th scope="col" className="border-b-2 px-3 w-[250px]">
-              vehicle type
-            </th>
-            <th scope="col" className="border-b-2 px-3 w-[250px]">
-              number plate
-            </th>
-            <th scope="col" className="border-b-2 px-3 w-[250px]">
-              status
-            </th>
-            <th scope="col" className="border-b-2 px-3 w-[150px]">
-              actions
-            </th>
-          </tr>
-        </thead>
+      <div className="flex items-center justify-center w-full">
+        <table className="w-[90%]">
+          <thead>
+            <tr>
+              <th scope="col" className="border-b-2 px-3 w-[250px]">
+                Customer
+              </th>
+              <th scope="col" className="border-b-2 px-3 w-[250px]">
+                phone number
+              </th>
+              <th scope="col" className="border-b-2 px-3 w-[250px]">
+                vehicle type
+              </th>
+              <th scope="col" className="border-b-2 px-3 w-[250px]">
+                number plate
+              </th>
+              <th scope="col" className="border-b-2 px-3 w-[250px]">
+                service
+              </th>
+              <th scope="col" className="border-b-2 px-3 w-[250px]">
+                status
+              </th>
+              <th scope="col" className="border-b-2 px-3 w-[150px]">
+                actions
+              </th>
+            </tr>
+          </thead>
 
-        {/* table body */}
-        <tbody>
-          <tr>
-            <th className="py-4">data</th>
-            <th className="py-4">data</th>
-            <th className="py-4">data</th>
-            <th className="py-4">data</th>
-            <th className="py-4">data</th>
-            <th className="py-4">
-
-              
-              <div className="flex justify-around">
-                <button className="bg-green-500 px-3 py-1 text-white rounded-md">
-                  edit
-                </button>
-                <button className="bg-red-500 px-3 py-1 text-white rounded-md">
-                  Done
-                </button>
-              </div>
-            </th>
-          </tr>
-        </tbody>
-        
-      </table>
+          {/* table body */}
+          <tbody>
+            {data.map((elem, i) => (
+              <tr key={i} className="border-b-2">
+                <th className="py-2 font-light">{elem.customer.name}</th>
+                <th className="py-2 font-light">{elem.customer.phone}</th>
+                <th className="py-2 font-light">{elem.vehicle_type.type}</th>
+                <th className="py-2 font-light">{elem.number_plate}</th>
+                <th className="py-2 font-light">{elem.number_plate}</th>
+                <th className="py-2 font-light italic">{elem.status}</th>
+                <th className="py-2 font-light">
+                  <div className="flex justify-around">
+                    <button className="bg-green-500 px-3 py-1 text-white rounded-md">
+                      edit
+                    </button>
+                    <button className="bg-red-500 px-3 py-1 text-white rounded-md">
+                      Done
+                    </button>
+                  </div>
+                </th>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 };
