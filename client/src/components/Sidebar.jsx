@@ -4,6 +4,7 @@ import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa";
 import { HiOutlineUsers } from "react-icons/hi2";
 import { GiTakeMyMoney } from "react-icons/gi";
+import { Link } from "react-router";
 
 const Sidebar = () => {
   return (
@@ -15,49 +16,49 @@ const Sidebar = () => {
 
       <div className="flex flex-col gap-4 py-4 pl-4">
         {/* pending vehicles */}
-        <a
+        <Link
           className="flex text-gray-700 items-center text-[16px] py-1 hover:cursor-pointer"
-          to="/pending"
+          to="/"
         >
           <MdIncompleteCircle size={24} className="mr-1" />
           Pending V
-        </a>
+        </Link>
 
         {/* completed vehicles */}
-        <a
+        <Link
           className="flex text-gray-700 items-center text-[16px] py-1 hover:cursor-pointer"
-          to="/#"
+          to="/completed"
         >
           <IoCheckmarkDoneCircleOutline size={24} className="mr-1" />
           Completed V
-        </a>
+        </Link>
 
         {/* detailers list */}
-        <a
+        <Link
           className="flex text-gray-700 items-center text-[16px] py-1 hover:cursor-pointer"
-          to="/#"
+          to="/detailers"
         >
           <FaRegUser size={24} className="mr-1" />
           detailers
-        </a>
+        </Link>
 
         {/* customers list */}
-        <a
+        <Link
           className="flex text-gray-700 items-center text-[16px] py-1 hover:cursor-pointer"
-          to="/#"
+          to="/customers"
         >
           <HiOutlineUsers size={24} className="mr-1" />
           Customers
-        </a>
+        </Link>
 
         {/* payments records */}
-        <a
+        <Link
           className="flex text-gray-700 items-center text-[16px] py-1 hover:cursor-pointer"
-          to="/#"
+          to="/Payments"
         >
           <GiTakeMyMoney size={24} className="mr-1" />
           Payments
-        </a>
+        </Link>
 
       </div>
     </div>

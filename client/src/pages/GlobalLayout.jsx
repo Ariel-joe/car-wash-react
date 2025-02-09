@@ -1,13 +1,11 @@
-import React from 'react'
-import { Outlet } from 'react-router'
+import { Outlet } from "react-router";
 
 const GlobalLayout = () => {
   return (
     <>
-    <Outlet />
-      
+      <Outlet />
     </>
-  )
-}
+  );
+};
 
-export  {GlobalLayout}
+export { GlobalLayout };

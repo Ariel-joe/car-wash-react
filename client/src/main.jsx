@@ -1,20 +1,32 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import { App } from './App.jsx'
-import { BrowserRouter, Route, Routes } from 'react-router'
-createRoot(document.getElementById('root')).render(
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import { App } from "./App.jsx";
+import { BrowserRouter, Route, Routes } from "react-router";
+import { PendServices } from "./pages/PendServices.jsx";
+import { GlobalLayout } from "./pages/GlobalLayout.jsx";
+import { CompServices } from "./pages/CompServices.jsx";
+import { Detailers } from "./pages/Detailers.jsx";
+import { Customers } from "./pages/Customers.jsx";
+import { Payments } from "./pages/Payments.jsx";
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-    <Routes>
+      <Routes>
+        
+        {/*  */}
+        <Route element={<GlobalLayout />}>
+          <Route path="/" element={<App />}>
+            <Route index element={<PendServices />} />
+            <Route path="completed" element={<CompServices />} />
+            <Route path="detailers" element={<Detailers />} />
+            <Route path="customers" element={<Customers />} />
+            <Route path="payments" element={<Payments />} />
+          </Route>
+        </Route>
 
-
-      <Route path='/' element={<GlobalLayout />}>
-        <Route index element={<App />} />
-      </Route>
-
-
-    </Routes>
+        {/*  */}
+      </Routes>
     </BrowserRouter>
-  </StrictMode>,
-)
+  </StrictMode>
+);

@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar } from "./components/Navbar";
 import { Sidebar } from "./components/Sidebar";
-import { PendServices } from "./pages/PendServices";
+import { Outlet } from "react-router";
 
 const App = () => {
   return (
@@ -13,7 +13,7 @@ const App = () => {
       <div className="w-[84%]">
         <Navbar />
         <main className="w-[84%] mx-auto ml-20px sm:ml-3vw my-4 text-gray-800 text-base">
-          <PendServices />
+          <Outlet />
         </main>
       </div>
     </div>
