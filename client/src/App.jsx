@@ -12,7 +12,7 @@ const App = () => {
 
       <div className="w-[84%]">
         <Navbar />
-        <main className="w-[84%] mx-auto ml-20px sm:ml-3vw my-4 text-gray-800 text-base">
+        <main className="w-[84%] flex items-center justify-center sm:ml-3vw my-4 text-gray-800 text-base">
           <Outlet />
         </main>
       </div>
