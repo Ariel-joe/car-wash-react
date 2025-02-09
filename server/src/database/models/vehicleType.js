@@ -19,6 +19,7 @@ const vehicleTypeSchema = new Schema(
         "minivan",
         "Electric Vehicle",
       ],
+      default: "sedan"
     },
   },
   {
