@@ -4,22 +4,12 @@ const vehicleTypeSchema = new Schema(
   {
     status: {
       type: String,
-      enum: ["Pending", "In Progress", "Complete"],
-      default: "Pending",
+      enum: ["not available", "available"],
+      default: "available",
     },
     type: {
       type: String,
-      enum: [
-        "sedan",
-        "hatchback",
-        "SUV",
-        "CUV",
-        "coupe",
-        "van",
-        "minivan",
-        "Electric Vehicle",
-      ],
-      default: "sedan"
+      required: true,
     },
   },
   {
