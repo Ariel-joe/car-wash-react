@@ -1,9 +1,22 @@
 import { Vehicle } from "../database/models/vehicle.js";
 
-export const getVehicles = (req, res) => {
-  res.json({
-    message: "this are all the vehicles",
-  });
+// get all the vehicles
+export const getVehicles = async (req, res) => {
+  try {
+    const vehicles = await Vehicle.find().populate("customer vehicle_type");
+
+    return res.status(200).json({
+      success: true,
+      data: vehicles,
+    });
+  } catch (error) {
+    console.error(error.message);
+
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 // adding a customer vehicle for service
