@@ -23,29 +23,29 @@ const PendServices = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center w-full">
-        <table className="w-[90%]">
+      <div className="ml-[10%]">
+        <table className="w-full">
           <thead>
             <tr>
-              <th scope="col" className="border-b-2 px-3 w-[250px]">
+              <th scope="col" className="border-b-2 px-3 py-2 w-[250px]">
                 Customer
               </th>
-              <th scope="col" className="border-b-2 px-3 w-[250px]">
+              <th scope="col" className="border-b-2 px-3 py-2 w-[250px]">
                 phone number
               </th>
-              <th scope="col" className="border-b-2 px-3 w-[250px]">
+              <th scope="col" className="border-b-2 px-3 py-2 w-[250px]">
                 vehicle type
               </th>
-              <th scope="col" className="border-b-2 px-3 w-[250px]">
+              <th scope="col" className="border-b-2 px-3 w-[350px]">
                 number plate
               </th>
-              <th scope="col" className="border-b-2 px-3 w-[250px]">
+              <th scope="col" className="border-b-2 px-3 py-2 w-[250px]">
                 service
               </th>
-              <th scope="col" className="border-b-2 px-3 w-[250px]">
+              <th scope="col" className="border-b-2 px-3 py-2 w-[250px]">
                 detailer
               </th>
-              <th scope="col" className="border-b-2 px-3 w-[250px]">
+              <th scope="col" className="border-b-2 px-3 py-2 w-[250px]">
                 status
               </th>
               <th scope="col" className="border-b-2 px-3 w-[150px]">
@@ -63,6 +63,7 @@ const PendServices = () => {
                 <th className="py-2 font-light">{elem.vehicle_type.type}</th>
                 <th className="py-2 font-light">{elem.number_plate}</th>
                 <th className="py-2 font-light">{elem.number_plate}</th>
+                <th className="py-2 font-light">Michael Kagiri</th>
                 <th className="py-2 font-light">{elem.status}</th>
                 <th className="py-2 font-light">
                   <div className="flex justify-around">

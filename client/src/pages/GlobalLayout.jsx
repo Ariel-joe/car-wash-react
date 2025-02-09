@@ -3,7 +3,9 @@ import { Outlet } from "react-router";
 const GlobalLayout = () => {
   return (
     <>
-      <Outlet />
+      <div>
+        <Outlet />
+      </div>
     </>
   );
 };
