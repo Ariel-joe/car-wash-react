@@ -38,9 +38,16 @@ export const addVehicle = async (req, res) => {
 
 export const searchVehicle = async (req, res) => {
   try {
-    const vehicleId = req.params.id
+    const vehicleId = req.query.id;
 
-    const vehicleSearch = await Vehicle.findOne({vehicleId})
+    const vehicleSearch = await Vehicle.findOne({ _id: vehicleId }).populate(
+      "customer vehicle_type"
+    );
+
+    return res.status(200).json({
+      success: true,
+      data: vehicleSearch,
+    });
   } catch (error) {
     console.error(error.message);
 

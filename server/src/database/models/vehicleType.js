@@ -17,6 +17,6 @@ const vehicleTypeSchema = new Schema(
   }
 );
 
-const Vehicle_type = model("vehicleType", vehicleTypeSchema);
+const VehicleType = model("vehicleType", vehicleTypeSchema);
 
-export { Vehicle_type };
+export { VehicleType };

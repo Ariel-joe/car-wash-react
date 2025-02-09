@@ -1,4 +1,4 @@
-import { Vehicle_type } from "../database/models/vehicleType.js";
+import { VehicleType } from "../database/models/vehicleType.js";
 
 export const vehicleTypefunc = async (req, res) => {
   try {
@@ -7,7 +7,7 @@ export const vehicleTypefunc = async (req, res) => {
       status,
       type,
     };
-    const typeData = await Vehicle_type.create(vehicleTypeData);
+    const typeData = await VehicleType.create(vehicleTypeData);
 
     return res.status(201).json({
       success: true,

@@ -2,8 +2,8 @@ import { model, Schema } from "mongoose";
 
 const vehicleSchema = new Schema(
   {
-    customer: { type: Schema.Types.ObjectId, ref: "Customer" },
-    vehicle_type: { type: Schema.Types.ObjectId, ref: "Vehicle_type" },
+    customer: { type: Schema.Types.ObjectId, ref: "customer" },
+    vehicle_type: { type: Schema.Types.ObjectId, ref: "vehicleType" },
     number_plate: { type: String, required: true },
     status: {
       type: String,
