@@ -1,5 +1,6 @@
 import expresss from "express";
 import "dotenv/config";
+import cors from "cors";
 import { connectDB } from "./database/config.js";
 import { getHome } from "./controllers/home.js";
 import { servicesRoute } from "./routes/servicesRoute.js";
@@ -12,6 +13,13 @@ import { serviceTypeRoute } from "./routes/servicetypesRoute.js";
 const app = expresss();
 
 app.use(expresss.json());
+
+const corsOptions = {
+  origin: "*",
+};
+
+app.use(cors(corsOptions));
+
 connectDB();
 
 app.get("/", getHome);
