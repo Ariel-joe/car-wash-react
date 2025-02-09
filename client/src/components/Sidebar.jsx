@@ -1,6 +1,10 @@
 import React from "react";
 import { MdIncompleteCircle } from "react-icons/md";
-import { IoAddCircleOutline, IoCheckmarkDoneCircleOutline } from "react-icons/io5";
+import {
+  IoAddCircleOutline,
+  IoCheckmarkDoneCircleOutline,
+} from "react-icons/io5";
+import { TbProgressCheck } from "react-icons/tb";
 import { FaRegUser } from "react-icons/fa";
 import { HiOutlineUsers } from "react-icons/hi2";
 import { GiTakeMyMoney } from "react-icons/gi";
@@ -15,13 +19,12 @@ const Sidebar = () => {
       </div>
 
       <div className="flex flex-col gap-4 py-4 pl-4">
-
         {/* pending vehicles */}
         <Link
           className="flex text-gray-700 items-center text-[16px] py-1 hover:cursor-pointer"
           to="/"
         >
-          <IoAddCircleOutline  size={24} className="mr-1" />
+          <IoAddCircleOutline size={24} className="mr-1" />
           Add Customer
         </Link>
         {/* pending vehicles */}
@@ -31,6 +34,15 @@ const Sidebar = () => {
         >
           <MdIncompleteCircle size={24} className="mr-1" />
           Pending V
+        </Link>
+
+        {/* inprogress  */}
+        <Link
+          className="flex text-gray-700 items-center text-[16px] py-1 hover:cursor-pointer"
+          to="/pending"
+        >
+          <TbProgressCheck size={24} className="mr-1" />
+          Inprogress
         </Link>
 
         {/* completed vehicles */}
@@ -68,11 +80,9 @@ const Sidebar = () => {
           <GiTakeMyMoney size={24} className="mr-1" />
           Payments
         </Link>
-
       </div>
     </div>
   );
 };
 
 export { Sidebar };
-

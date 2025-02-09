@@ -66,7 +66,7 @@ const PendServices = () => {
                 <th className="py-2 font-light">Michael Kagiri</th>
                 <th className="py-2 font-light">{elem.status}</th>
                 <th className="py-2 font-light">
-                  <div className="flex justify-around">
+                  <div className="flex justify-evenly">
                     <button className="bg-blue-500 px-3 mr-1 text-sm py-1 text-white rounded-md">
                       edit
                     </button>
