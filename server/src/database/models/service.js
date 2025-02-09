@@ -9,15 +9,7 @@ const serviceSchema = new Schema(
     },
     service: {
       type: String,
-      enum: [
-        "auto-wash",
-        "inner-only",
-        "outer-only",
-        "engine-steaming",
-        "waxing",
-        "buffing",
-      ],
-      default: "auto-wash",
+      required: true,
     },
   },
   {

@@ -7,6 +7,7 @@ import { detailersRoute } from "./routes/detailersRoute.js";
 import { customersRoute } from "./routes/customersRoute.js";
 import { paymentsRoute } from "./routes/paymentsRoute.js";
 import { vehiclesRoute } from "./routes/vehiclesRoute.js";
+import { serviceTypeRoute } from "./routes/servicetypesRoute.js";
 
 const app = expresss();
 
@@ -21,7 +22,8 @@ app.use(
   detailersRoute,
   paymentsRoute,
   servicesRoute,
-  vehiclesRoute
+  vehiclesRoute,
+  serviceTypeRoute
 );
 
 app.listen(process.env.PORT, () => {

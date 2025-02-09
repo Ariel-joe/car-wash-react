@@ -1,11 +1,29 @@
-export const getCompletedServices = (req, res) => {
-    res.json({
-        message: "this is the completed route"
-    })
-}
+// adding a service.
 
-export const getPendingServices = (req, res) => {
-    res.json({
-      message: "this is the pending route",
+import { Service } from "../database/models/service.js";
+
+export const addService = async (req, res) => {
+  try {
+    const { service, status } = req.body;
+
+    const serviceData = {
+      service,
+      status,
+    };
+
+    const newService = await Service.create(serviceData);
+
+    return res.status(201).json({
+      sucess: true,
+      data: newService,
     });
+  } catch (error) {
+    console.error(error.message);
+
+    return res.status(500).json({
+      sucess: false,
+      message: error.message
+    })
+    
   }
+};

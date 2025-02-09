@@ -1,14 +1,8 @@
 import { Router } from "express";
-import {
-  getCompletedServices,
-  getPendingServices,
-} from "../controllers/Services.js";
+import { addService } from "../controllers/Services.js";
 
 const servicesRoute = Router();
 
-servicesRoute
-  .route("/services")
-  .get(getPendingServices)
-  .post(getCompletedServices);
+servicesRoute.post("/services/add", addService);
 
 export { servicesRoute };
