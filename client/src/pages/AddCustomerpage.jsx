@@ -1,20 +1,36 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const AddCustomerpage = () => {
-  useEffect(() => {
-    const submitHandler = async (formdata) => {
-      try {
-      } catch (error) {
-        console.error(error.message);
-        
-      }
-    };
-  }, []);
+  const [name, setName] = useState("");
+  const [phonenumber, setPhonenumber] = useState("");
+  const [numberplate, setNumberplate] = useState("");
+  const [vehicletype, setVehicletype] = useState("");
+  const [service, setService] = useState("");
+  const [amount, setAmount] = useState("");
 
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    try {
+      formData = {
+        name,
+        phonenumber,
+        numberplate,
+        vehicletype,
+        service,
+        amount,
+      };
+
+      const response = await fetch("")
+    } catch (error) {
+      toast.error("failed to save the customer")
+    }
+    
+  }
   return (
     <>
       <div className="items-center justify-center w-3/5 p-2">
-        <form className="bg-white px-8 py-4 w-full">
+        <form onSubmit={submitHandler} className="bg-white px-8 py-4 w-full">
           <div className="flex flex-col items-center">
             <div>
               <h1 className="font-semibold text-xl mb-5">New Customer</h1>
@@ -28,6 +44,8 @@ const AddCustomerpage = () => {
                   type="text"
                   className="border w-full rounded-md py-2 px-3"
                   placeholder="John Doe"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
 
@@ -38,6 +56,8 @@ const AddCustomerpage = () => {
                   type="text"
                   className="border w-full rounded-md py-2 px-3"
                   placeholder="+254712345678"
+                  value={phonenumber}
+                  onChange={(e) => setPhonenumber(e.target.value)}
                 />
               </div>
             </div>
@@ -53,6 +73,8 @@ const AddCustomerpage = () => {
                   type="text"
                   className="border w-full rounded-md py-2 px-3"
                   placeholder="John Doe"
+                  value={numberplate}
+                  onChange={(e) => setNumberplate(e.target.value)}
                 />
               </div>
 
@@ -63,6 +85,8 @@ const AddCustomerpage = () => {
                   type="text"
                   className="border w-full rounded-md py-2 px-3"
                   placeholder="+254712345678"
+                  value={vehicletype}
+                  onChange={(e) => setVehicletype(e.target.value)}
                 />
               </div>
             </div>
@@ -78,6 +102,8 @@ const AddCustomerpage = () => {
                   type="text"
                   className="border w-full rounded-md py-2 px-3"
                   placeholder="John Doe"
+                  value={service}
+                  onChange={(e) => setService(e.target.value)}
                 />
               </div>
 
@@ -88,12 +114,17 @@ const AddCustomerpage = () => {
                   type="text"
                   className="border w-full rounded-md py-2 px-3"
                   placeholder="+254712345678"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
                 />
               </div>
             </div>
 
             <div>
-              <button className="bg-black w-full text-white px-10 py-2">
+              <button
+                type="submit"
+                className="bg-black w-full text-white px-10 py-2"
+              >
                 Submit
               </button>
             </div>
