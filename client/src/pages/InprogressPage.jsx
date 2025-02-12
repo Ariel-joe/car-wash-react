@@ -29,7 +29,7 @@ const InprogressPage = () => {
           <thead>
             <tr>
               <th scope="col" className="border-b-2 px-3 py-2 w-[150px]">
-                Customer
+                Customer 
               </th>
               <th scope="col" className="border-b-2 px-3 py-2 w-[150px]">
                 phone number
