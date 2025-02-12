@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const AddCustomerpage = () => {
+  useEffect(() => {
+    const submitHandler = async (formdata) => {
+      try {
+      } catch (error) {
+        console.error(error.message);
+        
+      }
+    };
+  }, []);
+
   return (
     <>
-      <div className="items-center justify-center w-full p-2">
+      <div className="items-center justify-center w-3/5 p-2">
         <form className="bg-white px-8 py-4 w-full">
           <div className="flex flex-col items-center">
             <div>
@@ -80,6 +90,12 @@ const AddCustomerpage = () => {
                   placeholder="+254712345678"
                 />
               </div>
+            </div>
+
+            <div>
+              <button className="bg-black w-full text-white px-10 py-2">
+                Submit
+              </button>
             </div>
 
             {/*  */}
