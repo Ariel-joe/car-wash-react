@@ -20,7 +20,6 @@ const PendServices = () => {
     fetchData();
   }, []);
 
-
   // fetching the detailers
   useEffect(() => {
     const fetchDetailers = async () => {
@@ -86,7 +85,19 @@ const PendServices = () => {
                 <th className="py-2 font-light">full body-wash</th>
 
                 {/* looping through for the detailers */}
-                <th className="py-2 font-light">{}</th>
+                <th className="py-2 font-light">
+                  <div>
+                    <div className="relative">
+                      <select className="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer">
+                        {detailers.map((detailer, i) => (
+                          <option key={i} value={detailer.name}>
+                            {detailer.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </th>
                 <th className="py-2 font-light">{elem.status}</th>
                 <th className="py-2 font-light">
                   <div className="flex justify-evenly">
