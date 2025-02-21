@@ -11,7 +11,7 @@ const vehicleSchema = new Schema(
       default: "Pending",
     },
   },
-  {
+  { 
     timestamps: true,
   }
 );

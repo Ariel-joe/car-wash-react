@@ -1,9 +1,23 @@
 import { Detailer } from "../database/models/detailer.js";
 
-export const getDetailers = (req, res) => {
-  res.json({
-    message: "this are the availalbe detailers",
-  });
+export const getDetailers =async (req, res) => {
+  try {
+    const detailers = await Detailer.find()
+
+    return res.status(200).json({
+      success: true,
+      data: detailers,
+    })
+  } catch (error) {
+    console.error(error.message);
+
+    return res.status(500).json({
+      success: false,
+      message: "something went wrong please try again!"
+    })
+    
+    
+  }
 };
 
 
