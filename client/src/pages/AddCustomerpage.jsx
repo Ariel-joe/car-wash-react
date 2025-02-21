@@ -21,7 +21,7 @@ const AddCustomerpage = () => {
         amount,
       };
 
-      const response = await fetch("")
+      const response = await fetch("http://localhost:3006/api/")
     } catch (error) {
       toast.error("failed to save the customer")
     }

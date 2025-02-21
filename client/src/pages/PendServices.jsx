@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 const PendServices = () => {
   const [data, setData] = useState([]);
+  const [detailers, setDetailers] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -10,8 +11,6 @@ const PendServices = () => {
 
         const result = await response.json();
 
-        console.log(result);
-
         setData(result.data);
       } catch (error) {
         console.error(error.message);
@@ -19,6 +18,28 @@ const PendServices = () => {
     };
 
     fetchData();
+  }, []);
+
+
+  // fetching the detailers
+  useEffect(() => {
+    const fetchDetailers = async () => {
+      try {
+        const response = await fetch("http://localhost:3006/api/detailers");
+
+        const result = await response.json();
+
+        if (result.success) {
+          setDetailers(result.data);
+
+          return;
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+
+    fetchDetailers();
   }, []);
 
   return (
@@ -63,7 +84,9 @@ const PendServices = () => {
                 <th className="py-2 font-light">{elem.vehicle_type.type}</th>
                 <th className="py-2 font-light">{elem.number_plate}</th>
                 <th className="py-2 font-light">full body-wash</th>
-                <th className="py-2 font-light">Michael Kagiri</th>
+
+                {/* looping through for the detailers */}
+                <th className="py-2 font-light">{}</th>
                 <th className="py-2 font-light">{elem.status}</th>
                 <th className="py-2 font-light">
                   <div className="flex justify-evenly">

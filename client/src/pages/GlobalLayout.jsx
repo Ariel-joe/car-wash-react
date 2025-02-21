@@ -5,7 +5,7 @@ const GlobalLayout = () => {
   return (
     <>
       <div>
-        <Toaster position="top-right" richColors />
+        <Toaster position="top-center" richColors />
         <Outlet />
       </div>
     </>
