@@ -1,3 +1,4 @@
+import { Detailer } from "../database/models/detailer.js";
 import { Vehicle } from "../database/models/vehicle.js";
 
 // get all the vehicles
@@ -76,13 +77,18 @@ export const searchVehicle = async (req, res) => {
 // function to update vehicle status to completed
 export const updateVehicleStatus = async (req, res) => {
   try {
-    const vehicleId = req.query.id;
+    const {vehicleId, detailerId, status} = req.body;
 
     const vehicle = await Vehicle.findOneAndUpdate(
       { _id: vehicleId },
       { status: "Completed" },
       { new: true }
     );
+
+    // If a detailer is assigned and status is "Completed", set the detailer to "Available"
+    if (detailerId) {
+      await Detailer.findByIdAndUpdate(detailerId, { status: "available" });
+    }
 
     return res.status(200).json({
       success: true,
