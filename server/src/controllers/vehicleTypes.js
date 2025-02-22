@@ -22,3 +22,23 @@ export const vehicleTypefunc = async (req, res) => {
     });
   }
 };
+
+
+// getting all the vehicles types.
+export const getVehicleTypes = async (req, res) => {
+  try {
+    const vehicleTypes = await VehicleType.find();
+
+    return res.status(200).json({
+      success: true,
+      data: vehicleTypes,
+    });
+  } catch (error) {
+    console.error(error.message);
+
+    return res.status(500).json({
+      success: false,
+      message: "something went wrong please try again!",
+    });
+  }
+};
