@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const PendServices = () => {
   const [data, setData] = useState([]);
@@ -29,11 +30,14 @@ const PendServices = () => {
         }
       );
 
-      if (!response.ok) {
+      const result = await response.json();
+
+      if (result.success) {
+        toast.success("Detailer assigned successfully");
+      } else {
         throw new Error(`Failed to assign detailer: ${response.statusText}`);
       }
 
-      console.log(`Assigned ${detailerName} to vehicle ${vehicleId}`);
     } catch (error) {
       console.error("Error assigning detailer:", error);
     }
