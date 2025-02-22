@@ -3,6 +3,8 @@ import { toast } from "sonner";
 
 const InprogressPage = () => {
   const [data, setData] = useState([]);
+  const [detailersData, setDetailersData] = useState([]);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +27,7 @@ const InprogressPage = () => {
   }, []);
 
   // function to handle the changing of status to Completed
-  const handleStatusChange = async (vehicleId) => {
+  const handleStatusChange = async (vehicleId, detailerId) => {
     console.log("clicked to update status");
 
     try {
@@ -36,7 +38,7 @@ const InprogressPage = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ vehicleId, status: "Completed" }),
+          body: JSON.stringify({ vehicleId, detailerId, status: "Completed" }),
         }
       );
 
@@ -51,6 +53,15 @@ const InprogressPage = () => {
             vehicle._id === vehicleId
               ? { ...vehicle, status: "Completed" }
               : vehicle
+          )
+        );
+
+        // update localstate to reflect the availability of detailer
+        setDetailersData((prevDetailers) =>
+          prevDetailers.map((detailer) =>
+            detailer._id === detailerId
+              ? { ...detailer, status: "available" }
+              : detailer
           )
         );
       }
@@ -108,7 +119,9 @@ const InprogressPage = () => {
                   <th className="py-2 font-light">{elem.status}</th>
                   <th className="py-2 font-light">
                     <button
-                      onClick={() => handleStatusChange(elem._id)}
+                      // update function to change status of detailer to available
+
+                      onClick={() => handleStatusChange(elem._id, elem.detailer?._id)}
                       className="bg-green-500 px-2 py-1 rounded-md text-white"
                     >
                       Complete
