@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 const PendServices = () => {
   const [data, setData] = useState([]);
 
-  
-
   // function for adding the detailer to the service
   // const addDetailer = async () => {
   //   try {
@@ -22,13 +20,11 @@ const PendServices = () => {
   //     const result = await response.json();
 
   //     console.log(result);
-      
 
   //   } catch (error) {
   //     console.error(error.message);
   //   }
   // };
-
 
   // fetching the user data
   useEffect(() => {
@@ -38,10 +34,10 @@ const PendServices = () => {
 
         const result = await response.json();
 
-        setData(result.data);
-
-        console.log(data[0]);
+        console.log(result.data);
         
+
+        setData(result.data);
       } catch (error) {
         console.error(error.message);
       }
@@ -51,9 +47,6 @@ const PendServices = () => {
   }, []);
 
   // fetching the detailers
-  
-
-
 
   return (
     <>
@@ -96,21 +89,17 @@ const PendServices = () => {
                 <th className="py-2 font-light">{elem.customer.phone}</th>
                 <th className="py-2 font-light">{elem.vehicle_type.type}</th>
                 <th className="py-2 font-light">{elem.number_plate}</th>
-                <th className="py-2 font-light">full body-wash</th>
+                <th className="py-2 font-light">{elem.service.service}</th>
 
                 {/* looping through for the detailers */}
-                <th className="py-2 font-light">
-                  
-                </th>
+                <th className="py-2 font-light">{elem.detailer.name}</th>
                 <th className="py-2 font-light">{elem.status}</th>
                 <th className="py-2 font-light">
                   <div className="flex justify-evenly">
                     <button className="bg-blue-500 px-3 mr-1 text-sm py-1 text-white rounded-md">
                       edit
                     </button>
-                    <button
-                      className="bg-orange-500 px-3 py-1 text-sm text-white rounded-md"
-                    >
+                    <button className="bg-orange-500 px-3 py-1 text-sm text-white rounded-md">
                       Assign
                     </button>
                   </div>

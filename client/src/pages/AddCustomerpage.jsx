@@ -1,19 +1,23 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import { toast } from "sonner";
 
 const AddCustomerpage = () => {
   const [name, setName] = useState("");
-  const [phonenumber, setPhonenumber] = useState("");
-  const [numberplate, setNumberplate] = useState("");
+  const [phone, setPhone] = useState("");
+  const [numberPlate, setNumberPlate] = useState("");
   const [amount, setAmount] = useState("");
 
   const [detailersData, setDetailersData] = useState([]);
   const [detailer, setDetailer] = useState("");
 
   const [vehicletypeData, setVehicletypeData] = useState([]);
-  const [vehicletype, setVehicletype] = useState("");
+  const [vehicleType, setVehicleType] = useState("");
 
   const [servicesData, setServicesData] = useState([]);
   const [service, setService] = useState("");
+
+  const navigate = useNavigate();
 
   // fetching available services
   useEffect(() => {
@@ -82,18 +86,39 @@ const AddCustomerpage = () => {
     e.preventDefault();
 
     try {
-      formData = {
+      const formData = {
         name,
-        phonenumber,
-        numberplate,
-        vehicletype,
+        phone,
+        numberPlate,
+        vehicleType,
         service,
         amount,
-        detailer
+        detailer,
       };
 
-      const response = await fetch("http://localhost:3006/api/");
+      console.log(formData);
+
+      const response = await fetch("http://localhost:3006/api/customers/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      console.log(result);
+
+      if (result.success) {
+        toast.success("customer saved successfully");
+        navigate("/pending");
+
+        return;
+      }
     } catch (error) {
+      console.error(error.message);
+
       toast.error("failed to save the customer");
     }
   };
@@ -126,8 +151,8 @@ const AddCustomerpage = () => {
                   type="text"
                   className="border w-full rounded-md py-1 px-3"
                   placeholder="+254712345678"
-                  value={phonenumber}
-                  onChange={(e) => setPhonenumber(e.target.value)}
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                 />
               </div>
             </div>
@@ -141,8 +166,8 @@ const AddCustomerpage = () => {
                   type="text"
                   className="border w-full rounded-md py-1 px-3"
                   placeholder="KAA 001A"
-                  value={numberplate}
-                  onChange={(e) => setNumberplate(e.target.value)}
+                  value={numberPlate}
+                  onChange={(e) => setNumberPlate(e.target.value)}
                 />
               </div>
 
@@ -151,9 +176,12 @@ const AddCustomerpage = () => {
                 <div className="relative">
                   <label>vehicle Type</label>
                   <select
-                    onChange={(e) => setVehicletype(e.target.value)}
+                    onChange={(e) => setVehicleType(e.target.value)}
                     className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-1 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
                   >
+                    <option value="" disabled selected>
+                      Select a vehicle
+                    </option>
                     {vehicletypeData.map((vehicle, i) => (
                       <option key={i} value={vehicle.type}>
                         {vehicle.type}
@@ -171,6 +199,9 @@ const AddCustomerpage = () => {
                   onChange={(e) => setDetailer(e.target.value)}
                   className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-1 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
                 >
+                  <option value="" disabled selected>
+                    Select a detailer
+                  </option>
                   {detailersData.map((detailer, i) => (
                     <option key={i} value={detailer.name}>
                       {detailer.name}
@@ -188,19 +219,22 @@ const AddCustomerpage = () => {
 
             <div className="w-full flex space-x-8">
               <div className="w-full mb-3">
-              <div className="relative">
-                <label>Service</label>
-                <select
-                  onChange={(e) => setService(e.target.value)}
-                  className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-1 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
-                >
-                  {servicesData.map((service, i) => (
-                    <option key={i} value={service.service}>
-                      {service.service}
+                <div className="relative">
+                  <label>Service</label>
+                  <select
+                    onChange={(e) => setService(e.target.value)}
+                    className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-1 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
+                  >
+                    <option value="" disabled selected>
+                      Select a service
                     </option>
-                  ))}
-                </select>
-              </div>
+                    {servicesData.map((service, i) => (
+                      <option key={i} value={service.service}>
+                        {service.service}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
               {/*  */}
