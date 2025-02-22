@@ -47,50 +47,87 @@ export const addDetailer = async (req, res) => {
   }
 };
 
-// Assigning a detailer to a vehicle
-export const assignDetailerToVehicle = async (req, res) => {
+// // Assigning a detailer to a vehicle
+// export const assignDetailerToVehicle = async (req, res) => {
+//   try {
+//     const { vehicleId, detailerId } = req.body;
+
+//     console.log(vehicleId);
+//     console.log(detailerId);
+    
+    
+
+//     // Find the vehicle by ID
+//     const vehicle = await Vehicle.findById(vehicleId);
+
+//     if (!vehicle) {
+//       return res.status(404).json({
+//         success: false,
+//         message: "Vehicle not found",
+//       });
+//     }
+
+//     // Find the detailer by ID
+//     const detailer = await Detailer.findById(detailerId);
+//     if (!detailer) {
+//       return res.status(404).json({
+//         success: false,
+//         message: "Detailer not found",
+//       });
+//     }
+
+//     // Assign the detailer to the vehicle
+//     vehicle.detailer = detailerId;
+//     await vehicle.save();
+
+//     return res.status(200).json({
+//       success: true,
+//       message: "Detailer assigned to vehicle successfully",
+//       data: vehicle,
+//     });
+//   } catch (error) {
+//     console.error(error.message);
+
+//     return res.status(500).json({
+//       success: false,
+//       message: "Something went wrong, please try again!",
+//     });
+//   }
+// };
+
+
+
+
+
+export const assignDetailer = async (req, res) => {
   try {
-    const { vehicleId, detailerId } = req.body;
+    const { vehicleId, detailerName } = req.body;
 
-    console.log(vehicleId);
-    console.log(detailerId);
-    
-    
+    // Validate input
+    if (!vehicleId || !detailerName) {
+      return res.status(400).json({ success: false, message: "Vehicle ID and Detailer ID are required" });
+    }
 
-    // Find the vehicle by ID
+    // Check if the vehicle exists
     const vehicle = await Vehicle.findById(vehicleId);
-
     if (!vehicle) {
-      return res.status(404).json({
-        success: false,
-        message: "Vehicle not found",
-      });
+      return res.status(404).json({ success: false, message: "Vehicle not found" });
     }
 
-    // Find the detailer by ID
-    const detailer = await Detailer.findById(detailerId);
+    // Check if the detailer exists
+    const detailer = await Detailer.findOne({ name: detailerName });
     if (!detailer) {
-      return res.status(404).json({
-        success: false,
-        message: "Detailer not found",
-      });
+      return res.status(404).json({ success: false, message: "Detailer not found" });
     }
 
-    // Assign the detailer to the vehicle
-    vehicle.detailer = detailerId;
+    // Update vehicle with assigned detailer and change status
+    vehicle.detailer = detailer._id;
+    vehicle.status = "In Progress";
     await vehicle.save();
 
-    return res.status(200).json({
-      success: true,
-      message: "Detailer assigned to vehicle successfully",
-      data: vehicle,
-    });
+    return res.status(200).json({ success: true, message: "Detailer assigned successfully", vehicle });
   } catch (error) {
-    console.error(error.message);
-
-    return res.status(500).json({
-      success: false,
-      message: "Something went wrong, please try again!",
-    });
+    console.error("Error assigning detailer:", error);
+    return res.status(500).json({ success: false, message: "Server error" });
   }
 };
