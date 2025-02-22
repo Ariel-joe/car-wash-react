@@ -14,7 +14,6 @@ export const addCustomer = async (req, res) => {
       vehicleType,
       service,
       amount,
-      detailer,
     } = req.body;
 
     
@@ -36,13 +35,13 @@ export const addCustomer = async (req, res) => {
       });
     }
 
-    const detailerData = await Detailer.findOne({name: detailer});
-    if (!detailerData) {
-      return res.status(404).json({
-        success: false,
-        message: "Detailer not found",
-      });
-    }
+    // const detailerData = await Detailer.findOne({name: detailer});
+    // if (!detailerData) {
+    //   return res.status(404).json({
+    //     success: false,
+    //     message: "Detailer not found",
+    //   });
+    // }
 
     const customerData = {
       name,
@@ -51,7 +50,7 @@ export const addCustomer = async (req, res) => {
       vehicleType: vehicleTypeData._id,
       service: serviceData._id,
       amount,
-      detailer: detailerData._id,
+      // detailer: detailerData._id,
     };
 
     const newCustomer = await Customer.create(customerData);
@@ -61,7 +60,7 @@ export const addCustomer = async (req, res) => {
       vehicle_type: vehicleTypeData._id,
       number_plate: numberPlate,
       service: serviceData._id,
-      detailer: detailerData._id,
+      // detailer: detailerData._id,
       status: "Pending",
     }
 
