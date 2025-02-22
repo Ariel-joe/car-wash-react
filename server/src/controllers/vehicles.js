@@ -3,7 +3,9 @@ import { Vehicle } from "../database/models/vehicle.js";
 // get all the vehicles
 export const getVehicles = async (req, res) => {
   try {
-    const vehicles = await Vehicle.find().populate("customer vehicle_type service detailer");
+    const vehicles = await Vehicle.find().populate(
+      "customer vehicle_type service detailer"
+    );
 
     return res.status(200).json({
       success: true,
@@ -60,6 +62,31 @@ export const searchVehicle = async (req, res) => {
     return res.status(200).json({
       success: true,
       data: vehicleSearch,
+    });
+  } catch (error) {
+    console.error(error.message);
+
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+// function to update vehicle status to completed
+export const updateVehicleStatus = async (req, res) => {
+  try {
+    const vehicleId = req.query.id;
+
+    const vehicle = await Vehicle.findOneAndUpdate(
+      { _id: vehicleId },
+      { status: "Completed" },
+      { new: true }
+    );
+
+    return res.status(200).json({
+      success: true,
+      data: vehicle,
     });
   } catch (error) {
     console.error(error.message);
