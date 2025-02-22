@@ -18,22 +18,19 @@ const PendServices = () => {
     // handling the assignment  to the server
     try {
       // Make a PUT request using fetch
-      const response = await fetch(`/api/vehicles/${vehicleId}/assign`, {
-        method: "PUT",
+      const response = await fetch("http://localhost:3006/api/detailers/assign", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          detailer: assignedDetailers,
-          status: "In Progress",
-        }),
+        body: JSON.stringify({ vehicleId, detailerName }),
       });
 
       if (!response.ok) {
         throw new Error(`Failed to assign detailer: ${response.statusText}`);
       }
 
-      console.log(`Assigned ${assignedDetailers} to vehicle ${vehicleId}`);
+      console.log(`Assigned ${detailerName} to vehicle ${vehicleId}`);
     } catch (error) {
       console.error("Error assigning detailer:", error);
     }
