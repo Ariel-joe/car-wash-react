@@ -7,6 +7,29 @@ const AddCustomerpage = () => {
   const [vehicletype, setVehicletype] = useState("");
   const [service, setService] = useState("");
   const [amount, setAmount] = useState("");
+  const [detailersData, setDetailersData] = useState([]);
+  
+
+  // fetching detailers.
+  useEffect(() => {
+    const fetchDetailers = async () => {
+      try {
+        const response = await fetch("http://localhost:3006/api/detailers");
+
+        const result = await response.json();
+
+        if (result.success) {
+          setDetailersData(result.data);
+
+          return;
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+
+    fetchDetailers();
+  }, []);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -21,12 +44,11 @@ const AddCustomerpage = () => {
         amount,
       };
 
-      const response = await fetch("http://localhost:3006/api/")
+      const response = await fetch("http://localhost:3006/api/");
     } catch (error) {
-      toast.error("failed to save the customer")
+      toast.error("failed to save the customer");
     }
-    
-  }
+  };
   return (
     <>
       <div className="items-center justify-center w-3/5 p-2">
@@ -59,6 +81,23 @@ const AddCustomerpage = () => {
                   value={phonenumber}
                   onChange={(e) => setPhonenumber(e.target.value)}
                 />
+              </div>
+            </div>
+
+            <div className="w-full">
+              <div className="w-full">
+                <div className="relative">
+                  <select
+                    onChange={(e) => setDetailer(e.target.value)}
+                    className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
+                  >
+                    {detailersData.map((detailer, i) => (
+                      <option key={i} value={detailer.name}>
+                        {detailer.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </div>
 

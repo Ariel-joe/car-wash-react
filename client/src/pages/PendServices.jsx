@@ -2,8 +2,36 @@ import { useEffect, useState } from "react";
 
 const PendServices = () => {
   const [data, setData] = useState([]);
-  const [detailers, setDetailers] = useState([]);
+  const [detailer, setDetailer] = useState("");
 
+  
+
+  // function for adding the detailer to the service
+  // const addDetailer = async () => {
+  //   try {
+  //     const response = await fetch("http://localhost:3006/api/detailers/assign", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         vehicle_id: data[0]._id,
+  //         detailer_name: detailer,
+  //       }),
+  //     });
+
+  //     const result = await response.json();
+
+  //     console.log(result);
+      
+
+  //   } catch (error) {
+  //     console.error(error.message);
+  //   }
+  // };
+
+
+  // fetching the user data
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -12,6 +40,9 @@ const PendServices = () => {
         const result = await response.json();
 
         setData(result.data);
+
+        console.log(data[0]);
+        
       } catch (error) {
         console.error(error.message);
       }
@@ -21,25 +52,9 @@ const PendServices = () => {
   }, []);
 
   // fetching the detailers
-  useEffect(() => {
-    const fetchDetailers = async () => {
-      try {
-        const response = await fetch("http://localhost:3006/api/detailers");
+  
 
-        const result = await response.json();
 
-        if (result.success) {
-          setDetailers(result.data);
-
-          return;
-        }
-      } catch (error) {
-        console.error(error.message);
-      }
-    };
-
-    fetchDetailers();
-  }, []);
 
   return (
     <>
@@ -86,17 +101,7 @@ const PendServices = () => {
 
                 {/* looping through for the detailers */}
                 <th className="py-2 font-light">
-                  <div>
-                    <div className="relative">
-                      <select className="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer">
-                        {detailers.map((detailer, i) => (
-                          <option key={i} value={detailer.name}>
-                            {detailer.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
+                  
                 </th>
                 <th className="py-2 font-light">{elem.status}</th>
                 <th className="py-2 font-light">
@@ -104,7 +109,9 @@ const PendServices = () => {
                     <button className="bg-blue-500 px-3 mr-1 text-sm py-1 text-white rounded-md">
                       edit
                     </button>
-                    <button className="bg-orange-500 px-3 py-1 text-sm text-white rounded-md">
+                    <button
+                      className="bg-orange-500 px-3 py-1 text-sm text-white rounded-md"
+                    >
                       Assign
                     </button>
                   </div>
