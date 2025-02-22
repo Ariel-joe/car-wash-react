@@ -18,13 +18,16 @@ const PendServices = () => {
     // handling the assignment  to the server
     try {
       // Make a PUT request using fetch
-      const response = await fetch("http://localhost:3006/api/detailers/assign", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ vehicleId, detailerName }),
-      });
+      const response = await fetch(
+        "http://localhost:3006/api/detailers/assign",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ vehicleId, detailerName }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`Failed to assign detailer: ${response.statusText}`);
@@ -134,62 +137,64 @@ const PendServices = () => {
 
           {/* table body */}
           <tbody>
-            {data.map((elem, i) => (
-              <tr key={i} className="border-b-2">
-                <th className="py-2 font-light">{elem.customer.name}</th>
-                <th className="py-2 font-light">{elem.customer.phone}</th>
-                <th className="py-2 font-light">{elem.vehicle_type.type}</th>
-                <th className="py-2 font-light">{elem.number_plate}</th>
-                <th className="py-2 font-light">{elem.service.service}</th>
+            {data
+              .filter((elem) => elem.status === "Pending")
+              .map((elem, i) => (
+                <tr key={i} className="border-b-2">
+                  <th className="py-2 font-light">{elem.customer.name}</th>
+                  <th className="py-2 font-light">{elem.customer.phone}</th>
+                  <th className="py-2 font-light">{elem.vehicle_type.type}</th>
+                  <th className="py-2 font-light">{elem.number_plate}</th>
+                  <th className="py-2 font-light">{elem.service.service}</th>
 
-                {/* looping through for the detailers */}
-                <th className="py-2 font-light">
-                  <select
-                    value={assignedDetailers[elem._id] || ""}
-                    onChange={(e) =>
-                      setAssignedDetailers((prev) => ({
-                        ...prev,
-                        [elem._id]: e.target.value, // Update state for this specific vehicle
-                      }))
-                    }
-                    className="px-2 py-1 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
-                  >
-                    <option value="" disabled>
-                      Select a detailer
-                    </option>
-                    {detailersData.map((detailer) => (
-                      <option key={detailer._id} value={detailer.name}>
-                        {detailer.name}
-                      </option>
-                    ))}
-                  </select>
-                </th>
-                <th className="py-2 font-light">{elem.status}</th>
-                <th className="py-2 font-light">
-                  <div className="flex justify-evenly">
-                    <button className="bg-blue-500 px-3 mr-1 text-sm py-1 text-white rounded-md">
-                      edit
-                    </button>
-                    <button
-                      onClick={() =>
-                        handleAssignDetailer(
-                          elem._id,
-                          assignedDetailers[elem._id]
-                        )
+                  {/* looping through for the detailers */}
+                  <th className="py-2 font-light">
+                    <select
+                      value={assignedDetailers[elem._id] || ""}
+                      onChange={(e) =>
+                        setAssignedDetailers((prev) => ({
+                          ...prev,
+                          [elem._id]: e.target.value, // Update state for this specific vehicle
+                        }))
                       }
-                      disabled={!assignedDetailers[elem._id]} // Disable if no detailer selected
-                      className={`px-3 py-1 text-sm text-white rounded-md ${
-                        assignedDetailers[elem._id]
-                          ? "bg-orange-500"
-                          : "bg-gray-500 cursor-not-allowed"
-                      }`}
+                      className="px-2 py-1 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
                     >
-                      Assign
-                    </button>
-                  </div>
-                </th>
-              </tr>
-            ))}
+                      <option value="" disabled>
+                        Select a detailer
+                      </option>
+                      {detailersData.map((detailer) => (
+                        <option key={detailer._id} value={detailer.name}>
+                          {detailer.name}
+                        </option>
+                      ))}
+                    </select>
+                  </th>
+                  <th className="py-2 font-light">{elem.status}</th>
+                  <th className="py-2 font-light">
+                    <div className="flex justify-evenly">
+                      <button className="bg-blue-500 px-3 mr-1 text-sm py-1 text-white rounded-md">
+                        edit
+                      </button>
+                      <button
+                        onClick={() =>
+                          handleAssignDetailer(
+                            elem._id,
+                            assignedDetailers[elem._id]
+                          )
+                        }
+                        disabled={!assignedDetailers[elem._id]} // Disable if no detailer selected
+                        className={`px-3 py-1 text-sm text-white rounded-md ${
+                          assignedDetailers[elem._id]
+                            ? "bg-orange-500"
+                            : "bg-gray-500 cursor-not-allowed"
+                        }`}
+                      >
+                        Assign
+                      </button>
+                    </div>
+                  </th>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
