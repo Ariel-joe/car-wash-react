@@ -3,7 +3,7 @@ import { Vehicle } from "../database/models/vehicle.js";
 // get all the vehicles
 export const getVehicles = async (req, res) => {
   try {
-    const vehicles = await Vehicle.find().populate("customer vehicle_type");
+    const vehicles = await Vehicle.find().populate("customer vehicle_type service detailer");
 
     return res.status(200).json({
       success: true,

@@ -60,6 +60,8 @@ export const addCustomer = async (req, res) => {
       customer: newCustomer._id,
       vehicle_type: vehicleTypeData._id,
       number_plate: numberPlate,
+      service: serviceData._id,
+      detailer: detailerData._id,
       status: "Pending",
     }
 
