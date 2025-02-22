@@ -45,6 +45,9 @@ const CompServices = () => {
                 service
               </th>
               <th scope="col" className="border-b-2 px-3 py-2 w-[150px]">
+                price
+              </th>
+              <th scope="col" className="border-b-2 px-3 py-2 w-[150px]">
                 detailer
               </th>
               <th scope="col" className="border-b-2 px-3 py-2 w-[150px]">
@@ -64,6 +67,7 @@ const CompServices = () => {
                   <th className="py-2 font-light">{elem.vehicle_type.type}</th>
                   <th className="py-2 font-light">{elem.number_plate}</th>
                   <th className="py-2 font-light">{elem.service.service}</th>
+                  <th className="py-2 font-light">ksh. {elem.customer.amount}</th>
                   <th className="py-2 font-light">{elem.detailer.name}</th>
                   <th className="py-2 font-light">{elem.status}</th>
                   <th className="py-2 font-light"></th>
