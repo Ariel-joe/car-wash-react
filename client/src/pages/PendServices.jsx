@@ -9,12 +9,21 @@ const PendServices = () => {
   // State to store assigned detailers per vehicle
   const [assignedDetailers, setAssignedDetailers] = useState({});
 
+  
+
   // function to handle assigning detailers to services
   const handleAssignDetailer = async (vehicleId, detailerName) => {
     setAssignedDetailers((prevState) => ({
       ...prevState,
       [vehicleId]: detailerName,
     }));
+
+    // Check if a detailer has been selected
+    if (!detailerName) {
+      toast.error("Please select a detailer");
+      return;
+    }
+
 
     // handling the assignment  to the server
     try {
@@ -38,6 +47,14 @@ const PendServices = () => {
         throw new Error(`Failed to assign detailer: ${response.statusText}`);
       }
 
+      // Update the local state to reflect the change
+      setData((prevData) =>
+        prevData.map((vehicle) =>
+          vehicle._id === vehicleId
+            ? { ...vehicle, status: "In Progress" }
+            : vehicle
+        )
+      );
     } catch (error) {
       console.error("Error assigning detailer:", error);
     }

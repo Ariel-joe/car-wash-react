@@ -8,8 +8,6 @@ const AddCustomerpage = () => {
   const [numberPlate, setNumberPlate] = useState("");
   const [amount, setAmount] = useState("");
 
-
-
   const [vehicletypeData, setVehicletypeData] = useState([]);
   const [vehicleType, setVehicleType] = useState("");
 
@@ -60,8 +58,6 @@ const AddCustomerpage = () => {
     fetchvehicleTypes();
   }, []);
 
-  
-
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -73,7 +69,6 @@ const AddCustomerpage = () => {
         vehicleType,
         service,
         amount,
-        detailer,
       };
 
       const response = await fetch("http://localhost:3006/api/customers/add", {
@@ -154,7 +149,7 @@ const AddCustomerpage = () => {
                 <div className="relative">
                   <label>vehicle Type</label>
                   <select
-                  value={vehicleType}
+                    value={vehicleType}
                     onChange={(e) => setVehicleType(e.target.value)}
                     className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-1 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
                   >
@@ -189,12 +184,12 @@ const AddCustomerpage = () => {
                 <div className="relative">
                   <label>Service</label>
                   <select
-                  value={service}
+                    value={service}
                     onChange={(e) => setService(e.target.value)}
                     className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-1 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
                   >
                     <option value="" disabled>
-                    Select a service
+                      Select a service
                     </option>
                     {servicesData.map((service, i) => (
                       <option key={i} value={service.service}>
