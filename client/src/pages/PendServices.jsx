@@ -9,8 +9,6 @@ const PendServices = () => {
   // State to store assigned detailers per vehicle
   const [assignedDetailers, setAssignedDetailers] = useState({});
 
-  
-
   // function to handle assigning detailers to services
   const handleAssignDetailer = async (vehicleId, detailerName) => {
     setAssignedDetailers((prevState) => ({
@@ -23,7 +21,6 @@ const PendServices = () => {
       toast.error("Please select a detailer");
       return;
     }
-
 
     // handling the assignment  to the server
     try {
@@ -183,11 +180,13 @@ const PendServices = () => {
                       <option value="" disabled>
                         Select a detailer
                       </option>
-                      {detailersData.map((detailer) => (
-                        <option key={detailer._id} value={detailer.name}>
-                          {detailer.name}
-                        </option>
-                      ))}
+                      {detailersData
+                        .filter((detailer) => detailer.status === "available")
+                        .map((detailer) => (
+                          <option key={detailer._id} value={detailer.name}>
+                            {detailer.name}
+                          </option>
+                        ))}
                     </select>
                   </th>
                   <th className="py-2 font-light">{elem.status}</th>
