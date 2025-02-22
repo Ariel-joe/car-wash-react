@@ -54,8 +54,6 @@ export const addDetailer = async (req, res) => {
 
 //     console.log(vehicleId);
 //     console.log(detailerId);
-    
-    
 
 //     // Find the vehicle by ID
 //     const vehicle = await Vehicle.findById(vehicleId);
@@ -95,37 +93,56 @@ export const addDetailer = async (req, res) => {
 //   }
 // };
 
-
-
-
-
 export const assignDetailer = async (req, res) => {
   try {
     const { vehicleId, detailerName } = req.body;
 
     // Validate input
     if (!vehicleId || !detailerName) {
-      return res.status(400).json({ success: false, message: "Vehicle ID and Detailer ID are required" });
+      return res.status(400).json({
+        success: false,
+        message: "Vehicle ID and Detailer ID are required",
+      });
     }
 
     // Check if the vehicle exists
     const vehicle = await Vehicle.findById(vehicleId);
     if (!vehicle) {
-      return res.status(404).json({ success: false, message: "Vehicle not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "Vehicle not found" });
     }
 
     // Check if the detailer exists
     const detailer = await Detailer.findOne({ name: detailerName });
     if (!detailer) {
-      return res.status(404).json({ success: false, message: "Detailer not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "Detailer not found" });
+    }
+
+    // Prevent assigning a busy detailer
+    if (detailer.status.toLowerCase() === "busy") {
+      return res.status(400).json({
+        success: false,
+        message: "Detailer is already assigned to another vehicle",
+      });
     }
 
     // Update vehicle with assigned detailer and change status
     vehicle.detailer = detailer._id;
     vehicle.status = "In Progress";
-    await vehicle.save();
 
-    return res.status(200).json({ success: true, message: "Detailer assigned successfully", vehicle });
+    // update detailer status
+    detailer.status = "busy";
+
+    await Promise.all([vehicle.save(), detailer.save()]);
+
+    return res.status(200).json({
+      success: true,
+      message: "Detailer assigned successfully",
+      vehicle,
+    });
   } catch (error) {
     console.error("Error assigning detailer:", error);
     return res.status(500).json({ success: false, message: "Server error" });
