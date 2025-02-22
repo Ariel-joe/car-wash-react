@@ -20,7 +20,7 @@ const Modal = ({ openModal, closeModal, children }) => {
             onClick={closeModal}
             className="text-black hover:cursor-pointer"
           >
-            <IoCloseCircleOutline size={24} />
+            cancel
           </button>
 
         </div>

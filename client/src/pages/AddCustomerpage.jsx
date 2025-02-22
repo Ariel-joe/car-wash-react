@@ -8,8 +8,7 @@ const AddCustomerpage = () => {
   const [numberPlate, setNumberPlate] = useState("");
   const [amount, setAmount] = useState("");
 
-  const [detailersData, setDetailersData] = useState([]);
-  const [detailer, setDetailer] = useState("");
+
 
   const [vehicletypeData, setVehicletypeData] = useState([]);
   const [vehicleType, setVehicleType] = useState("");
@@ -61,26 +60,7 @@ const AddCustomerpage = () => {
     fetchvehicleTypes();
   }, []);
 
-  // fetching detailers.
-  useEffect(() => {
-    const fetchDetailers = async () => {
-      try {
-        const response = await fetch("http://localhost:3006/api/detailers");
-
-        const result = await response.json();
-
-        if (result.success) {
-          setDetailersData(result.data);
-
-          return;
-        }
-      } catch (error) {
-        console.error(error.message);
-      }
-    };
-
-    fetchDetailers();
-  }, []);
+  
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -95,8 +75,6 @@ const AddCustomerpage = () => {
         amount,
         detailer,
       };
-
-      console.log(formData);
 
       const response = await fetch("http://localhost:3006/api/customers/add", {
         method: "POST",
@@ -176,10 +154,11 @@ const AddCustomerpage = () => {
                 <div className="relative">
                   <label>vehicle Type</label>
                   <select
+                  value={vehicleType}
                     onChange={(e) => setVehicleType(e.target.value)}
                     className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-1 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
                   >
-                    <option value="" disabled selected>
+                    <option value="" disabled>
                       Select a vehicle
                     </option>
                     {vehicletypeData.map((vehicle, i) => (
@@ -192,24 +171,12 @@ const AddCustomerpage = () => {
               </div>
             </div>
 
-            <div className="w-full mb-3">
+            {/* <div className="w-full mb-3">
               <div className="relative">
                 <label>Detailers</label>
-                <select
-                  onChange={(e) => setDetailer(e.target.value)}
-                  className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-1 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
-                >
-                  <option value="" disabled selected>
-                    Select a detailer
-                  </option>
-                  {detailersData.map((detailer, i) => (
-                    <option key={i} value={detailer.name}>
-                      {detailer.name}
-                    </option>
-                  ))}
-                </select>
+                
               </div>
-            </div>
+            </div> */}
 
             {/*  */}
 
@@ -222,11 +189,12 @@ const AddCustomerpage = () => {
                 <div className="relative">
                   <label>Service</label>
                   <select
+                  value={service}
                     onChange={(e) => setService(e.target.value)}
                     className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-1 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
                   >
-                    <option value="" disabled selected>
-                      Select a service
+                    <option value="" disabled>
+                    Select a service
                     </option>
                     {servicesData.map((service, i) => (
                       <option key={i} value={service.service}>
@@ -249,11 +217,8 @@ const AddCustomerpage = () => {
               </div>
             </div>
 
-            <div>
-              <button
-                type="submit"
-                className="bg-black w-full text-white px-10 py-1"
-              >
+            <div className="w-full">
+              <button type="submit" className="bg-black w-full text-white py-2">
                 Submit
               </button>
             </div>
