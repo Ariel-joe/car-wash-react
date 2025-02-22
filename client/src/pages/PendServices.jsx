@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 const PendServices = () => {
   const [data, setData] = useState([]);
-  const [detailer, setDetailer] = useState("");
 
   
 
