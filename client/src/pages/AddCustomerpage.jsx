@@ -211,17 +211,17 @@ const AddCustomerpage = ({ closeModal }) => {
               </div>
             </div>
 
-            <div className="w-full mb-3">
+            <div className="flex flex-row-reverse justify-around w-full my-6">
               <button
                 type="submit"
-                className="bg-black w-full text-white py-2 mb-3"
+                className="bg-black text-white w-[40%] py-2 px-12 mb-5"
               >
                 Submit
               </button>
               <button
                 type="button"
                 onClick={closeModal}
-                className="bg-black w-full text-white py-2"
+                className="bg-transparent border px-12 w-[40%] text-DarkGray border-black py-2 mb-5"
               >
                 Cancel
               </button>

@@ -9,7 +9,7 @@ const Modal = ({ openModal, closeModal, children }) => {
       onClick={closeModal}
     >
       <div
-        className="relative bg-white rounded-md p-4"
+        className="relative bg-white rounded-md p-4 w-[60%]"
         onClick={(e) => e.stopPropagation()} // Prevents modal from closing when clicking inside
       >
         {/* Close button inside the modal */}
