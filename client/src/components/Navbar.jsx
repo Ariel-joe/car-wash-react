@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Modal } from "./Modal";
 import { IoNotificationsOutline } from "react-icons/io5";
-import { AddCustomer } from "./AddCustomer";
+import { AddCustomerpage } from "../pages/AddCustomerpage";
 
 const Navbar = () => {
   const [modal, setModal] = useState(false);
@@ -55,7 +55,7 @@ const Navbar = () => {
 
           {/* this is the modal */}
           <Modal openModal={modal} closeModal={() => setModal(false)}>
-            <AddCustomer />
+            <AddCustomerpage closeModal={() => setModal(false)} />
           </Modal>
         </div>
       </div>

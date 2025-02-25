@@ -20,17 +20,17 @@ const Sidebar = () => {
 
       <div className="flex flex-col gap-4 py-4">
         {/* pending vehicles */}
-        <NavLink
+        {/* <NavLink
           className="flex text-gray-700 items-center text-[16px] py-1 px-4 hover:cursor-pointer"
           to="/"
         >
           <IoAddCircleOutline size={24} className="mr-1" />
           Add Customer
-        </NavLink>
+        </NavLink> */}
         {/* pending vehicles */}
         <NavLink
           className="flex text-gray-700 items-center text-[16px] py-1 px-4 hover:cursor-pointer"
-          to="/pending"
+          to="/"
         >
           <MdIncompleteCircle size={24} className="mr-1" />
           Pending V

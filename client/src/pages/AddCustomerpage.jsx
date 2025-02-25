@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
-const AddCustomerpage = () => {
+const AddCustomerpage = ({ closeModal }) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [numberPlate, setNumberPlate] = useState("");
@@ -81,23 +81,22 @@ const AddCustomerpage = () => {
 
       const result = await response.json();
 
-      console.log(result);
-
       if (result.success) {
-        toast.success("customer saved successfully");
-        navigate("/pending");
-
-        return;
+        toast.success("Customer saved successfully");
+        navigate("/");
+        closeModal(); // Close the modal on successful submission
+      } else {
+        toast.error("Failed to save the customer");
       }
     } catch (error) {
       console.error(error.message);
-
-      toast.error("failed to save the customer");
+      toast.error("Failed to save the customer");
     }
   };
+
   return (
     <>
-      <div className="items-center justify-center w-3/5 p-2">
+      <div className="items-center justify-center w-full p-2">
         <form onSubmit={submitHandler} className="bg-white px-8 py-4 w-full">
           <div className="flex flex-col items-center">
             <div>
@@ -147,7 +146,7 @@ const AddCustomerpage = () => {
               {/*  */}
               <div className="mb-3 w-full">
                 <div className="relative">
-                  <label>vehicle Type</label>
+                  <label>Vehicle Type</label>
                   <select
                     value={vehicleType}
                     onChange={(e) => setVehicleType(e.target.value)}
@@ -212,9 +211,19 @@ const AddCustomerpage = () => {
               </div>
             </div>
 
-            <div className="w-full">
-              <button type="submit" className="bg-black w-full text-white py-2">
+            <div className="w-full mb-3">
+              <button
+                type="submit"
+                className="bg-black w-full text-white py-2 mb-3"
+              >
                 Submit
+              </button>
+              <button
+                type="button"
+                onClick={closeModal()}
+                className="bg-black w-full text-white py-2"
+              >
+                Cancel
               </button>
             </div>
 
