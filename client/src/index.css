@@ -11,6 +11,7 @@ a.active {
   background-color: black;
   color: #f4f2ec;
   padding: 10px 16px;
+  margin: 0;
 }
 
 @layer base {

@@ -79,7 +79,7 @@ const Sidebar = () => {
 
         {/* payments records */}
         <NavLink
-          className="flex text-gray-700 items-center text-[16px] py-3 px-4 hover:cursor-pointer"
+          className="flex text-gray-700 items-center text-[16px] py-1 px-4 hover:cursor-pointer"
           to="/Payments"
         >
           <GiTakeMyMoney size={24} className="mr-1" />
@@ -88,7 +88,7 @@ const Sidebar = () => {
       </div>
 
       <div>
-        <h2 className="pt-4 px-4 text-lg py-1">Analytics</h2>
+        <h2 className="px-4 text-lg">Analytics</h2>
         <hr className="border-1 border-gray-600" />
       </div>
     </div>
