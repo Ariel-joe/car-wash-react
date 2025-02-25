@@ -116,7 +116,7 @@ const PendServices = () => {
     };
 
     fetchData();
-  }, []);
+  }, [data]);
 
   // fetching the detailers
 

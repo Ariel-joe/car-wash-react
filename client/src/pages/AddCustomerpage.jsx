@@ -83,8 +83,8 @@ const AddCustomerpage = ({ closeModal }) => {
 
       if (result.success) {
         toast.success("Customer saved successfully");
-        navigate("/");
         closeModal(); // Close the modal on successful submission
+        navigate("/");
       } else {
         toast.error("Failed to save the customer");
       }
@@ -220,7 +220,7 @@ const AddCustomerpage = ({ closeModal }) => {
               </button>
               <button
                 type="button"
-                onClick={closeModal()}
+                onClick={closeModal}
                 className="bg-black w-full text-white py-2"
               >
                 Cancel
