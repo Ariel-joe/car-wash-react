@@ -4,18 +4,16 @@ import { Outlet } from "react-router";
 
 const App = () => {
   return (
-    <div className="flex">
-      <div className="w-[12%]">
+      <div className="flex h-screen w-full">
         <Sidebar />
-      </div>
 
-      <div className="w-[88%]">
+      <div className="w-[85%] h-full overflow-auto relative">
         <Navbar />
-        <main className="w-full flex items-center justify-center my-4">
+        <main className="w-full flex items-center justify-center mt-20">
           <Outlet />
         </main>
       </div>
-    </div>
+      </div>
   );
 };
 

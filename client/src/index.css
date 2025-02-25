@@ -7,8 +7,11 @@
 * {
   font-family: Outfit;
 }
-a:active {
+a.active {
   background-color: black;
+  color: white;
+  padding: 10px 16px;
+  width: 100%;
 }
 
 @layer base {

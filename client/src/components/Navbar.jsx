@@ -8,7 +8,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="flex flex-row justify-between px-4 items-center border-b-2 py-3">
+      <div className="flex flex-row w-[85%] bg-white fixed justify-between px-4 items-center border-b-2 py-3">
         <form>
           <input
             type="text"
