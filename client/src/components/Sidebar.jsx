@@ -12,10 +12,15 @@ import { NavLink } from "react-router";
 
 const Sidebar = () => {
   return (
-    <div className="w-[15%] bg-creamish py-4 h-full overflow-hidden">
+    <div className="w-[15%] bg-creamish h-full overflow-hidden">
       {/* logo goes here */}
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center py-2 items-center">
         <img src="/img/Nairobi-cream-bg.png" width={"120px"} alt="" />
+      </div>
+
+      <div>
+        <h2 className="pt-4 px-4 text-lg py-1">Home</h2>
+        <hr className="border-1 border-gray-600" />
       </div>
 
       <div className="flex flex-col gap-4 py-4">
@@ -80,6 +85,11 @@ const Sidebar = () => {
           <GiTakeMyMoney size={24} className="mr-1" />
           Payments
         </NavLink>
+      </div>
+
+      <div>
+        <h2 className="pt-4 px-4 text-lg py-1">Analytics</h2>
+        <hr className="border-1 border-gray-600" />
       </div>
     </div>
   );
