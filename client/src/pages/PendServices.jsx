@@ -76,7 +76,7 @@ const PendServices = () => {
     };
 
     fetchDetailers();
-  }, []);
+  }, [detailersData]);
 
   // function for adding the detailer to the service
   // const addDetailer = async () => {
