@@ -62,14 +62,12 @@ const Detailers = () => {
                 <th className="py-2 font-light">{detailer.phone_number}</th>
                 <th className="py-2 font-light">{detailer.activity}</th>
                 <th className="py-2 font-light">
-                  <div className="flex gap-4 justify-evenly">
-                    <button className="flex items-center gap-1 bg-blue-500 px-2 py-1 rounded-md text-white">
+                  <div className="flex gap-4 justify-center">
+                    <button className="flex bg-blue-500 px-3 py-2 rounded-md text-white">
                       <UserRoundPen size={16} /> 
-                      Edit
                     </button>
-                    <button className="flex items-center gap-1 bg-red-500 px-2 py-1 rounded-md text-white">
+                    <button className="flex bg-red-500 px-3 py-2 rounded-md text-white">
                       <Trash size={16} /> 
-                      Delete
                     </button>
                   </div>
                 </th>

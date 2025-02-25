@@ -4,6 +4,7 @@ const DetailerForm = () => {
   return (
     <>
       <div className="my-8">
+        <h2>Add Detailer</h2>
         <form>
           <div className="flex gap-4 my-2">
             <input
@@ -33,7 +34,7 @@ const DetailerForm = () => {
             </div>
           </div>
 
-          <button className="bg-black w-full py-2 px-4 text-white rounded-md">
+          <button className="bg-gray-700 w-full py-2 px-4 text-white rounded-md">
             Add Detailer
           </button>
         </form>
