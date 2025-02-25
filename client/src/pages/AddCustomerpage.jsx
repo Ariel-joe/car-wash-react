@@ -113,6 +113,7 @@ const AddCustomerpage = ({ closeModal }) => {
                   placeholder="John Doe"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  required
                 />
               </div>
 
@@ -125,6 +126,7 @@ const AddCustomerpage = ({ closeModal }) => {
                   placeholder="+254712345678"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
+                  required
                 />
               </div>
             </div>
@@ -140,6 +142,7 @@ const AddCustomerpage = ({ closeModal }) => {
                   placeholder="KAA 001A"
                   value={numberPlate}
                   onChange={(e) => setNumberPlate(e.target.value)}
+                  required
                 />
               </div>
 
@@ -207,6 +210,7 @@ const AddCustomerpage = ({ closeModal }) => {
                   className="border w-full rounded-md py-1 px-3"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
+                  required
                 />
               </div>
             </div>

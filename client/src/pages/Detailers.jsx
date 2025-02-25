@@ -1,3 +1,4 @@
+import { DetailerForm } from "../components/DetailerForm";
 import { Trash, UserRoundPen } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -27,6 +28,11 @@ const Detailers = () => {
 
   return (
     <>
+      <div>
+        <div>
+          <DetailerForm />
+        </div>
+
       <div>
         <table className="w-full">
           <thead>
@@ -72,6 +78,8 @@ const Detailers = () => {
           </tbody>
         </table>
       </div>
+      </div>
+
     </>
   );
 };
