@@ -34,6 +34,7 @@ const Detailers = () => {
         </div>
 
       <div>
+        <h2>Detailer list</h2>
         <table className="w-full">
           <thead>
             <tr>

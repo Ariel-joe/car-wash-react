@@ -39,7 +39,7 @@ const PendServices = () => {
       const result = await response.json();
 
       if (result.success) {
-        toast.success("Detailer assigned successfully");
+        toast.success(`${detailerName} assigned to ${result.vehicle.number_plate} successfully`);
       } else {
         throw new Error(`Failed to assign detailer: ${response.statusText}`);
       }

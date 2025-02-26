@@ -24,13 +24,15 @@ const Navbar = () => {
 
         <div className="flex justify-evenly items-center gap-5">
           {/* Notification/Inbox */}
-          <button className="rounded-full p-2 bg-creamish">
+          <button className="rounded-full relative p-2 bg-creamish">
             <IoNotificationsOutline size={18} />
+            <p className="absolute right-[-5px] bottom-[-1px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">2</p>
+
           </button>
           {/* New Customer */}
           <button
             onClick={() => setModal(true)}
-            className="bg-creamish text-black px-4 py-2 rounded-md hover:cursor-pointer flex justify-center items-center text-sm text-lightDarkGray"
+            className="bg-creamish px-4 py-2 rounded-md hover:cursor-pointer flex justify-center items-center text-sm text-lightDarkGray"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

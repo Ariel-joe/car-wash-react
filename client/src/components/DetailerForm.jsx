@@ -3,7 +3,7 @@ import React from "react";
 const DetailerForm = () => {
   return (
     <>
-      <div className="my-8">
+      <div className="mt-4 mb-12">
         <h2>Add Detailer</h2>
         <form>
           <div className="flex gap-4 my-2">
