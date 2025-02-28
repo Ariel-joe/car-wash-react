@@ -103,17 +103,7 @@ const PendServices = () => {
 
   // fetching the user data
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:3006/api/vehicles");
-
-        const result = await response.json();
-
-        setData(result.data);
-      } catch (error) {
-        console.error(error.message);
-      }
-    };
+    
 
     fetchData();
   }, [data]);
