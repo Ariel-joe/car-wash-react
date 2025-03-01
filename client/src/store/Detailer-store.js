@@ -33,8 +33,13 @@ const useDetailerStore = create((set) => ({
       );
 
       if (response.ok) {
-        const { data } = await response.json();
-        set({ assignedDetailers: data });
+        // Update the assignedDetailers state
+        set((state) => ({
+          assignedDetailers: {
+            ...state.assignedDetailers,
+            [vehicleId]: detailerName,
+          },
+        }));
 
         return true;
       } else {
@@ -42,11 +47,9 @@ const useDetailerStore = create((set) => ({
       }
     } catch (error) {
       console.error(error.message);
-
       return false;
     }
   },
 }));
 
 export { useDetailerStore };
-

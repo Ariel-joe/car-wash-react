@@ -7,15 +7,17 @@ import { useDetailerStore } from "../store/Detailer-store";
 
 const PendServices = () => {
   // detailer store
-  const { detailers, fetchDetailers, assignedDetailer, assignDetailerFunc } =
-    useDetailerStore();
+  const { detailers, fetchDetailers, assignDetailerFunc } = useDetailerStore();
+  const [assignedDetailers, setAssignedDetailers] = useState({});
 
   // customer store
   const { customer } = useCustomerStore();
 
   // vehicle store
-  const { vehicles, fetchVehicles, isLoading } = useVehicleStore();
+  const { vehicles, fetchVehicles, isLoading, statusUpdater } = useVehicleStore();
   const [vehicleData, setVehicleData] = useState([]);
+
+    // State to store assigned detailers per vehicle
 
   // fetch vehicles data
   useEffect(() => {
@@ -30,15 +32,10 @@ const PendServices = () => {
     setVehicleData(vehicles);
   }, []);
 
-  // State to store assigned detailers per vehicle
-  const [assignedDetailers, setAssignedDetailers] = useState({});
+
 
   // function to handle assigning detailers to services
   const handleAssignDetailer = async (vehicleId, detailerName) => {
-    setAssignedDetailers((prevState) => ({
-      ...prevState,
-      [vehicleId]: detailerName,
-    }));
 
     // Check if a detailer has been selected
     if (!detailerName) {
@@ -46,7 +43,7 @@ const PendServices = () => {
       return;
     }
 
-    // handling the assignment  to the server
+    // handling the assignment of detailer to the server
     try {
       const responseSuccess = await assignDetailerFunc(vehicleId, detailerName);
 
@@ -56,11 +53,13 @@ const PendServices = () => {
         throw new Error(`Failed to assign detailer: ${response.statusText}`);
       }
 
-      fetchVehicles();
+      statusUpdater(vehicleId, "In Progress");
     } catch (error) {
-      console.error("Error assigning detailer:", error);
+      console.error(error.message);
     }
   };
+
+
 
   // fetching detailers.
   useEffect(() => {
