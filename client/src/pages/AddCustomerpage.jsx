@@ -20,11 +20,9 @@ const AddCustomerpage = ({ closeModal }) => {
 
   // service store
   const { fetchServices, services } = useServiceStore();
-  const [ servicesData, setServicesData] = useState()
 
   // vehicleType store
   const { fetchVehicleTypes, vehicleTypes } = useVehicleTypeStore();
-  const [vehicleTypeData, setVehicleTypeData] = useState();
 
   // fetching available services
   useEffect(() => {
@@ -33,12 +31,8 @@ const AddCustomerpage = ({ closeModal }) => {
     };
     getServices();
   }, []);
-  
-  useEffect(() => {
-    if(services) {
-      setServicesData(services)
-    }
-  })
+
+
 
   // fetching vehicle types
   useEffect(() => {
@@ -47,12 +41,6 @@ const AddCustomerpage = ({ closeModal }) => {
     };
     fetchvehicleTypesFunc();
   }, []);
-
-  useEffect(() => {
-    if (vehicleTypes) {
-      setVehicleTypeData(vehicleTypes);
-    }
-  }, [vehicleTypes]);
 
   // submitting customer data to be posted
   const submitHandler = async (e) => {
@@ -195,7 +183,6 @@ const AddCustomerpage = ({ closeModal }) => {
                     ) : (
                       <option value="">Loading services types...</option>
                     )}
-                    
                   </select>
                 </div>
               </div>
