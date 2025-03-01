@@ -28,8 +28,6 @@ const PendServices = () => {
 
   useEffect(() => {
     setVehicleData(vehicles);
-
-    console.log(vehicleData);
   }, []);
 
   // State to store assigned detailers per vehicle
@@ -53,9 +51,7 @@ const PendServices = () => {
       const responseSuccess = await assignDetailerFunc(vehicleId, detailerName);
 
       if (responseSuccess) {
-        toast.success(
-          `${detailerName} assigned successfully`
-        );
+        toast.success(`${detailerName} assigned successfully`);
       } else {
         throw new Error(`Failed to assign detailer: ${response.statusText}`);
       }
