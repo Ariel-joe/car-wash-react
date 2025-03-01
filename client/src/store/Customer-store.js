@@ -12,11 +12,21 @@ const useCustomerStore = create((set) => ({
         body: JSON.stringify(formData),
       });
 
-      const { data } = await response.json();
+      if(response.ok){
+          const { data } = await response.json();
 
-      set({ customer: data });
+          set({ customer: data });
+
+          return true;
+      }else {
+        return false;
+      }
+
+
     } catch (error) {
       console.error(error.message);
+
+      return false;
     }
   },
 }));

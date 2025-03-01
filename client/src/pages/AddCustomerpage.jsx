@@ -1,3 +1,4 @@
+import { useCustomerStore } from "../store/Customer-store";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
@@ -17,7 +18,7 @@ const AddCustomerpage = ({ closeModal }) => {
   const navigate = useNavigate();
 
   // customer store
-  const {} = useCustomer
+  const { fetchCustomer } = useCustomerStore();
 
   // fetching available services
   useEffect(() => {
@@ -41,7 +42,7 @@ const AddCustomerpage = ({ closeModal }) => {
 
   // fetching vehicle types
   useEffect(() => {
-    const fetchvehicleTypes = async (params) => {
+    const fetchvehicleTypes = async () => {
       try {
         const response = await fetch(
           "http://localhost:3006/api/vehicles/types"
@@ -61,6 +62,9 @@ const AddCustomerpage = ({ closeModal }) => {
     fetchvehicleTypes();
   }, []);
 
+
+
+  // submitting customer data to be posted
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -74,17 +78,10 @@ const AddCustomerpage = ({ closeModal }) => {
         amount,
       };
 
-      const response = await fetch("http://localhost:3006/api/customers/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const responseSuccess = await fetchCustomer(formData)
+      
 
-      const result = await response.json();
-
-      if (result.success) {
+      if (responseSuccess) {
         toast.success("Customer saved successfully");
         closeModal(); // Close the modal on successful submission
         navigate("/");
