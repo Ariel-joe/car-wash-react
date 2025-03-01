@@ -1,10 +1,36 @@
+import { useVehicleStore } from "../store/vehicle-store";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 const PendServices = () => {
-  const [data, setData] = useState([]);
-
   const [detailersData, setDetailersData] = useState([]);
+
+
+  const { vehicles, fetchVehicles, isLoading } = useVehicleStore();
+  const [vehicleData, setVehicleData] = useState([]);
+
+  // fetch vehicles data
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchVehicles()
+
+      console.log("successfully rerendered!");
+      
+    }
+
+    fetchData()
+  }, []); // Remove data as dependency
+
+  useEffect(() => {
+    setVehicleData(vehicles);
+
+    console.log(vehicleData);
+    
+  }, [])
+
+
+  
+
 
   // State to store assigned detailers per vehicle
   const [assignedDetailers, setAssignedDetailers] = useState({});
@@ -39,7 +65,9 @@ const PendServices = () => {
       const result = await response.json();
 
       if (result.success) {
-        toast.success(`${detailerName} assigned to ${result.vehicle.number_plate} successfully`);
+        toast.success(
+          `${detailerName} assigned to ${result.vehicle.number_plate} successfully`
+        );
       } else {
         throw new Error(`Failed to assign detailer: ${response.statusText}`);
       }
@@ -101,12 +129,7 @@ const PendServices = () => {
   //   }
   // };
 
-  // fetching the user data
-  useEffect(() => {
-    
-
-    fetchData();
-  }, [data]);
+  
 
   // fetching the detailers
 
@@ -145,7 +168,14 @@ const PendServices = () => {
 
           {/* table body */}
           <tbody>
-            {data
+          {isLoading ? (
+            <tr>
+              <td colSpan="8" className="text-center py-4">
+                Loading...
+              </td>
+            </tr>
+          ) : (
+            vehicleData
               .filter((elem) => elem.status === "Pending")
               .map((elem, i) => (
                 <tr key={i} className="border-b-2">
@@ -154,15 +184,13 @@ const PendServices = () => {
                   <th className="py-2 font-light">{elem.vehicle_type.type}</th>
                   <th className="py-2 font-light">{elem.number_plate}</th>
                   <th className="py-2 font-light">{elem.service.service}</th>
-
-                  {/* looping through for the detailers */}
                   <th className="py-2 font-light">
                     <select
                       value={assignedDetailers[elem._id] || ""}
                       onChange={(e) =>
                         setAssignedDetailers((prev) => ({
                           ...prev,
-                          [elem._id]: e.target.value, // Update state for this specific vehicle
+                          [elem._id]: e.target.value,
                         }))
                       }
                       className="px-2 py-1 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
@@ -192,7 +220,7 @@ const PendServices = () => {
                             assignedDetailers[elem._id]
                           )
                         }
-                        disabled={!assignedDetailers[elem._id]} // Disable if no detailer selected
+                        disabled={!assignedDetailers[elem._id]}
                         className={`px-3 py-1 text-sm text-white rounded-md ${
                           assignedDetailers[elem._id]
                             ? "bg-orange-500"
@@ -204,7 +232,8 @@ const PendServices = () => {
                     </div>
                   </th>
                 </tr>
-              ))}
+              ))
+          )}
           </tbody>
         </table>
       </div>

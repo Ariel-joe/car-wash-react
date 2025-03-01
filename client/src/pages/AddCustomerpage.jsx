@@ -16,6 +16,9 @@ const AddCustomerpage = ({ closeModal }) => {
 
   const navigate = useNavigate();
 
+  // customer store
+  const {} = useCustomer
+
   // fetching available services
   useEffect(() => {
     const getServices = async () => {
