@@ -1,3 +1,4 @@
+import { Spin } from "antd";
 import { useCustomerStore } from "../store/Customer-store";
 import { useVehicleStore } from "../store/vehicle-store";
 import { useEffect, useState } from "react";
@@ -168,8 +169,8 @@ const PendServices = () => {
           <tbody>
             {isLoading ? (
               <tr>
-                <td colSpan="8" className="text-center py-4">
-                  Loading...
+                <td colSpan="8" className="text-center py-4 h-screen">
+                  <Spin size="large" />
                 </td>
               </tr>
             ) : (
