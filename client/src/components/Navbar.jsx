@@ -27,13 +27,10 @@ const Navbar = () => {
 
         <div className="flex justify-evenly items-center gap-5">
           {/* Notification/Inbox */}
-          <button className="rounded-full relative p-2 bg-creamish">
-            <IoNotificationsOutline size={18} />
-            <p className="absolute right-[-5px] bottom-[-1px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
-              {customerCount}
+            <p className="text-center mr-5 text-sm text-gray-500">
+              0 vehicles pending | 0 vehicles Inprogess
             </p>
 
-          </button>
           {/* New Customer */}
           <button
             onClick={() => setModal(true)}
