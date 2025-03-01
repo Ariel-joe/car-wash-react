@@ -2,9 +2,12 @@ import { useState } from "react";
 import { Modal } from "./Modal";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { AddCustomerpage } from "../pages/AddCustomerpage";
+import { useCustomerStore } from "../store/Customer-store";
 
 const Navbar = () => {
   const [modal, setModal] = useState(false);
+
+  const {customerCount} = useCustomerStore();
 
   // Define closeModal function
   const closeModal = () => {
@@ -26,7 +29,9 @@ const Navbar = () => {
           {/* Notification/Inbox */}
           <button className="rounded-full relative p-2 bg-creamish">
             <IoNotificationsOutline size={18} />
-            <p className="absolute right-[-5px] bottom-[-1px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">2</p>
+            <p className="absolute right-[-5px] bottom-[-1px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
+              {customerCount}
+            </p>
 
           </button>
           {/* New Customer */}

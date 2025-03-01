@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 const useCustomerStore = create((set) => ({
   customer: null,
+  customerCount: 0,
   fetchCustomer: async (formData) => {
     try {
       const response = await fetch("http://localhost:3006/api/customers/add", {
@@ -15,8 +16,10 @@ const useCustomerStore = create((set) => ({
       if(response.ok){
           const { data } = await response.json();
 
+          
           set({ customer: data });
-
+          
+          customerCount = set(customerCount + 1);
           return true;
       }else {
         return false;

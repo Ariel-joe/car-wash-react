@@ -3,9 +3,12 @@ import { useCustomerStore } from "../store/Customer-store";
 import { useVehicleStore } from "../store/vehicle-store";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { useDetailerStore } from "../store/Detailer-store";
 
 const PendServices = () => {
-  const [detailersData, setDetailersData] = useState([]);
+  // detailer store
+  const { detailers, fetchDetailers, assignedDetailer, assignDetailerFunc } =
+    useDetailerStore();
 
   // customer store
   const { customer } = useCustomerStore();
@@ -18,12 +21,10 @@ const PendServices = () => {
   useEffect(() => {
     const fetchData = async () => {
       await fetchVehicles();
-
-      console.log("successfully rerendered!");
     };
 
     fetchData();
-  }, [customer, vehicleData]); // Remove data as dependency
+  }, [customer, vehicleData]);
 
   useEffect(() => {
     setVehicleData(vehicles);
@@ -49,36 +50,15 @@ const PendServices = () => {
 
     // handling the assignment  to the server
     try {
-      // Make a PUT request using fetch
-      const response = await fetch(
-        "http://localhost:3006/api/detailers/assign",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ vehicleId, detailerName }),
-        }
-      );
+      const responseSuccess = await assignDetailerFunc(vehicleId, detailerName);
 
-      const result = await response.json();
-
-      if (result.success) {
+      if (responseSuccess) {
         toast.success(
-          `${detailerName} assigned to ${result.vehicle.number_plate} successfully`
+          `${detailerName} assigned successfully`
         );
       } else {
         throw new Error(`Failed to assign detailer: ${response.statusText}`);
       }
-
-      // Update the local state to reflect the change
-      // setData((prevData) =>
-      //   prevData.map((vehicle) =>
-      //     vehicle._id === vehicleId
-      //       ? { ...vehicle, status: "In Progress" }
-      //       : vehicle
-      //   )
-      // );
 
       fetchVehicles();
     } catch (error) {
@@ -88,49 +68,11 @@ const PendServices = () => {
 
   // fetching detailers.
   useEffect(() => {
-    const fetchDetailers = async () => {
-      try {
-        const response = await fetch("http://localhost:3006/api/detailers");
-
-        const result = await response.json();
-
-        if (result.success) {
-          setDetailersData(result.data);
-
-          return;
-        }
-      } catch (error) {
-        console.error(error.message);
-      }
+    const fetchDetailersFunc = async () => {
+      await fetchDetailers();
     };
-
-    fetchDetailers();
-  }, [detailersData]);
-
-  // function for adding the detailer to the service
-  // const addDetailer = async () => {
-  //   try {
-  //     const response = await fetch("http://localhost:3006/api/detailers/assign", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         vehicle_id: data[0]._id,
-  //         detailer_name: detailer,
-  //       }),
-  //     });
-
-  //     const result = await response.json();
-
-  //     console.log(result);
-
-  //   } catch (error) {
-  //     console.error(error.message);
-  //   }
-  // };
-
-  // fetching the detailers
+    fetchDetailersFunc();
+  }, [detailers]);
 
   return (
     <>
@@ -199,7 +141,7 @@ const PendServices = () => {
                         <option value="" disabled>
                           Select a detailer
                         </option>
-                        {detailersData
+                        {detailers
                           .filter((detailer) => detailer.status === "available")
                           .map((detailer) => (
                             <option key={detailer._id} value={detailer.name}>
