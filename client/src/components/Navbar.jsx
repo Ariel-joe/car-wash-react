@@ -7,7 +7,7 @@ import { useCustomerStore } from "../store/Customer-store";
 const Navbar = () => {
   const [modal, setModal] = useState(false);
 
-  const {customerCount} = useCustomerStore();
+  const { customerCount } = useCustomerStore();
 
   // Define closeModal function
   const closeModal = () => {
@@ -26,10 +26,17 @@ const Navbar = () => {
         </form>
 
         <div className="flex justify-evenly items-center gap-5">
-          {/* Notification/Inbox */}
-            <p className="text-center mr-5 text-sm text-gray-500">
-              0 vehicles pending | 0 vehicles Inprogess
-            </p>
+          {/* information on vehicles */}
+
+          
+          <p className="text-sm text-gray-450">
+            0 pending 
+          </p>
+          <div className="h-5 border"></div>
+
+          <p className="text-sm text-gray-450">
+          0  Inprogess
+          </p>
 
           {/* New Customer */}
           <button

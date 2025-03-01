@@ -50,11 +50,3 @@ const useDetailerStore = create((set) => ({
 
 export { useDetailerStore };
 
-      // Update the local state to reflect the change
-      // setData((prevData) =>
-      //   prevData.map((vehicle) =>
-      //     vehicle._id === vehicleId
-      //       ? { ...vehicle, status: "In Progress" }
-      //       : vehicle
-      //   )
-      // );
