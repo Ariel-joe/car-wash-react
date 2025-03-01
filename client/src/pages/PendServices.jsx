@@ -22,7 +22,7 @@ const PendServices = () => {
     };
 
     fetchData();
-  }, [customer]); // Remove data as dependency
+  }, [customer, vehicleData]); // Remove data as dependency
 
   useEffect(() => {
     setVehicleData(vehicles);
@@ -71,13 +71,15 @@ const PendServices = () => {
       }
 
       // Update the local state to reflect the change
-      setData((prevData) =>
-        prevData.map((vehicle) =>
-          vehicle._id === vehicleId
-            ? { ...vehicle, status: "In Progress" }
-            : vehicle
-        )
-      );
+      // setData((prevData) =>
+      //   prevData.map((vehicle) =>
+      //     vehicle._id === vehicleId
+      //       ? { ...vehicle, status: "In Progress" }
+      //       : vehicle
+      //   )
+      // );
+
+      fetchVehicles();
     } catch (error) {
       console.error("Error assigning detailer:", error);
     }
@@ -171,7 +173,7 @@ const PendServices = () => {
                 </td>
               </tr>
             ) : (
-              vehicleData
+              vehicles
                 .filter((elem) => elem.status === "Pending")
                 .map((elem, i) => (
                   <tr key={i} className="border-b-2">
