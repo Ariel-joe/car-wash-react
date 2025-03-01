@@ -1,18 +1,16 @@
+import { useServiceStore } from "../store/service-store";
 import { useCustomerStore } from "../store/Customer-store";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
+import { useVehicleTypeStore } from "../store/vehicleType-store";
 
 const AddCustomerpage = ({ closeModal }) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [numberPlate, setNumberPlate] = useState("");
   const [amount, setAmount] = useState("");
-
-  const [vehicletypeData, setVehicletypeData] = useState([]);
   const [vehicleType, setVehicleType] = useState("");
-
-  const [servicesData, setServicesData] = useState([]);
   const [service, setService] = useState("");
 
   const navigate = useNavigate();
@@ -20,49 +18,41 @@ const AddCustomerpage = ({ closeModal }) => {
   // customer store
   const { fetchCustomer } = useCustomerStore();
 
+  // service store
+  const { fetchServices, services } = useServiceStore();
+  const [ servicesData, setServicesData] = useState()
+
+  // vehicleType store
+  const { fetchVehicleTypes, vehicleTypes } = useVehicleTypeStore();
+  const [vehicleTypeData, setVehicleTypeData] = useState();
+
   // fetching available services
   useEffect(() => {
     const getServices = async () => {
-      try {
-        const response = await fetch("http://localhost:3006/api/services");
-
-        const result = await response.json();
-
-        if (result.success) {
-          setServicesData(result.data);
-          return;
-        }
-      } catch (error) {
-        console.error(error.message);
-      }
+      await fetchServices();
     };
-
     getServices();
   }, []);
+  
+  useEffect(() => {
+    if(services) {
+      setServicesData(services)
+    }
+  })
 
   // fetching vehicle types
   useEffect(() => {
-    const fetchvehicleTypes = async () => {
-      try {
-        const response = await fetch(
-          "http://localhost:3006/api/vehicles/types"
-        );
-
-        const result = await response.json();
-
-        if (result.success) {
-          setVehicletypeData(result.data);
-          return;
-        }
-      } catch (error) {
-        console.error(error.message);
-      }
+    const fetchvehicleTypesFunc = async () => {
+      await fetchVehicleTypes();
     };
-
-    fetchvehicleTypes();
+    fetchvehicleTypesFunc();
   }, []);
 
-
+  useEffect(() => {
+    if (vehicleTypes) {
+      setVehicleTypeData(vehicleTypes);
+    }
+  }, [vehicleTypes]);
 
   // submitting customer data to be posted
   const submitHandler = async (e) => {
@@ -78,8 +68,7 @@ const AddCustomerpage = ({ closeModal }) => {
         amount,
       };
 
-      const responseSuccess = await fetchCustomer(formData)
-      
+      const responseSuccess = await fetchCustomer(formData);
 
       if (responseSuccess) {
         toast.success("Customer saved successfully");
@@ -158,11 +147,15 @@ const AddCustomerpage = ({ closeModal }) => {
                     <option value="" disabled>
                       Select a vehicle
                     </option>
-                    {vehicletypeData.map((vehicle, i) => (
-                      <option key={i} value={vehicle.type}>
-                        {vehicle.type}
-                      </option>
-                    ))}
+                    {vehicleTypes && vehicleTypes.length > 0 ? (
+                      vehicleTypes.map((vehicle, i) => (
+                        <option key={i} value={vehicle.type}>
+                          {vehicle.type}
+                        </option>
+                      ))
+                    ) : (
+                      <option value="">Loading vehicle types...</option>
+                    )}
                   </select>
                 </div>
               </div>
@@ -193,11 +186,16 @@ const AddCustomerpage = ({ closeModal }) => {
                     <option value="" disabled>
                       Select a service
                     </option>
-                    {servicesData.map((service, i) => (
-                      <option key={i} value={service.service}>
-                        {service.service}
-                      </option>
-                    ))}
+                    {services && services.length > 0 ? (
+                      services.map((service, i) => (
+                        <option key={i} value={service.service}>
+                          {service.service}
+                        </option>
+                      ))
+                    ) : (
+                      <option value="">Loading services types...</option>
+                    )}
+                    
                   </select>
                 </div>
               </div>

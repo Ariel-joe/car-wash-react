@@ -17,9 +17,8 @@ const PendServices = () => {
   const { vehicles, fetchVehicles, isLoading, statusUpdater } = useVehicleStore();
   const [vehicleData, setVehicleData] = useState([]);
 
-    // State to store assigned detailers per vehicle
 
-  // fetch vehicles data
+  // fetch vehicles
   useEffect(() => {
     const fetchData = async () => {
       await fetchVehicles();
@@ -31,6 +30,15 @@ const PendServices = () => {
   useEffect(() => {
     setVehicleData(vehicles);
   }, []);
+
+
+    // fetching detailers
+    useEffect(() => {
+      const fetchDetailersFunc = async () => {
+        await fetchDetailers();
+      };
+      fetchDetailersFunc();
+    }, [detailers]);
 
 
 
@@ -61,13 +69,7 @@ const PendServices = () => {
 
 
 
-  // fetching detailers.
-  useEffect(() => {
-    const fetchDetailersFunc = async () => {
-      await fetchDetailers();
-    };
-    fetchDetailersFunc();
-  }, [detailers]);
+
 
   return (
     <>
