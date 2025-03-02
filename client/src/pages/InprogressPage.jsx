@@ -1,34 +1,25 @@
 import { Spin } from "antd";
 import { useDetailerStore } from "../store/Detailer-store";
 import { useVehicleStore } from "../store/vehicle-store";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { toast } from "sonner";
 
 const InprogressPage = () => {
-  const [data, setData] = useState([]);
-  const [detailersData, setDetailersData] = useState([]);
-
   // vehicle store
   const { vehicles, fetchVehicles, statusUpdater, isLoading } =
     useVehicleStore();
-  const [vehicleData, setVehicleData] = useState([]);
 
   // detailer Store
-  const { detailers, fetchDetailers, updateDetailerStatus } =
-    useDetailerStore();
+  const { fetchDetailers, updateDetailerStatus } = useDetailerStore();
 
-  // fetch vehicles
+  // fetch data on component mount
   useEffect(() => {
     const fetchData = async () => {
-      await fetchVehicles();
+      await Promise.all([fetchVehicles(), fetchDetailers()]);
     };
 
     fetchData();
-  }, [vehicleData]);
-
-  useEffect(() => {
-    setVehicleData(vehicles);
-  }, []);
+  }, [fetchVehicles, fetchDetailers]);
 
   // function to handle the changing of status to Completed
   const handleStatusChange = async (vehicleId, detailerId) => {
@@ -102,32 +93,47 @@ const InprogressPage = () => {
                   <Spin size="large" />
                 </td>
               </tr>
+            ) : !vehicles || vehicles.length === 0 ? (
+              <tr>
+                <td colSpan="8" className="text-center py-4">
+                  No vehicles in progress
+                </td>
+              </tr>
             ) : (
               vehicles
-                .filter((elem) => elem.status === "In Progress")
+                .filter((elem) => elem && elem.status === "In Progress")
                 .map((elem, i) => (
                   <tr key={i} className="border-b-2">
-                    <th className="py-2 font-light">{elem.customer.name}</th>
-                    <th className="py-2 font-light">{elem.customer.phone}</th>
-                    <th className="py-2 font-light">
-                      {elem.vehicle_type.type}
-                    </th>
-                    <th className="py-2 font-light">{elem.number_plate}</th>
-                    <th className="py-2 font-light">{elem.service.service}</th>
-                    <th className="py-2 font-light">{elem.detailer.name}</th>
-                    <th className="py-2 font-light">{elem.status}</th>
-                    <th className="py-2 font-light">
+                    <td className="py-2 font-light">
+                      {elem.customer?.name || "N/A"}
+                    </td>
+                    <td className="py-2 font-light">
+                      {elem.customer?.phone || "N/A"}
+                    </td>
+                    <td className="py-2 font-light">
+                      {elem.vehicle_type?.type || "N/A"}
+                    </td>
+                    <td className="py-2 font-light">
+                      {elem.number_plate || "N/A"}
+                    </td>
+                    <td className="py-2 font-light">
+                      {elem.service?.service || "N/A"}
+                    </td>
+                    <td className="py-2 font-light">
+                      {elem.detailer?.name || "N/A"}
+                    </td>
+                    <td className="py-2 font-light">{elem.status || "N/A"}</td>
+                    <td className="py-2 font-light">
                       <button
-                        // update function to change status of detailer to available
-
                         onClick={() =>
                           handleStatusChange(elem._id, elem.detailer?._id)
                         }
                         className="bg-green-500 px-2 py-1 rounded-md text-white"
+                        disabled={!elem.detailer?._id}
                       >
                         Complete
                       </button>
-                    </th>
+                    </td>
                   </tr>
                 ))
             )}
