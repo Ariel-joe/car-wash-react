@@ -50,6 +50,32 @@ const useDetailerStore = create((set) => ({
       return false;
     }
   },
+
+  updateDetailerStatus: async (detailerId, status) => {
+    let success = false;
+
+    set((state) => {
+      if (!state.detailers) return { detailers: null };
+
+      const updatedDetailers = [...state.detailers];
+      const index = updatedDetailers.findIndex(
+        (detailer) => detailer._id === detailerId
+      );
+
+      if (index !== -1) {
+        updatedDetailers[index] = {
+          ...updatedDetailers[index],
+          status,
+        };
+        success = true;
+        return { detailers: updatedDetailers };
+      }
+
+      return { detailers: state.detailers };
+    });
+
+    return success;
+  },
 }));
 
 export { useDetailerStore };

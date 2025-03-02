@@ -1,3 +1,6 @@
+import { Spin } from "antd";
+import { useDetailerStore } from "../store/Detailer-store";
+import { useVehicleStore } from "../store/vehicle-store";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -5,25 +8,26 @@ const InprogressPage = () => {
   const [data, setData] = useState([]);
   const [detailersData, setDetailersData] = useState([]);
 
+  // vehicle store
+  const { vehicles, fetchVehicles, statusUpdater, isLoading } =
+    useVehicleStore();
+  const [vehicleData, setVehicleData] = useState([]);
 
+  // detailer Store
+  const { detailers, fetchDetailers, updateDetailerStatus } =
+    useDetailerStore();
+
+  // fetch vehicles
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:3006/api/vehicles");
-
-        const result = await response.json();
-
-        if (result.success) {
-          setData(result.data);
-
-          return;
-        }
-      } catch (error) {
-        console.error(error.message);
-      }
+      await fetchVehicles();
     };
 
     fetchData();
+  }, [vehicleData]);
+
+  useEffect(() => {
+    setVehicleData(vehicles);
   }, []);
 
   // function to handle the changing of status to Completed
@@ -31,42 +35,28 @@ const InprogressPage = () => {
     console.log("clicked to update status");
 
     try {
-      const response = await fetch(
-        `http://localhost:3006/api/vehicles/update?id=${vehicleId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ vehicleId, detailerId, status: "Completed" }),
+      // updating the status of the vehicle
+      const vehicleStatusUpdated = await statusUpdater(vehicleId, "Completed");
+
+      if (vehicleStatusUpdated) {
+        // If vehicle status update was successful, update detailer status
+        const detailerStatusUpdated = await updateDetailerStatus(
+          detailerId,
+          "available"
+        );
+
+        if (detailerStatusUpdated) {
+          toast.success("Status updated successfully");
+        } else {
+          toast.warning(
+            "Vehicle status updated, but detailer status update failed"
+          );
         }
-      );
-
-      const result = await response.json();
-
-      if (result.success) {
-        toast.success("Status updated successfully");
-
-        // Update the local state to reflect the change
-        setData((prevData) =>
-          prevData.map((vehicle) =>
-            vehicle._id === vehicleId
-              ? { ...vehicle, status: "Completed" }
-              : vehicle
-          )
-        );
-
-        // update localstate to reflect the availability of detailer
-        setDetailersData((prevDetailers) =>
-          prevDetailers.map((detailer) =>
-            detailer._id === detailerId
-              ? { ...detailer, status: "available" }
-              : detailer
-          )
-        );
+      } else {
+        toast.error("Failed to update vehicle status");
       }
     } catch (error) {
-      console.error("Error updating status:", error);
+      console.error(error.message);
       toast.error("Error updating status");
     }
   };
@@ -106,29 +96,41 @@ const InprogressPage = () => {
 
           {/* table body */}
           <tbody>
-            {data
-              .filter((elem) => elem.status === "In Progress")
-              .map((elem, i) => (
-                <tr key={i} className="border-b-2">
-                  <th className="py-2 font-light">{elem.customer.name}</th>
-                  <th className="py-2 font-light">{elem.customer.phone}</th>
-                  <th className="py-2 font-light">{elem.vehicle_type.type}</th>
-                  <th className="py-2 font-light">{elem.number_plate}</th>
-                  <th className="py-2 font-light">{elem.service.service}</th>
-                  <th className="py-2 font-light">{elem.detailer.name}</th>
-                  <th className="py-2 font-light">{elem.status}</th>
-                  <th className="py-2 font-light">
-                    <button
-                      // update function to change status of detailer to available
+            {isLoading ? (
+              <tr>
+                <td colSpan="8" className="text-center py-4 h-screen">
+                  <Spin size="large" />
+                </td>
+              </tr>
+            ) : (
+              vehicles
+                .filter((elem) => elem.status === "In Progress")
+                .map((elem, i) => (
+                  <tr key={i} className="border-b-2">
+                    <th className="py-2 font-light">{elem.customer.name}</th>
+                    <th className="py-2 font-light">{elem.customer.phone}</th>
+                    <th className="py-2 font-light">
+                      {elem.vehicle_type.type}
+                    </th>
+                    <th className="py-2 font-light">{elem.number_plate}</th>
+                    <th className="py-2 font-light">{elem.service.service}</th>
+                    <th className="py-2 font-light">{elem.detailer.name}</th>
+                    <th className="py-2 font-light">{elem.status}</th>
+                    <th className="py-2 font-light">
+                      <button
+                        // update function to change status of detailer to available
 
-                      onClick={() => handleStatusChange(elem._id, elem.detailer?._id)}
-                      className="bg-green-500 px-2 py-1 rounded-md text-white"
-                    >
-                      Complete
-                    </button>
-                  </th>
-                </tr>
-              ))}
+                        onClick={() =>
+                          handleStatusChange(elem._id, elem.detailer?._id)
+                        }
+                        className="bg-green-500 px-2 py-1 rounded-md text-white"
+                      >
+                        Complete
+                      </button>
+                    </th>
+                  </tr>
+                ))
+            )}
           </tbody>
         </table>
       </div>

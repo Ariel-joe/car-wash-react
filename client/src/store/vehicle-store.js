@@ -17,24 +17,28 @@ const useVehicleStore = create((set) => ({
     },
 
     statusUpdater: (vehicleId, status) => {
-
+      // Create a variable to track success/failure
+      let success = false;
+      
       set((state) => {
-        const updatedVehicles = [...state.vehicles]
-
-        const index = updatedVehicles.findIndex(vehicle => vehicle._id === vehicleId)
-
-        if (index !== -1 ) {
+        const updatedVehicles = [...state.vehicles];
+        const index = updatedVehicles.findIndex(vehicle => vehicle._id === vehicleId);
+        
+        if (index !== -1) {
           updatedVehicles[index] = {
-            ...updatedVehicles[index], status
-          }
+            ...updatedVehicles[index], 
+            status
+          };
+          success = true; // Set the success flag
+          return { vehicles: updatedVehicles };
         }
-
-        return {vehicles: updatedVehicles}
-      })
-
-
-
-    }
+        
+        // If vehicle not found, return the unchanged state
+        return { vehicles: state.vehicles };
+      });
+      
+      return success;
+    },
   }));
 
 export { useVehicleStore };

@@ -24,15 +24,13 @@ const AddCustomerpage = ({ closeModal }) => {
   // vehicleType store
   const { fetchVehicleTypes, vehicleTypes } = useVehicleTypeStore();
 
-  // fetching available services
+  // fetching services
   useEffect(() => {
     const getServices = async () => {
       await fetchServices();
     };
     getServices();
   }, []);
-
-
 
   // fetching vehicle types
   useEffect(() => {
@@ -148,19 +146,6 @@ const AddCustomerpage = ({ closeModal }) => {
                 </div>
               </div>
             </div>
-
-            {/* <div className="w-full mb-3">
-              <div className="relative">
-                <label>Detailers</label>
-                
-              </div>
-            </div> */}
-
-            {/*  */}
-
-            {/*  */}
-            <hr />
-            {/*  */}
 
             <div className="w-full flex space-x-8">
               <div className="w-full mb-3">
