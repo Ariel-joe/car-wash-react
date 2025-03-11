@@ -17,6 +17,8 @@ const PendServices = () => {
   const { vehicles, fetchVehicles, isLoading, statusUpdater } =
     useVehicleStore();
   const [vehicleData, setVehicleData] = useState([]);
+  const [vehiclesPending, setVehiclesPending] = useState([])
+
 
   // fetch vehicles
   useEffect(() => {
@@ -38,6 +40,14 @@ const PendServices = () => {
     };
     fetchDetailersFunc();
   }, []);
+
+
+  // filtering pending vehicles
+  useEffect(() => {
+    setVehiclesPending(
+      vehicles.filter((vehicle) => vehicle.status === "Pending")
+    );
+  }, [vehicles]);
 
   // function to handle assigning detailers to services
   const handleAssignDetailer = async (vehicleId, detailerName) => {
@@ -105,9 +115,14 @@ const PendServices = () => {
                   <Spin size="large" />
                 </td>
               </tr>
+            ) : vehiclesPending.length === 0 ? (
+              <tr>
+                <td colSpan="8" className="h-screen text-center py-4">
+                  No pending vehicles
+                </td>
+              </tr>
             ) : (
-              vehicles
-                .filter((elem) => elem.status === "Pending")
+              vehiclesPending
                 .map((elem, i) => (
                   <tr key={i} className="border-b-2">
                     <th className="py-2 font-light">{elem.customer.name}</th>

@@ -121,17 +121,17 @@ const InprogressPage = () => {
             </tr>
           ) : (
             vehiclesInProgress.map((vehicle, i) => (
-              <tr key={vehicle._id || i} className="border-b-2">
-                <td className="py-2 font-light">{vehicle.customer?.name}</td>
-                <td className="py-2 font-light">{vehicle.customer?.phone}</td>
-                <td className="py-2 font-light">
+              <tr key={vehicle._id || i} className="border-b-2 text-center">
+                <td className="py-2 px-3 font-light">{vehicle.customer?.name}</td>
+                <td className="py-2 px-3 font-light">{vehicle.customer?.phone}</td>
+                <td className="py-2 px-3 font-light">
                   {vehicle.vehicle_type?.type}
                 </td>
-                <td className="py-2 font-light">{vehicle.number_plate}</td>
-                <td className="py-2 font-light">{vehicle.service?.service}</td>
-                <td className="py-2 font-light">{vehicle.detailer?.name}</td>
-                <td className="py-2 font-light">{vehicle.status}</td>
-                <td className="py-2 font-light">
+                <td className="py-2 px-3 font-light">{vehicle.number_plate}</td>
+                <td className="py-2 px-3 font-light">{vehicle.service?.service}</td>
+                <td className="py-2 px-3 font-light">{vehicle.detailer?.name}</td>
+                <td className="py-2 px-3 font-light">{vehicle.status}</td>
+                <td className="py-2 px-3 font-light">
                   <button
                     onClick={() =>
                       handleStatusChange(vehicle._id, vehicle.detailer?._id)

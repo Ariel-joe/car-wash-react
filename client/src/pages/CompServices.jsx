@@ -1,21 +1,25 @@
+import { Spin } from "antd";
 import { useVehicleStore } from "../store/vehicle-store.js";
 import React, { useEffect, useState } from "react";
 
 const CompServices = () => {
   const [data, setData] = useState([]);
-    const { fetchVehicles, vehicles } = useVehicleStore();
+  const { fetchVehicles, vehicles, isLoading } = useVehicleStore();
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetchVehicles()
+      await fetchVehicles();
     };
 
     fetchData();
   }, [fetchVehicles]);
 
   useEffect(() => {
-    setData(vehicles)
-  }, [vehicles])
+    setData(vehicles);
+  }, [vehicles]);
+
+
+
 
   return (
     <>
@@ -52,21 +56,33 @@ const CompServices = () => {
 
           {/* table body */}
           <tbody>
-            {data
-              .filter((elem) => elem.status === "Completed")
-              .map((elem, i) => (
-                <tr key={i} className="border-b-2">
-                  <th className="py-2 font-light">{elem.customer.name}</th>
-                  <th className="py-2 font-light">{elem.customer.phone}</th>
-                  <th className="py-2 font-light">{elem.vehicle_type.type}</th>
-                  <th className="py-2 font-light">{elem.number_plate}</th>
-                  <th className="py-2 font-light">{elem.service.service}</th>
-                  <th className="py-2 font-light">ksh. {elem.customer.amount}</th>
-                  <th className="py-2 font-light">{elem.detailer.name}</th>
-                  <th className="py-2 font-light">{elem.status}</th>
-                  <th className="py-2 font-light"></th>
-                </tr>
-              ))}
+            {isLoading ? (
+              <tr>
+                <td colSpan="8" className="text-center py-4 h-screen">
+                  <Spin size="large" />
+                </td>
+              </tr>
+            ) : (
+              data
+                .filter((elem) => elem.status === "Completed")
+                .map((elem, i) => (
+                  <tr key={i} className="border-b-2">
+                    <th className="py-2 font-light">{elem.customer.name}</th>
+                    <th className="py-2 font-light">{elem.customer.phone}</th>
+                    <th className="py-2 font-light">
+                      {elem.vehicle_type.type}
+                    </th>
+                    <th className="py-2 font-light">{elem.number_plate}</th>
+                    <th className="py-2 font-light">{elem.service.service}</th>
+                    <th className="py-2 font-light">
+                      ksh. {elem.customer.amount}
+                    </th>
+                    <th className="py-2 font-light">{elem.detailer.name}</th>
+                    <th className="py-2 font-light">{elem.status}</th>
+                    <th className="py-2 font-light"></th>
+                  </tr>
+                ))
+            )}
           </tbody>
         </table>
       </div>
