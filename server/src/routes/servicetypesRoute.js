@@ -3,6 +3,6 @@ import { addServiceType } from "../controllers/serviceTypes.js";
 
 const serviceTypeRoute = Router();
 
-serviceTypeRoute.post("/servicetypes/add", addServiceType);
+serviceTypeRoute.post("/servicetypes", addServiceType);
 
 export { serviceTypeRoute };

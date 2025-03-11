@@ -13,12 +13,12 @@ import {
 const vehiclesRoute = Router();
 
 vehiclesRoute.get("/vehicles", getVehicles);
-vehiclesRoute.get("/vehicles/search", searchVehicle);
+vehiclesRoute.get("/vehicles", searchVehicle);
 
-vehiclesRoute.post("/vehicles/add", addVehicle);
-vehiclesRoute.get("/vehicles/types", getVehicleTypes);
-vehiclesRoute.post("/vehicles/types/add", vehicleTypefunc);
+vehiclesRoute.post("/vehicles", addVehicle);
+vehiclesRoute.get("/vehicles", getVehicleTypes);
+vehiclesRoute.post("/vehicles", vehicleTypefunc);
 
-vehiclesRoute.put("/vehicles/update", updateVehicleStatus)
+vehiclesRoute.put("/vehicles", updateVehicleStatus);
 
 export { vehiclesRoute };

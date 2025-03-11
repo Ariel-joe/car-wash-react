@@ -11,10 +11,10 @@ const detailersRoute = Router();
 
 detailersRoute.get("/detailers", getDetailers);
 
-detailersRoute.post("/detailers/add", addDetailer);
+detailersRoute.post("/detailers", addDetailer);
 
-detailersRoute.post("/detailers/assign", assignDetailer);
+detailersRoute.post("/detailers", assignDetailer);
 
-detailersRoute.patch("/detailers/edit/:id", updateDetailer)
+detailersRoute.patch("/detailers/:id", updateDetailer)
 
 export { detailersRoute };
