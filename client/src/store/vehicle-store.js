@@ -1,56 +1,76 @@
 import { create } from "zustand";
 
-const useVehicleStore = create((set) => ({
+const useVehicleStore = create((set, get) => ({
   vehicles: [],
   isLoading: true,
-  
+  error: null,
+
   fetchVehicles: async () => {
-    set({isLoading: true});
+    // Check if vehicles are already loaded to prevent unnecessary refetching
+    // if (get().vehicles.length > 0 && !get().isLoading) {
+    //   return get().vehicles;
+    // }
+
+    set({ isLoading: true, error: null });
 
     try {
       const response = await fetch("http://localhost:3006/api/vehicles");
-      const { data } = await response.json();
-      set({ vehicles: data, isLoading: false });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch vehicles");
+      }
+
+      const result = await response.json();
+      const fetchedVehicles = result.data || [];
+
+      set({
+        vehicles: fetchedVehicles,
+        isLoading: false,
+        error: null,
+      });
     } catch (error) {
-      console.error(error.message);
-      set({isLoading: false})
+      console.error("Error fetching vehicles:", error.message);
+      set({
+        isLoading: false,
+        error: error.message,
+        vehicles: [],
+      });
+      return [];
     }
   },
 
   statusUpdater: async (vehicleId, status) => {
     try {
-      // Make API call to update vehicle status in the database
-      const response = await fetch("http://localhost:3006/api/vehicles/update", {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ vehicleId, status }), 
-      });
+      const response = await fetch(
+        "http://localhost:3006/api/vehicles/update",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({ vehicleId, status }),
+        }
+      );
 
       if (!response.ok) {
-        throw new Error('Failed to update vehicle status');
+        throw new Error("Failed to update vehicle status");
       }
 
       set((state) => {
-        const updatedVehicles = [...state.vehicles];
-        const index = updatedVehicles.findIndex(vehicle => vehicle._id === vehicleId);
-        
-        if (index !== -1) {
-          updatedVehicles[index] = {
-            ...updatedVehicles[index], 
-            status
-          };
-          return { vehicles: updatedVehicles };
-        }
-        
-        return { vehicles: state.vehicles };
+        const updatedVehicles = state.vehicles.map((vehicle) =>
+          vehicle._id === vehicleId ? { ...vehicle, status } : vehicle
+        );
+
+        console.log({ updatedVehicles });
+
+        return { vehicles: updatedVehicles };
       });
-      
-      return true; 
+
+      return true;
     } catch (error) {
       console.error(error.message);
-      return false; 
+      return false;
     }
   },
 }));

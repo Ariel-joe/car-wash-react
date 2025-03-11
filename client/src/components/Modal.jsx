@@ -1,5 +1,4 @@
-import { CircleX } from "lucide-react";
-import React from "react";
+import { X } from "lucide-react";
 
 const Modal = ({ openModal, closeModal, children }) => {
   if (!openModal) return null;
@@ -15,10 +14,10 @@ const Modal = ({ openModal, closeModal, children }) => {
       >
         {/* Close button inside the modal */}
         <button
-          className="absolute top-2 right-2 text-gray-500"
+          className="absolute top-4 right-4 text-gray-500"
           onClick={closeModal}
         >
-          <CircleX />
+          <X />
         </button>
         {children}
       </div>

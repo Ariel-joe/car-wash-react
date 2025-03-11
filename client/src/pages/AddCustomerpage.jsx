@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { useVehicleTypeStore } from "../store/vehicleType-store";
+import { useVehicleStore } from "../store/vehicle-store";
 
 const AddCustomerpage = ({ closeModal }) => {
   const [name, setName] = useState("");
@@ -23,6 +24,8 @@ const AddCustomerpage = ({ closeModal }) => {
 
   // vehicleType store
   const { fetchVehicleTypes, vehicleTypes } = useVehicleTypeStore();
+
+  const { fetchVehicles } = useVehicleStore();
 
   // fetching services
   useEffect(() => {
@@ -60,6 +63,7 @@ const AddCustomerpage = ({ closeModal }) => {
         toast.success("Customer saved successfully");
         closeModal(); // Close the modal on successful submission
         navigate("/");
+        fetchVehicles();
       } else {
         toast.error("Failed to save the customer");
       }
@@ -188,14 +192,14 @@ const AddCustomerpage = ({ closeModal }) => {
             <div className="flex flex-row-reverse justify-around w-full my-6">
               <button
                 type="submit"
-                className="bg-black text-white w-[40%] py-2 px-12 mb-5"
+                className="bg-black text-white w-[40%] py-2 px-12 mb-5 rounded-md"
               >
                 Submit
               </button>
               <button
                 type="button"
                 onClick={closeModal}
-                className="bg-transparent border px-12 w-[40%] text-DarkGray border-black py-2 mb-5"
+                className="bg-transparent border px-12 w-[40%] text-DarkGray border-black py-2 mb-5 rounded-md"
               >
                 Cancel
               </button>

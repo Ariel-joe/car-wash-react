@@ -1,27 +1,21 @@
+import { useVehicleStore } from "../store/vehicle-store.js";
 import React, { useEffect, useState } from "react";
 
 const CompServices = () => {
   const [data, setData] = useState([]);
+    const { fetchVehicles, vehicles } = useVehicleStore();
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:3006/api/vehicles");
-
-        const result = await response.json();
-
-        if (result.success) {
-          setData(result.data);
-
-          return;
-        }
-      } catch (error) {
-        console.error(error.message);
-      }
+      await fetchVehicles()
     };
 
     fetchData();
-  }, []);
+  }, [fetchVehicles]);
+
+  useEffect(() => {
+    setData(vehicles)
+  }, [vehicles])
 
   return (
     <>

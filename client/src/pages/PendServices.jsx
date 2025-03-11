@@ -14,9 +14,9 @@ const PendServices = () => {
   const { customer } = useCustomerStore();
 
   // vehicle store
-  const { vehicles, fetchVehicles, isLoading, statusUpdater } = useVehicleStore();
+  const { vehicles, fetchVehicles, isLoading, statusUpdater } =
+    useVehicleStore();
   const [vehicleData, setVehicleData] = useState([]);
-
 
   // fetch vehicles
   useEffect(() => {
@@ -31,20 +31,16 @@ const PendServices = () => {
     setVehicleData(vehicles);
   }, []);
 
-
-    // fetching detailers
-    useEffect(() => {
-      const fetchDetailersFunc = async () => {
-        await fetchDetailers();
-      };
-      fetchDetailersFunc();
-    }, [detailers]);
-
-
+  // fetching detailers
+  useEffect(() => {
+    const fetchDetailersFunc = async () => {
+      await fetchDetailers();
+    };
+    fetchDetailersFunc();
+  }, []);
 
   // function to handle assigning detailers to services
   const handleAssignDetailer = async (vehicleId, detailerName) => {
-
     // Check if a detailer has been selected
     if (!detailerName) {
       toast.error("Please select a detailer");
@@ -57,6 +53,7 @@ const PendServices = () => {
 
       if (responseSuccess) {
         toast.success(`${detailerName} assigned successfully`);
+        fetchDetailers();
       } else {
         throw new Error(`Failed to assign detailer: ${response.statusText}`);
       }
@@ -66,10 +63,6 @@ const PendServices = () => {
       console.error(error.message);
     }
   };
-
-
-
-
 
   return (
     <>

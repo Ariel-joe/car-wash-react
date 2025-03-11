@@ -1,10 +1,11 @@
 import { create } from "zustand";
 
 const useDetailerStore = create((set) => ({
-  detailers: null,
-  assignedDetailer: null,
+  detailers: [],
+  assignedDetailer: [],
 
   fetchDetailers: async () => {
+
     try {
       const response = await fetch("http://localhost:3006/api/detailers");
 
@@ -33,12 +34,14 @@ const useDetailerStore = create((set) => ({
 
       if (response.ok) {
         // Update the assignedDetailers state
-        set((state) => ({
-          assignedDetailers: {
-            ...state.assignedDetailers,
-            [vehicleId]: detailerName,
-          },
-        }));
+        set((state) => {
+          return {
+            assignedDetailer: {
+              ...state.assignedDetailer,
+              [vehicleId]: detailerName,
+            },
+          };
+        });
 
         return true;
       } else {
@@ -53,16 +56,19 @@ const useDetailerStore = create((set) => ({
   updateDetailerStatus: async (detailerId, status) => {
     try {
       // Make API call to update detailer status in the database
-      const response = await fetch(`http://localhost:3006/api/detailers/edit/${detailerId}`, {
-        method: 'PATCH', // Note that your route uses PATCH
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ status }), // Adjust payload according to your API
-      });
+      const response = await fetch(
+        `http://localhost:3006/api/detailers/edit/${detailerId}`,
+        {
+          method: "PATCH", // Note that your route uses PATCH
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ status }), // Adjust payload according to your API
+        }
+      );
 
       if (!response.ok) {
-        throw new Error('Failed to update detailer status');
+        throw new Error("Failed to update detailer status");
       }
 
       // If API call is successful, update the local state
@@ -87,7 +93,7 @@ const useDetailerStore = create((set) => ({
 
       return true; // Return success
     } catch (error) {
-      console.error('Error updating detailer status:', error);
+      console.error("Error updating detailer status:", error);
       return false; // Return failure
     }
   },
