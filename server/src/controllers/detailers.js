@@ -47,6 +47,30 @@ export const addDetailer = async (req, res) => {
   }
 };
 
+// editing the detailer detailers
+export const updateDetailer = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const editedDetailer = await Detailer.findOneAndUpdate(
+      { _id: id },
+      req.body,
+      { new: true }
+    );
+
+
+    return res.status(200).json({
+      success: true,
+      data: editedDetailer,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: error.message,
+    });
+  }
+};
+
 // // Assigning a detailer to a vehicle
 // export const assignDetailerToVehicle = async (req, res) => {
 //   try {

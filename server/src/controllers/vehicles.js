@@ -77,11 +77,11 @@ export const searchVehicle = async (req, res) => {
 // function to update vehicle status to completed
 export const updateVehicleStatus = async (req, res) => {
   try {
-    const {vehicleId, detailerId} = req.body;
+    const { vehicleId, status, detailerId } = req.body;
 
     const vehicle = await Vehicle.findOneAndUpdate(
       { _id: vehicleId },
-      { status: "Completed" },
+      { status },
       { new: true }
     );
 

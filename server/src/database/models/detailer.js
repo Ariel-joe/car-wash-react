@@ -4,7 +4,7 @@ const detailerSchema = new Schema(
   {
     name: { type: String, required: true },
     phone_number: { type: String, required: true },
-    activity: {type: String, enum: ["active", "dormant", "inactive"], default: "active"}
+    activity: {type: String, enum: ["active", "dormant", "inactive"], default: "active"},
     status: { type: String, enum: ["available", "busy"], default: "available" },
   },
   {
