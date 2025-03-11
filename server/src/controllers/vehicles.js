@@ -3,15 +3,14 @@ import { Vehicle } from "../database/models/vehicle.js";
 
 // get all the vehicles
 export const getVehicles = async (req, res) => {
+  const { id } = req.query;
   try {
-    const vehicles = await Vehicle.find().populate(
-      "customer vehicle_type service detailer"
-    );
+    //conditional statement for searching by number plate or searching everything at once
 
     return res.status(200).json({
       success: true,
       data: vehicles,
-    });
+    });  
   } catch (error) {
     console.error(error.message);
 
