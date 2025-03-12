@@ -5,6 +5,8 @@ import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { useVehicleTypeStore } from "../store/vehicleType-store";
 import { useVehicleStore } from "../store/vehicle-store";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 const AddCustomerpage = ({ closeModal }) => {
   const [name, setName] = useState("");
@@ -13,6 +15,7 @@ const AddCustomerpage = ({ closeModal }) => {
   const [amount, setAmount] = useState("");
   const [vehicleType, setVehicleType] = useState("");
   const [service, setService] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -42,7 +45,30 @@ const AddCustomerpage = ({ closeModal }) => {
     };
     fetchvehicleTypesFunc();
   }, []);
- 
+
+  // phone number validation
+  const handlePhoneChange = (value, country) => {
+    if (!country) return; // Ensure country data is available
+
+    // Remove non-digit characters for validation
+    const cleanedValue = value.replace(/\D/g, "");
+
+    // Remove country dial code to get just the local number
+    const dialCode = country.dialCode;
+    const localNumber = cleanedValue.substring(dialCode.length);
+
+    if (localNumber.length < 9) {
+      setError("Phone number must be 9 digits after the country code.");
+    } else if (localNumber.length > 9) {
+      setError("Phone number can only be 9 digits after the country code.");
+    } else {
+      setError("");
+    }
+
+    // Use the value directly from the component which already includes formatting
+    setPhone(value);
+  };
+
   // submitting customer data to be posted
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -73,8 +99,6 @@ const AddCustomerpage = ({ closeModal }) => {
     }
   };
 
-  
-
   return (
     <>
       <div className="items-center justify-center w-full p-2">
@@ -100,15 +124,17 @@ const AddCustomerpage = ({ closeModal }) => {
 
               {/*  */}
               <div className="flex flex-col items-start mb-3 w-full">
-                <label>Phone</label>
-                <input
-                  type="text"
+                <PhoneInput
+                  country={"ke"}
                   className="border w-full rounded-md py-1 px-3"
                   placeholder="+254712345678"
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  onChange={(value, country) =>
+                    handlePhoneChange(value, country)
+                  }
                   required
                 />
+                {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
               </div>
             </div>
 
