@@ -19,6 +19,6 @@ vehiclesRoute.get("/vehicles/types", getVehicleTypes);
 vehiclesRoute.get("/vehicles/:id", searchVehicle);
 vehiclesRoute.post("/vehicles/types", vehicleTypefunc);
 
-vehiclesRoute.put("/vehicles", updateVehicleStatus);
+vehiclesRoute.put("/vehicles/update", updateVehicleStatus);
 
 export { vehiclesRoute };

@@ -3,7 +3,7 @@ import { addService, getServices } from "../controllers/Services.js";
 
 const servicesRoute = Router();
 
-servicesRoute.post("/services", addService);
+servicesRoute.post("/services/add", addService);
 
 servicesRoute.get("/services", getServices)
 

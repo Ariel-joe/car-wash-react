@@ -11,7 +11,7 @@ const detailersRoute = Router();
 
 detailersRoute.get("/detailers", getDetailers);
 
-detailersRoute.post("/detailers", addDetailer);
+detailersRoute.post("/detailers/add", addDetailer);
 
 detailersRoute.post("/detailers", assignDetailer);
 
