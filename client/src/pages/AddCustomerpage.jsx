@@ -123,10 +123,14 @@ const AddCustomerpage = ({ closeModal }) => {
               </div>
 
               {/*  */}
-              <div className="flex flex-col items-start mb-3 w-full">
+              <div className="flex flex-col items-start w-full">
+                <label>Phone</label>
                 <PhoneInput
                   country={"ke"}
-                  className="border w-full rounded-md py-1 px-3"
+                  containerClass="w-full"
+                  inputClass="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  buttonClass="bg-gray-100 border border-gray-300 rounded-l-md"
+                  dropdownClass="bg-white border border-gray-300 rounded-md shadow-lg"
                   placeholder="+254712345678"
                   value={phone}
                   onChange={(value, country) =>
