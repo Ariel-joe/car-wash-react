@@ -22,7 +22,7 @@ const useDetailerStore = create((set) => ({
   assignDetailerFunc: async (vehicleId, detailerName) => {
     try {
       const response = await fetch(
-        "http://localhost:3006/api/detailers/assign",
+        "http://localhost:3006/api/detailers",
         {
           method: "POST",
           headers: {
@@ -57,7 +57,7 @@ const useDetailerStore = create((set) => ({
     try {
       // Make API call to update detailer status in the database
       const response = await fetch(
-        `http://localhost:3006/api/detailers/edit/${detailerId}`,
+        `http://localhost:3006/api/detailers/${detailerId}`,
         {
           method: "PATCH", // Note that your route uses PATCH
           headers: {

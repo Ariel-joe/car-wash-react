@@ -4,7 +4,7 @@ const useCustomerStore = create((set) => ({
   customer: null,
   fetchCustomer: async (formData) => {
     try {
-      const response = await fetch("http://localhost:3006/api/customers/add", {
+      const response = await fetch("http://localhost:3006/api/customers", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

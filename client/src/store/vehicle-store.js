@@ -7,9 +7,6 @@ const useVehicleStore = create((set, get) => ({
 
   fetchVehicles: async () => {
     // Check if vehicles are already loaded to prevent unnecessary refetching
-    // if (get().vehicles.length > 0 && !get().isLoading) {
-    //   return get().vehicles;
-    // }
 
     set({ isLoading: true, error: null });
 
@@ -41,17 +38,14 @@ const useVehicleStore = create((set, get) => ({
 
   statusUpdater: async (vehicleId, status) => {
     try {
-      const response = await fetch(
-        "http://localhost:3006/api/vehicles/update",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({ vehicleId, status }),
-        }
-      );
+      const response = await fetch("http://localhost:3006/api/vehicles", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ vehicleId, status }),
+      });
 
       if (!response.ok) {
         throw new Error("Failed to update vehicle status");

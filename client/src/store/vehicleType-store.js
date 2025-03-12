@@ -10,11 +10,14 @@ const useVehicleTypeStore = create((set) => ({
       if (response.ok) {
         const { data } = await response.json();
 
+        console.log({ data });
+
         set({ vehicleTypes: data });
         return;
       }
     } catch (error) {
       console.error(error.message);
+      console.log("failed");
     }
   },
 }));

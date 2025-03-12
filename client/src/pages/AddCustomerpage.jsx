@@ -42,7 +42,7 @@ const AddCustomerpage = ({ closeModal }) => {
     };
     fetchvehicleTypesFunc();
   }, []);
-
+ 
   // submitting customer data to be posted
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -72,6 +72,8 @@ const AddCustomerpage = ({ closeModal }) => {
       toast.error("Failed to save the customer");
     }
   };
+
+  
 
   return (
     <>
