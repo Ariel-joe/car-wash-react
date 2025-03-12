@@ -9,7 +9,7 @@ const detailerSchema = new Schema(
   },
   {
     timestamps: true,
-  }
+  }  
 );
 
 const Detailer = new model("detailer", detailerSchema);

@@ -13,10 +13,10 @@ import {
 const vehiclesRoute = Router();
 
 vehiclesRoute.get("/vehicles", getVehicles);
-vehiclesRoute.get("/vehicles", searchVehicle);
 
 vehiclesRoute.post("/vehicles", addVehicle);
 vehiclesRoute.get("/vehicles/types", getVehicleTypes);
+vehiclesRoute.get("/vehicles/:id", searchVehicle);
 vehiclesRoute.post("/vehicles/types", vehicleTypefunc);
 
 vehiclesRoute.put("/vehicles", updateVehicleStatus);

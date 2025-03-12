@@ -5,6 +5,8 @@ import { Vehicle } from "../database/models/vehicle.js";
 export const getVehicles = async (req, res) => {
   const { id } = req.query;
   try {
+
+    const vehicles = await Vehicle.find()
     //conditional statement for searching by number plate or searching everything at once
 
     return res.status(200).json({
