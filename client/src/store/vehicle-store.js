@@ -13,18 +13,15 @@ const useVehicleStore = create((set, get) => ({
     try {
       const response = await fetch("http://localhost:3006/api/vehicles");
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch vehicles");
+      if (response.ok) {
+        const { data } = await response.json();
+
+        set({
+          vehicles: data,
+          isLoading: false,
+          error: null,
+        });
       }
-
-      const result = await response.json();
-      const fetchedVehicles = result.data || [];
-
-      set({
-        vehicles: fetchedVehicles,
-        isLoading: false,
-        error: null,
-      });
     } catch (error) {
       console.error("Error fetching vehicles:", error.message);
       set({

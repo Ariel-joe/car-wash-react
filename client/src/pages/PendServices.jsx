@@ -47,6 +47,9 @@ const PendServices = () => {
     setVehiclesPending(
       vehicles.filter((vehicle) => vehicle.status === "Pending")
     );
+
+    console.log(vehicles);
+    
   }, [vehicles]);
 
   // function to handle assigning detailers to services
