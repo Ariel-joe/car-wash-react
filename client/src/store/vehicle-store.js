@@ -35,7 +35,7 @@ const useVehicleStore = create((set, get) => ({
 
   statusUpdater: async (vehicleId, status) => {
     try {
-      const response = await fetch("http://localhost:3006/api/vehicles", {
+      const response = await fetch("http://localhost:3006/api/vehicles/update", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
