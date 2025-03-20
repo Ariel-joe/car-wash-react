@@ -7,6 +7,7 @@ import { useVehicleTypeStore } from "../store/vehicleType-store";
 import { useVehicleStore } from "../store/vehicle-store";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { useServiceTypeStore } from "../store/serviceType-store";
 
 const AddCustomerpage = ({ closeModal }) => {
   const [name, setName] = useState("");
@@ -28,7 +29,23 @@ const AddCustomerpage = ({ closeModal }) => {
   // vehicleType store
   const { fetchVehicleTypes, vehicleTypes } = useVehicleTypeStore();
 
+  // serviceType store
+  const { fetchServiceType, serviceType } = useServiceTypeStore();
+
   const { fetchVehicles } = useVehicleStore();
+
+  // fetching service types
+  useEffect(() => {
+    const getServiceTypes = async () => {
+      await fetchServiceType();
+    };
+
+    getServiceTypes();
+  }, []);
+
+  useEffect(() => {
+    console.log({ serviceType });
+  });
 
   // fetching services
   useEffect(() => {
@@ -129,7 +146,7 @@ const AddCustomerpage = ({ closeModal }) => {
                   country={"ke"}
                   containerClass="w-full"
                   inputClass="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  buttonClass="bg-gray-100 border border-gray-300 rounded-l-md"
+                  buttonClass="bg-gray-100 border border-gray-300  rounded-l-md"
                   dropdownClass="bg-white border border-gray-300 rounded-md shadow-lg"
                   placeholder="+254712345678"
                   value={phone}
@@ -164,7 +181,7 @@ const AddCustomerpage = ({ closeModal }) => {
                   <select
                     value={vehicleType}
                     onChange={(e) => setVehicleType(e.target.value)}
-                    className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-1 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
+                    className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-1.5 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
                   >
                     <option value="" disabled>
                       Select a vehicle
@@ -190,7 +207,7 @@ const AddCustomerpage = ({ closeModal }) => {
                   <select
                     value={service}
                     onChange={(e) => setService(e.target.value)}
-                    className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-1 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
+                    className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-1.5 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
                   >
                     <option value="" disabled>
                       Select a service
