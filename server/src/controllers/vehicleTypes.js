@@ -28,8 +28,6 @@ export const getVehicleTypes = async (req, res) => {
   try {
     const vehicleTypes = await VehicleType.find();
 
-    console.log({ vehicleTypes });
-
     return res.status(200).json({
       success: true,
       data: vehicleTypes,

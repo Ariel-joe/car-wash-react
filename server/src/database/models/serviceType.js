@@ -2,8 +2,8 @@ import { model, Schema } from "mongoose";
 
 const serviceTypeSchema = new Schema(
   {
-    vehicle_type: { type: Schema.Types.ObjectId, ref: "VehicleType" },
-    service: { type: Schema.Types.ObjectId, ref: "Service" },
+    vehicle_type: { type: Schema.Types.ObjectId, ref: "vehicleType" },
+    service: { type: Schema.Types.ObjectId, ref: "service" },
     price: { type: String, required: true },
   },
   {

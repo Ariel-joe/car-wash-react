@@ -162,6 +162,7 @@ export const assignDetailer = async (req, res) => {
 
     await Promise.all([vehicle.save(), detailer.save()]);
 
+
     return res.status(200).json({
       success: true,
       message: "Detailer assigned successfully",

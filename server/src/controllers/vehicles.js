@@ -7,7 +7,7 @@ export const getVehicles = async (req, res) => {
   try {
 
     const vehicles = await Vehicle.find().populate(
-      "customer vehicle_type service"
+      "customer vehicle_type service detailer"
     );
     //conditional statement for searching by number plate or searching everything at once
 
