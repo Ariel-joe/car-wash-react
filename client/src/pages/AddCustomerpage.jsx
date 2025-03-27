@@ -43,10 +43,6 @@ const AddCustomerpage = ({ closeModal }) => {
     getServiceTypes();
   }, []);
 
-  useEffect(() => {
-    console.log({ serviceType });
-  });
-
   // fetching services
   useEffect(() => {
     const getServices = async () => {
@@ -65,7 +61,7 @@ const AddCustomerpage = ({ closeModal }) => {
 
   // phone number validation
   const handlePhoneChange = (value, country) => {
-    if (!country) return; // Ensure country data is available
+    if (!country) return;
 
     // Remove non-digit characters for validation
     const cleanedValue = value.replace(/\D/g, "");

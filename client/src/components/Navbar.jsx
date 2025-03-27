@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Modal } from "./Modal";
-import { IoNotificationsOutline } from "react-icons/io5";
 import { AddCustomerpage } from "../pages/AddCustomerpage";
 import { useCustomerStore } from "../store/Customer-store";
 
