@@ -30,7 +30,13 @@ const AddCustomerpage = ({ closeModal }) => {
   const { fetchVehicleTypes, vehicleTypes } = useVehicleTypeStore();
 
   // serviceType store
-  const { fetchServiceType, serviceType } = useServiceTypeStore();
+  const {
+    fetchServiceType,
+    serviceType,
+    selectedVehicleType,
+    selectedService,
+    price,
+  } = useServiceTypeStore();
 
   const { fetchVehicles } = useVehicleStore();
 
@@ -175,17 +181,17 @@ const AddCustomerpage = ({ closeModal }) => {
                 <div className="relative">
                   <label>Vehicle Type</label>
                   <select
-                    value={vehicleType}
+                    value={selectedVehicleType}
                     onChange={(e) => setVehicleType(e.target.value)}
                     className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-1.5 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
                   >
                     <option value="" disabled>
                       Select a vehicle
                     </option>
-                    {vehicleTypes && vehicleTypes.length > 0 ? (
-                      vehicleTypes.map((vehicle, i) => (
-                        <option key={i} value={vehicle.type}>
-                          {vehicle.type}
+                    {serviceType && Object.keys(serviceType).length > 0 ? (
+                      Object.keys(serviceType).map((vehicle, i) => (
+                        <option key={i} value={vehicle}>
+                          {vehicle}
                         </option>
                       ))
                     ) : (
@@ -227,7 +233,7 @@ const AddCustomerpage = ({ closeModal }) => {
                 <input
                   type="text"
                   className="border w-full rounded-md py-1 px-3"
-                  value={amount}
+                  value={price}
                   onChange={(e) => setAmount(e.target.value)}
                   required
                 />
