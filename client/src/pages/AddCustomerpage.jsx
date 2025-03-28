@@ -182,7 +182,7 @@ const AddCustomerpage = ({ closeModal }) => {
                   <label>Vehicle Type</label>
                   <select
                     value={selectedVehicleType}
-                    onChange={(e) => setVehicleType(e.target.value)}
+                    onChange={(e) => setvehicleType(e.target.value)}
                     className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-1.5 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
                   >
                     <option value="" disabled>
@@ -207,21 +207,23 @@ const AddCustomerpage = ({ closeModal }) => {
                 <div className="relative">
                   <label>Service</label>
                   <select
-                    value={service}
+                    value={selectedService}
                     onChange={(e) => setService(e.target.value)}
                     className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-1.5 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
+                    disabled={!selectedVehicleType}
                   >
                     <option value="" disabled>
                       Select a service
                     </option>
-                    {services && services.length > 0 ? (
-                      services.map((service, i) => (
+                    {selectedVehicleType &&
+                    serviceType[selectedVehicleType]?.length > 0 ? (
+                      serviceType[selectedVehicleType].map((service, i) => (
                         <option key={i} value={service.service}>
                           {service.service}
                         </option>
                       ))
                     ) : (
-                      <option value="">Loading services types...</option>
+                      <option value="">No services available</option>
                     )}
                   </select>
                 </div>
@@ -233,9 +235,8 @@ const AddCustomerpage = ({ closeModal }) => {
                 <input
                   type="text"
                   className="border w-full rounded-md py-1 px-3"
-                  value={price}
-                  onChange={(e) => setAmount(e.target.value)}
-                  required
+                  value={price || ""}
+                  readOnly
                 />
               </div>
             </div>
