@@ -8,12 +8,12 @@ export const signup = async (req, res) => {
 
   const hashedPassword = await hash(password, 10);
 
-  req.body.password = hashedPassword;
-
   try {
     const userData = {
-        username, email, password
-    }
+      username,
+      email,
+      password: hashedPassword,
+    };
     const newUser = await User.create(userData);
 
     return res.json({
@@ -41,7 +41,7 @@ export const login = async (req, res) => {
     if (!user) throw new Error("invalid credentials");
 
     // if the username exists, we now try and match the passwords
-    const passwordMatch = compare(password, user.password);
+    const passwordMatch = await compare(password, user.password);
     if (!passwordMatch) throw new Error("invalid credentials");
 
     // the password is correct, now we generate  JWT token for the user
@@ -58,8 +58,7 @@ export const login = async (req, res) => {
     // add the token in the cookie
     res.cookie(process.env.AUTH_COOKIE_NAME, token, {
       maxAge: 24 * 60 * 60 * 1000,
-    //   can only be accessed by server requests
-
+      //   can only be accessed by server requests
 
       httpOnly: true,
       // path = where the cookie is valid
@@ -73,11 +72,10 @@ export const login = async (req, res) => {
       // maxAge = how long the cookie is valid for in milliseconds
     });
 
-
     return res.json({
-        success: true,
-        data: user
-    })
+      success: true,
+      data: user,
+    });
   } catch (error) {
     console.error(error.message);
 

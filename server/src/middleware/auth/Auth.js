@@ -7,6 +7,9 @@ export const userAuthentication = async (req, res, next) => {
 
     if (!token) throw new Error("Token not found");
 
+    console.log("Request Headers:", req.headers);
+console.log("Request Cookies:", req.cookies);
+
     // beyond this point means the token has been set inside the cookie
 
     // verifying the tokens

@@ -18,6 +18,8 @@ const app = expresss();
 app.use(expresss.json());
 
 
+
+
 // cors configuration
 const corsOptions = {
   origin: process.env.CLIENT_URL,
@@ -25,9 +27,9 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
 // cookie parser middleware
 app.use(cookieParser())
+
 
 
 // connection to the database
