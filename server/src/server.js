@@ -9,6 +9,7 @@ import { customersRoute } from "./routes/customersRoute.js";
 import { paymentsRoute } from "./routes/paymentsRoute.js";
 import { vehiclesRoute } from "./routes/vehiclesRoute.js";
 import { serviceTypeRoute } from "./routes/servicetypesRoute.js";
+import { userAuthentication } from "./middleware/auth/Auth.js";
 
 const app = expresss();
 
@@ -26,6 +27,7 @@ app.get("/", getHome);
 
 app.use(
   "/api",
+  userAuthentication,
   customersRoute,
   detailersRoute,
   paymentsRoute,
