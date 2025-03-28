@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { useUserStore } from "../../store/user-store";
 import { Outlet, useNavigate } from "react-router";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
+import { useUserStore } from "../../store/user-store";
 
-const GlobalLayout = () => {
+const ProtectedRouteWrapper = () => {
   const navigate = useNavigate();
   const { isLoggedIn } = useUserStore();
 
@@ -15,14 +15,8 @@ const GlobalLayout = () => {
       return;
     }
   }, []);
-  return (
-    <>
-      <div>
-        <Toaster position="top-center" richColors />
-        <Outlet />
-      </div>
-    </>
-  );
+
+  return <Outlet />;
 };
 
-export { GlobalLayout };
+export { ProtectedRouteWrapper };

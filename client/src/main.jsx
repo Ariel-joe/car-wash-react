@@ -17,7 +17,6 @@ createRoot(document.getElementById("root")).render(
         {/*  */}
         <Route element={<GlobalLayout />}>
           <Route path="/" element={<App />}>
-            {/* <Route index element={<AddCustomerpage />} /> */}
             <Route index element={<PendServices />} />
             <Route path="completed" element={<CompServices />} />
             <Route path="detailers" element={<Detailers />} />
