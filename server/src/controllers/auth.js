@@ -41,7 +41,7 @@ export const login = async (req, res) => {
     if (!user) throw new Error("invalid credentials");
 
     // if the username exists, we now try and match the passwords
-    const passwordMatch = await compare(password, user.password);
+    const passwordMatch = compare(password, user.password);
     if (!passwordMatch) throw new Error("invalid credentials");
 
     // the password is correct, now we generate  JWT token for the user
