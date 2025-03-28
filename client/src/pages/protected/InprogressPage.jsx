@@ -5,6 +5,10 @@ import { useDetailerStore } from "../../store/Detailer-store.js";
 import { useVehicleStore } from "../../store/vehicle-store.js";
 
 const InprogressPage = () => {
+    // user
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log(user);
+    
   // vehicle store
   const { fetchVehicles, statusUpdater, vehicles, isLoading, error } =
     useVehicleStore();

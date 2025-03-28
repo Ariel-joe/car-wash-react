@@ -23,7 +23,7 @@ const Login = () => {
 
     if (loginSuccess) {
       toast.success("Login Successful");
-      navigate("/profile");
+      navigate("/");
     } else {
       toast.error("There was a problem logging you in. Please try again.");
     }
@@ -55,16 +55,6 @@ const Login = () => {
         <button type="submit" className="bg-black text-white p-2">
           Login
         </button>
-
-        <span className="flex gap-2">
-          Don't have an account?{" "}
-          <Link
-            to={"/signup"}
-            className="flex items-center text-blue-700 hover:shadow-md duration-150"
-          >
-            Signup <GoArrowRight />
-          </Link>
-        </span>
       </form>
     </>
   );

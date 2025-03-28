@@ -10,6 +10,10 @@ import "react-phone-input-2/lib/style.css";
 import { useServiceTypeStore } from "../../store/serviceType-store.js";
 
 const AddCustomerpage = ({ closeModal }) => {
+  // user
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user);
+
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [numberPlate, setNumberPlate] = useState("");
