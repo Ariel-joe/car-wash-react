@@ -10,17 +10,26 @@ import { paymentsRoute } from "./routes/paymentsRoute.js";
 import { vehiclesRoute } from "./routes/vehiclesRoute.js";
 import { serviceTypeRoute } from "./routes/servicetypesRoute.js";
 import { userAuthentication } from "./middleware/auth/Auth.js";
+import cookieParser from "cookie-parser";
 
 const app = expresss();
 
 app.use(expresss.json());
 
+
+// cors configuration
 const corsOptions = {
-  origin: "*",
+  origin: process.env.CLIENT_URL,
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
 
+// cookie parser middleware
+app.use(cookieParser())
+
+
+// connection to the database
 connectDB();
 
 app.get("/", getHome);
