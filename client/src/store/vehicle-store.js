@@ -11,7 +11,12 @@ const useVehicleStore = create((set, get) => ({
     set({ isLoading: true, error: null });
 
     try {
-      const response = await fetch("http://localhost:3006/api/vehicles");
+      const response = await fetch("http://localhost:3006/api/vehicles", {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        },
+        credentials: "include",
+      });
 
       if (response.ok) {
         const { data } = await response.json();

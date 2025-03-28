@@ -7,7 +7,9 @@ const useDetailerStore = create((set) => ({
   fetchDetailers: async () => {
 
     try {
-      const response = await fetch("http://localhost:3006/api/detailers");
+    const response = await fetch("http://localhost:3006/api/detailers", {
+      credentials: "include",
+    });
 
       if (response.ok) {
         const { data } = await response.json();
@@ -29,6 +31,7 @@ const useDetailerStore = create((set) => ({
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ vehicleId, detailerName }),
+          credentials: "include",
         }
       );
 

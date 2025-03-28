@@ -5,7 +5,12 @@ const useServiceStore = create((set) => ({
 
   fetchServices: async () => {
     try {
-      const response = await fetch("http://localhost:3006/api/services");
+      const response = await fetch("http://localhost:3006/api/services", {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        },
+        credentials: "include",
+      });
 
       if (response.ok) {
         const { data } = await response.json();

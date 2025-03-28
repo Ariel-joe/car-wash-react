@@ -8,8 +8,10 @@ const useCustomerStore = create((set) => ({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify(formData),
+        credentials: "include",
       });
 
       if (response.ok) {

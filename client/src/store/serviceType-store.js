@@ -16,7 +16,12 @@ const useServiceTypeStore = create((set, get) => ({
 
   fetchServiceType: async () => {
     try {
-      const response = await fetch("http://localhost:3006/api/servicetypes");
+      const response = await fetch("http://localhost:3006/api/servicetypes", {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        },
+        credentials: "include",
+      });
 
       if (response.ok) {
         const { data } = await response.json();

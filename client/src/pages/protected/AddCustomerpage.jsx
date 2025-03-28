@@ -8,11 +8,12 @@ import { useVehicleStore } from "../../store/vehicle-store.js";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useServiceTypeStore } from "../../store/serviceType-store.js";
+import { useUserStore } from "../../store/user-store.js"; // Import userStore
 
 const AddCustomerpage = ({ closeModal }) => {
-  // user
-  const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
+  const isLoggedIn = useUserStore((state) => state.isLoggedIn); // Access isLoggedIn
+  const logout = useUserStore((state) => state.logout); // Access logout function
+  const token = localStorage.getItem("authToken"); // Get token from local storage
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -41,36 +42,45 @@ const AddCustomerpage = ({ closeModal }) => {
   // fetching service types
   useEffect(() => {
     const getServiceTypes = async () => {
-      await fetchServiceType();
+      if (isLoggedIn) {
+        await fetchServiceType();
+      } else {
+        console.log("User not logged in");
+      }
     };
 
     getServiceTypes();
-  }, []);
+  }, [isLoggedIn]);
 
   // fetching services
   useEffect(() => {
     const getServices = async () => {
-      await fetchServices();
+      if (isLoggedIn) {
+        await fetchServices();
+      } else {
+        console.log("User not logged in");
+      }
     };
     getServices();
-  }, []);
+  }, [isLoggedIn]);
 
   // fetching vehicle types
   useEffect(() => {
     const fetchvehicleTypesFunc = async () => {
-      await fetchVehicleTypes();
+      if (isLoggedIn) {
+        await fetchVehicleTypes();
+      } else {
+        console.log("User not logged in");
+      }
     };
     fetchvehicleTypesFunc();
-  }, []);
+  }, [isLoggedIn]);
 
   // phone number validation
   const handlePhoneChange = (value, country) => {
     if (!country) return;
 
-    // Remove non-digit characters for validation
     const cleanedValue = value.replace(/\D/g, "");
-
-    // Remove country dial code to get just the local number
     const dialCode = country.dialCode;
     const localNumber = cleanedValue.substring(dialCode.length);
 
@@ -82,7 +92,6 @@ const AddCustomerpage = ({ closeModal }) => {
       setError("");
     }
 
-    // Use the value directly from the component which already includes formatting
     setPhone(value);
   };
 
@@ -90,25 +99,32 @@ const AddCustomerpage = ({ closeModal }) => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
+    
+
     try {
-      const formData = {
-        name,
-        phone,
-        numberPlate,
-        vehicleType,
-        service,
-        amount,
-      };
+      if (isLoggedIn) {
+        const formData = {
+          name,
+          phone,
+          numberPlate,
+          vehicleType,
+          service,
+          amount,
+        };
 
-      const responseSuccess = await fetchCustomer(formData);
+        const responseSuccess = await fetchCustomer(formData, token); // pass token
 
-      if (responseSuccess) {
-        toast.success("Customer saved successfully");
-        closeModal(); // Close the modal on successful submission
-        navigate("/");
-        fetchVehicles();
+        console.log("Token being sent:", token)
+        if (responseSuccess) {
+          toast.success("Customer saved successfully");
+          closeModal();
+          navigate("/");
+          fetchVehicles(token); // pass token
+        } else {
+          toast.error("Failed to save the customer");
+        }
       } else {
-        toast.error("Failed to save the customer");
+        toast.error("User not logged in");
       }
     } catch (error) {
       console.error(error.message);
