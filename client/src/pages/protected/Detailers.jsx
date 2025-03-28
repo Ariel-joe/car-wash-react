@@ -1,4 +1,4 @@
-import { DetailerForm } from "../components/DetailerForm";
+import { DetailerForm } from "../../components/DetailerForm";
 import { Trash, UserRoundPen } from "lucide-react";
 import { useEffect, useState } from "react";
 

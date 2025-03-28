@@ -1,9 +1,9 @@
 import { Spin } from "antd";
-import { useCustomerStore } from "../store/Customer-store";
-import { useVehicleStore } from "../store/vehicle-store";
+import { useCustomerStore } from "../../store/Customer-store.js";
+import { useVehicleStore } from "../../store/vehicle-store.js";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { useDetailerStore } from "../store/Detailer-store";
+import { useDetailerStore } from "../../store/Detailer-store.js";
 
 const PendServices = () => {
   // detailer store

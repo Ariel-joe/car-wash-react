@@ -1,13 +1,13 @@
-import { useServiceStore } from "../store/service-store";
-import { useCustomerStore } from "../store/Customer-store";
+import { useServiceStore } from "../../store/service-store.js";
+import { useCustomerStore } from "../../store/Customer-store.js";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
-import { useVehicleTypeStore } from "../store/vehicleType-store";
-import { useVehicleStore } from "../store/vehicle-store";
+import { useVehicleTypeStore } from "../../store/vehicleType-store.js";
+import { useVehicleStore } from "../../store/vehicle-store.js";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { useServiceTypeStore } from "../store/serviceType-store";
+import { useServiceTypeStore } from "../../store/serviceType-store.js";
 
 const AddCustomerpage = ({ closeModal }) => {
   const [name, setName] = useState("");
@@ -30,13 +30,7 @@ const AddCustomerpage = ({ closeModal }) => {
   const { fetchVehicleTypes, vehicleTypes } = useVehicleTypeStore();
 
   // serviceType store
-  const {
-    fetchServiceType,
-    serviceType,
-    selectedVehicleType,
-    selectedService,
-    price,
-  } = useServiceTypeStore();
+  const { fetchServiceType, serviceType } = useServiceTypeStore();
 
   const { fetchVehicles } = useVehicleStore();
 
@@ -181,17 +175,17 @@ const AddCustomerpage = ({ closeModal }) => {
                 <div className="relative">
                   <label>Vehicle Type</label>
                   <select
-                    value={selectedVehicleType}
-                    onChange={(e) => setvehicleType(e.target.value)}
+                    value={vehicleType}
+                    onChange={(e) => setVehicleType(e.target.value)}
                     className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-1.5 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
                   >
                     <option value="" disabled>
                       Select a vehicle
                     </option>
-                    {serviceType && Object.keys(serviceType).length > 0 ? (
-                      Object.keys(serviceType).map((vehicle, i) => (
-                        <option key={i} value={vehicle}>
-                          {vehicle}
+                    {vehicleTypes && vehicleTypes.length > 0 ? (
+                      vehicleTypes.map((vehicle, i) => (
+                        <option key={i} value={vehicle.type}>
+                          {vehicle.type}
                         </option>
                       ))
                     ) : (
@@ -207,23 +201,21 @@ const AddCustomerpage = ({ closeModal }) => {
                 <div className="relative">
                   <label>Service</label>
                   <select
-                    value={selectedService}
+                    value={service}
                     onChange={(e) => setService(e.target.value)}
                     className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-1.5 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
-                    disabled={!selectedVehicleType}
                   >
                     <option value="" disabled>
                       Select a service
                     </option>
-                    {selectedVehicleType &&
-                    serviceType[selectedVehicleType]?.length > 0 ? (
-                      serviceType[selectedVehicleType].map((service, i) => (
+                    {services && services.length > 0 ? (
+                      services.map((service, i) => (
                         <option key={i} value={service.service}>
                           {service.service}
                         </option>
                       ))
                     ) : (
-                      <option value="">No services available</option>
+                      <option value="">Loading services types...</option>
                     )}
                   </select>
                 </div>
@@ -235,8 +227,9 @@ const AddCustomerpage = ({ closeModal }) => {
                 <input
                   type="text"
                   className="border w-full rounded-md py-1 px-3"
-                  value={price || ""}
-                  readOnly
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  required
                 />
               </div>
             </div>

@@ -3,14 +3,13 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { App } from "./App.jsx";
 import { BrowserRouter, Route, Routes } from "react-router";
-import { PendServices } from "./pages/PendServices.jsx";
-import { GlobalLayout } from "./pages/GlobalLayout.jsx";
-import { CompServices } from "./pages/CompServices.jsx";
-import { Detailers } from "./pages/Detailers.jsx";
-import { Customers } from "./pages/Customers.jsx";
-import { Payments } from "./pages/Payments.jsx";
-// import { AddCustomerpage } from "./pages/AddCustomerpage.jsx";
-import { InprogressPage } from "./pages/InprogressPage.jsx";
+import { PendServices } from "./pages/protected/PendServices.jsx";
+import { GlobalLayout } from "./pages/protected/GlobalLayout.jsx";
+import { CompServices } from "./pages/protected/CompServices.jsx";
+import { Detailers } from "./pages/protected/Detailers.jsx";
+import { Customers } from "./pages/protected/Customers.jsx";
+import { Payments } from "./pages/protected/Payments.jsx";
+import { InprogressPage } from "./pages/protected/InprogressPage.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>

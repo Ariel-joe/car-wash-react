@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Modal } from "./Modal";
-import { AddCustomerpage } from "../pages/AddCustomerpage";
+import { AddCustomerpage } from "../pages/protected/AddCustomerpage";
 import { useCustomerStore } from "../store/Customer-store";
 
 const Navbar = () => {
@@ -27,15 +27,10 @@ const Navbar = () => {
         <div className="flex justify-evenly items-center gap-5">
           {/* information on vehicles */}
 
-          
-          <p className="text-sm text-gray-450">
-            0 pending 
-          </p>
+          <p className="text-sm text-gray-450">0 pending</p>
           <div className="h-5 border"></div>
 
-          <p className="text-sm text-gray-450">
-          0  Inprogess
-          </p>
+          <p className="text-sm text-gray-450">0 Inprogess</p>
 
           {/* New Customer */}
           <button

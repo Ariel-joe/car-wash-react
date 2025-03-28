@@ -1,5 +1,5 @@
+import { useVehicleStore } from "../../store/vehicle-store.js";
 import { Spin } from "antd";
-import { useVehicleStore } from "../store/vehicle-store.js";
 import React, { useEffect, useState } from "react";
 
 const CompServices = () => {

@@ -1,8 +1,8 @@
 import { Spin } from "antd";
-import { useDetailerStore } from "../store/Detailer-store";
-import { useVehicleStore } from "../store/vehicle-store";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { useDetailerStore } from "../../store/Detailer-store.js";
+import { useVehicleStore } from "../../store/vehicle-store.js";
 
 const InprogressPage = () => {
   // vehicle store
