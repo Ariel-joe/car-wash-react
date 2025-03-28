@@ -11,6 +11,7 @@ import { vehiclesRoute } from "./routes/vehiclesRoute.js";
 import { serviceTypeRoute } from "./routes/servicetypesRoute.js";
 import { userAuthentication } from "./middleware/auth/Auth.js";
 import cookieParser from "cookie-parser";
+import { userRoute } from "./routes/authRoute.js";
 
 const app = expresss();
 
@@ -36,6 +37,7 @@ app.get("/", getHome);
 
 app.use(
   "/api",
+  userRoute,
   userAuthentication,
   customersRoute,
   detailersRoute,
