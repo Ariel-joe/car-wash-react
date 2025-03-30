@@ -114,7 +114,6 @@ const AddCustomerpage = ({ closeModal }) => {
 
         const responseSuccess = await fetchCustomer(formData, token); // pass token
 
-        console.log("Token being sent:", token)
         if (responseSuccess) {
           toast.success("Customer saved successfully");
           closeModal();

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router";
 const Navbar = () => {
   const [modal, setModal] = useState(false);
 
-  // const { logout } = useUserStore();
+  const { logout } = useUserStore();
 
   const navigate = useNavigate()
 

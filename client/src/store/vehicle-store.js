@@ -39,6 +39,7 @@ const useVehicleStore = create((set, get) => ({
     try {
       const response = await fetch("http://localhost:3006/api/vehicles/update", {
         method: "PUT",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",

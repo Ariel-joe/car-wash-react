@@ -25,7 +25,6 @@ const useServiceTypeStore = create((set, get) => ({
 
       if (response.ok) {
         const { data } = await response.json();
-        console.log(data);
         set({ serviceType: data });
       }
     } catch (error) {}

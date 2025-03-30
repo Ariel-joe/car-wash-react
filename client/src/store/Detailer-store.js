@@ -62,7 +62,8 @@ const useDetailerStore = create((set) => ({
       const response = await fetch(
         `http://localhost:3006/api/detailers/${detailerId}`,
         {
-          method: "PATCH", // Note that your route uses PATCH
+          method: "PATCH",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
