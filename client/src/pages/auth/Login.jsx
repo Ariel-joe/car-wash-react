@@ -34,39 +34,37 @@ const Login = () => {
       <div className="flex justify-center mb-5 items-center">
         <img src="/img/osharide-official.png" width={"140px"} alt="" />
       </div>
-      
-      <h1 className="text-xl font-semibold text-center mb-2">Please login!</h1>
+
+      <h1 className="text-xl font-semibold text-center mb-2">Log In</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
-          <label className="text-lg">Username</label>
+          <label className="text-base ">Username</label>
           <input
             value={username}
             onChange={(e) => {
               setUsername(e.target.value);
             }}
             type="text"
-            className="p-2 border"
+            className="p-2 border rounded-md focus:border-blue-800 outline-none"
             placeholder="Enter username"
           />
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="text-lg">Password</label>
+          <label className="text-base">Password</label>
           <input
             value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
+            onChange={(e) => setPassword(e.target.value)}
             type="password"
-            className="p-2 border"
+            className="p-2 border rounded-md focus:border-blue-800 outline-none"
             placeholder="Enter password"
           />
         </div>
 
         <button
           type="submit"
-          className="bg-gradient-to-r from-cyan-600 to-blue-500 text-white p-2 text-xl rounded-md"
+          className="bg-gradient-to-r from-cyan-600 to-blue-500 text-white p-2 text-base rounded-md"
         >
           Login
         </button>
