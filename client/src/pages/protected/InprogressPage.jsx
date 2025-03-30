@@ -23,7 +23,6 @@ const InprogressPage = () => {
         await fetchDetailers();
 
       } catch (err) {
-        console.error("Failed to load initial data:", err);
         toast.error("Failed to load initial data");
       }
     };
@@ -61,7 +60,6 @@ const InprogressPage = () => {
         toast.error("Failed to update vehicle status");
       }
     } catch (error) {
-      console.error(error.message);
       toast.error("Error updating status");
     }
   };

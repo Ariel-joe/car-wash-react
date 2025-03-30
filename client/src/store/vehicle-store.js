@@ -56,7 +56,6 @@ const useVehicleStore = create((set, get) => ({
           vehicle._id === vehicleId ? { ...vehicle, status } : vehicle
         );
 
-        console.log({ updatedVehicles });
 
         return { vehicles: updatedVehicles };
       });

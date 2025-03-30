@@ -30,29 +30,39 @@ const Login = () => {
   };
   return (
     <>
-      <h1 className="text-3xl font-semibold text-center mb-14">Welcome Back</h1>
+      <h1 className="text-2xl font-semibold text-center">Please login!</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-        <input
-          value={username}
-          onChange={(e) => {
-            setUsername(e.target.value);
-          }}
-          type="text"
-          className="p-2 border"
-          placeholder="Enter username"
-        />
-        <input
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          type="password"
-          className="p-2 border"
-          placeholder="Enter password"
-        />
+        <div className="flex flex-col gap-2">
+          <label>Username</label>
+          <input
+            value={username}
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
+            type="text"
+            className="p-2 border"
+            placeholder="Enter username"
+          />
+        </div>
 
-        <button type="submit" className="bg-black text-white p-2">
+        <div className="flex flex-col gap-2">
+          <label>Password</label>
+          <input
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            type="password"
+            className="p-2 border"
+            placeholder="Enter password"
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="bg-black text-white p-2 text-sm rounded-md"
+        >
           Login
         </button>
       </form>

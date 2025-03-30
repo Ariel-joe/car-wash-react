@@ -14,6 +14,17 @@ a.active {
   margin: 0;
 }
 
+/* Trapezium effect for left column */
+.clip-left {
+  clip-path: polygon(0% 0%, 100% 0%, 85% 100%, 0% 100%);
+}
+
+/* Trapezium effect for right column */
+.clip-right {
+  clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+
 @layer base {
   :root {
     --background: 0 0% 100%;
