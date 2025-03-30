@@ -12,11 +12,11 @@ const AuthLayout = () => {
           className="w-full h-full object-cover"
         />
         {/* White Opacity Overlay */}
-        <div className="absolute top-0 left-0 w-full h-full bg-white opacity-30"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-cyan-600 to-blue-500 opacity-30"></div>
       </div>
 
       {/* Right Column (Login Form with Trapezium Shape) */}
-      <div className="w-5/12 flex justify-center items-center bg-white clip-right">
+      <div className="w-5/12 flex justify-center items-center clip-right">
         <div className="w-full max-w-[500px] shadow-lg px-10 py-12 rounded-lg">
           <Outlet />
         </div>

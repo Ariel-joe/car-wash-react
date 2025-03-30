@@ -30,11 +30,16 @@ const Login = () => {
   };
   return (
     <>
-      <h1 className="text-2xl font-semibold text-center">Please login!</h1>
+      {/* logo goes here */}
+      <div className="flex justify-center mb-5 items-center">
+        <img src="/img/osharide-official.png" width={"140px"} alt="" />
+      </div>
+      
+      <h1 className="text-xl font-semibold text-center mb-2">Please login!</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
-          <label>Username</label>
+          <label className="text-lg">Username</label>
           <input
             value={username}
             onChange={(e) => {
@@ -47,7 +52,7 @@ const Login = () => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label>Password</label>
+          <label className="text-lg">Password</label>
           <input
             value={password}
             onChange={(e) => {
@@ -61,7 +66,7 @@ const Login = () => {
 
         <button
           type="submit"
-          className="bg-black text-white p-2 text-sm rounded-md"
+          className="bg-gradient-to-r from-cyan-600 to-blue-500 text-white p-2 text-xl rounded-md"
         >
           Login
         </button>
