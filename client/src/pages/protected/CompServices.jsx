@@ -3,9 +3,6 @@ import { Spin } from "antd";
 import React, { useEffect, useState } from "react";
 
 const CompServices = () => {
-    // user
-    const user = JSON.parse(localStorage.getItem("user"));
-    console.log(user);
     
   const [data, setData] = useState([]);
   const { fetchVehicles, vehicles, isLoading } = useVehicleStore();

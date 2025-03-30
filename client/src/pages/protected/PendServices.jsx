@@ -6,10 +6,7 @@ import { toast } from "sonner";
 import { useDetailerStore } from "../../store/Detailer-store.js";
 
 const PendServices = () => {
-    // user
-    const user = JSON.parse(localStorage.getItem("user"));
-    console.log(user);
-    
+   
   // detailer store
   const { detailers, fetchDetailers, assignDetailerFunc } = useDetailerStore();
   const [assignedDetailers, setAssignedDetailers] = useState({});

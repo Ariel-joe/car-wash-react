@@ -1,12 +1,25 @@
 import { useState } from "react";
 import { Modal } from "./Modal";
 import { AddCustomerpage } from "../pages/protected/AddCustomerpage";
-import { useCustomerStore } from "../store/Customer-store";
+import { useUserStore } from "../store/user-store";
+import { toast } from "sonner";
+import { useNavigate } from "react-router";
 
 const Navbar = () => {
   const [modal, setModal] = useState(false);
 
-  const { customerCount } = useCustomerStore();
+  // const { logout } = useUserStore();
+
+  const navigate = useNavigate()
+
+  // handling logout
+  const handleLogout = () => {
+    logout();
+
+    toast.success("Logged out successfully");
+
+    navigate("/login");
+  };
 
   // Define closeModal function
   const closeModal = () => {
@@ -53,7 +66,7 @@ const Navbar = () => {
             </svg>
             New Customer
           </button>
-          <button className="bg-black text-creamish px-4 py-2 text-sm rounded-md">
+          <button onClick={handleLogout} className="bg-black text-creamish px-4 py-2 text-sm rounded-md">
             Logout
           </button>
 

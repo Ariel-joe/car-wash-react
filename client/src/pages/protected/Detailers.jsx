@@ -3,9 +3,6 @@ import { Trash, UserRoundPen } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const Detailers = () => {
-    // user
-    const user = JSON.parse(localStorage.getItem("user"));
-    console.log(user);
     
   const [detailersData, setDetailersData] = useState([]);
 
