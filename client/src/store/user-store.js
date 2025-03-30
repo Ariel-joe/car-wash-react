@@ -12,8 +12,8 @@ const useUserStore = create((set) => ({
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(userData),
           credentials: "include",
+          body: JSON.stringify(userData),
         }
       );
 

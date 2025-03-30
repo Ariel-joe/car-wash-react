@@ -6,9 +6,6 @@ const useVehicleTypeStore = create((set) => ({
   fetchVehicleTypes: async () => {
     try {
       const response = await fetch("http://localhost:3006/api/vehicles/types", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
         credentials: "include",
       });
 

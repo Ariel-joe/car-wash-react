@@ -2,24 +2,24 @@ import { create } from "zustand";
 
 const useServiceTypeStore = create((set, get) => ({
   serviceType: null,
-  selectedVehicleType: '',
-  selectedService: '',
+  selectedVehicleType: "",
+  selectedService: "",
   price: 0,
 
   setvehicleType: (vehicle) => {
-    set({selectedVehicleType: vehicle, selectedService: "", price: 0})
+    set({ selectedVehicleType: vehicle, selectedService: "", price: 0 });
   },
 
   setService: (service) => {
-    set({selectedService: service, price: get().getPrice(get().selectedVehicleType, service)})
+    set({
+      selectedService: service,
+      price: get().getPrice(get().selectedVehicleType, service),
+    });
   },
 
   fetchServiceType: async () => {
     try {
       const response = await fetch("http://localhost:3006/api/servicetypes", {
-        headers: {
-          "Authorization": `Bearer ${token}`
-        },
         credentials: "include",
       });
 
@@ -28,7 +28,6 @@ const useServiceTypeStore = create((set, get) => ({
         console.log(data);
         set({ serviceType: data });
       }
-
     } catch (error) {}
   },
 }));
