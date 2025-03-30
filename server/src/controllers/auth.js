@@ -31,7 +31,6 @@ export const signup = async (req, res) => {
 };
 
 // login
-
 export const login = async (req, res) => {
   const { username, password } = req.body;
 
@@ -62,7 +61,7 @@ export const login = async (req, res) => {
 
       httpOnly: true,
       // path = where the cookie is valid
-      // path: "/",
+      path: "/",
       // domain = what domain the cookie is valid on
       // domain: "localhost",
       // secure = only send cookie over https

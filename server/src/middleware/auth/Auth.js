@@ -2,13 +2,14 @@ import jwt from "jsonwebtoken";
 import { User } from "../../database/models/user.js";
 
 export const userAuthentication = async (req, res, next) => {
+
   try {
     const token = req.cookies[process.env.AUTH_COOKIE_NAME];
 
-    if (!token) throw new Error("Token not found");
+    console.log("TOKEN:", token);
+    
 
-    console.log("Request Headers:", req.headers);
-console.log("Request Cookies:", req.cookies);
+    if (!token) throw new Error("Token not found");
 
     // beyond this point means the token has been set inside the cookie
 

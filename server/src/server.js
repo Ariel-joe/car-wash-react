@@ -17,7 +17,8 @@ const app = expresss();
 
 app.use(expresss.json());
 
-
+// cookie parser middleware
+app.use(cookieParser())
 
 
 // cors configuration
@@ -27,8 +28,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-// cookie parser middleware
-app.use(cookieParser())
+
 
 
 
