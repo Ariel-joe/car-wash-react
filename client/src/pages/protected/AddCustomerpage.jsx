@@ -112,13 +112,13 @@ const AddCustomerpage = ({ closeModal }) => {
           amount,
         };
 
-        const responseSuccess = await fetchCustomer(formData, token); // pass token
+        const responseSuccess = await fetchCustomer(formData);
 
         if (responseSuccess) {
           toast.success("Customer saved successfully");
           closeModal();
-          navigate("/");
-          fetchVehicles(token); // pass token
+          navigate("/pending");
+          fetchVehicles();
         } else {
           toast.error("Failed to save the customer");
         }

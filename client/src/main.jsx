@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { App } from "./App.jsx";
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router";
 import { PendServices } from "./pages/protected/PendServices.jsx";
 import { GlobalLayout } from "./pages/protected/GlobalLayout.jsx";
 import { CompServices } from "./pages/protected/CompServices.jsx";
@@ -17,11 +17,17 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        {/*  */}
+        {/* Protected Routes */}
         <Route element={<GlobalLayout />}>
+          {/* Auth Routes */}
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route element={<AuthLayout />}>
+            <Route path="/login" element={<Login />} />
+          </Route>
+
           <Route element={<ProtectedRouteWrapper />}>
-            <Route path="/" element={<App />}>
-              <Route index element={<PendServices />} />
+            <Route element={<App />}>
+              <Route path="pending" element={<PendServices />} />
               <Route path="completed" element={<CompServices />} />
               <Route path="detailers" element={<Detailers />} />
               <Route path="customers" element={<Customers />} />
@@ -29,13 +35,10 @@ createRoot(document.getElementById("root")).render(
               <Route path="progress" element={<InprogressPage />} />
             </Route>
           </Route>
-
-          <Route element={<AuthLayout />}>
-            <Route path="login" element={<Login />} />
-          </Route>
         </Route>
 
-        {/*  */}
+        {/* Redirect to Login if Route Not Found */}
+        <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>

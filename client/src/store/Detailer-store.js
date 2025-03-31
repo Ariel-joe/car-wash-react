@@ -67,7 +67,7 @@ const useDetailerStore = create((set) => ({
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ status }), // Adjust payload according to your API
+          body: JSON.stringify({ status }), 
         }
       );
 

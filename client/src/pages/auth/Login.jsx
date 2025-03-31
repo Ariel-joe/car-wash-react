@@ -23,7 +23,7 @@ const Login = () => {
 
     if (loginSuccess) {
       toast.success("Login Successful");
-      navigate("/");
+      navigate("/pending");
     } else {
       toast.error("There was a problem logging you in. Please try again.");
     }
@@ -35,7 +35,7 @@ const Login = () => {
         <img src="/img/osharide-official.png" width={"140px"} alt="" />
       </div>
 
-      <h1 className="text-xl font-semibold text-center mb-2">Log In</h1>
+      {/* <h1 className="text-xl font-semibold text-center mb-2">Log In</h1> */}
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
@@ -66,7 +66,7 @@ const Login = () => {
           type="submit"
           className="bg-gradient-to-r from-cyan-600 to-blue-500 text-white p-2 text-base rounded-md"
         >
-          Login
+          Log in
         </button>
       </form>
     </>
