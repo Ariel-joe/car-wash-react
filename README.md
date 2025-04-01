@@ -48,18 +48,6 @@ This is a **MERN Stack** web application designed to streamline car wash operati
    npm run dev
    ```
 
-5. **Access the app:**
-   Open `http://localhost:3000`
-
-## API Endpoints
-### Authentication
-- `POST /generate-code` → Generates a unique access code for a detailer
-- `POST /validate-code` → Validates a detailer's access code
-
-### Car Management
-- `POST /add-car` → Adds a new car entry (Detailer access)
-- `GET /pending-cars` → Retrieves pending car approvals (Manager access)
-- `POST /approve-car` → Approves a car entry (Manager access)
 
 ## Future Enhancements
 - **Role-based authentication** for better security.
